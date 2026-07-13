@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>常规款外套开款推荐</title>
+<style>
+:root {
+  --primary: #1a1a2e;
+  --accent: #e94560;
+  --secondary: #16213e;
+  --light: #f8f9fa;
+  --gray: #6c757d;
+  --border: #dee2e6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f0f2f5;
+  color: #333;
+  line-height: 1.8;
+}
+/* Nav */
+.nav-sidebar {
+  position: fixed;
+  left: 0; top: 0;
+  width: 220px; height: 100vh;
+  background: var(--primary);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 20px 0;
+}
+.nav-sidebar h2 {
+  color: #fff;
+  font-size: 16px;
+  padding: 0 20px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 10px;
+}
+.nav-sidebar a {
+  display: block;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+.nav-sidebar a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.05);
+  border-left-color: var(--accent);
+}
+.nav-sidebar a.sub {
+  padding-left: 36px;
+  font-size: 13px;
+}
+/* Main */
+.main-content {
+  margin-left: 220px;
+  padding: 0;
+}
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+  padding: 80px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(233,69,96,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+  position: relative;
+}
+.hero .subtitle {
+  font-size: 16px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  position: relative;
+}
+.hero .meta {
+  margin-top: 30px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+}
+/* Section */
+.section {
+  background: #fff;
+  margin: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.section-header {
+  padding: 40px 40px 30px;
+  position: relative;
+}
+.section-header .trend-tag {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.section-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+.section-header .desc {
+  font-size: 15px;
+  color: var(--gray);
+  max-width: 700px;
+  line-height: 2;
+}
+.section-header .path {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--gray);
+  background: var(--light);
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: inline-block;
+}
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 0 40px 40px;
+}
+.card {
+  background: var(--light);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.card-header {
+  padding: 20px 20px 12px;
+}
+.card-header .card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.card-header .card-path {
+  font-size: 12px;
+  color: var(--gray);
+}
+.card-body {
+  padding: 0 20px 20px;
+}
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.tag.red { background: #fce4ec; color: #c62828; }
+.tag.blue { background: #e3f2fd; color: #1565c0; }
+.tag.green { background: #e8f5e9; color: #2e7d32; }
+.tag.orange { background: #fff3e0; color: #e65100; }
+.tag.purple { background: #f3e5f5; color: #6a1b9a; }
+.tag.teal { background: #e0f2f1; color: #00695c; }
+.tag.gray { background: #eceff1; color: #455a64; }
+.tag.pink { background: #fce4ec; color: #ad1457; }
+/* Trend Section */
+.trend-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 30px 40px;
+  margin: 0 40px 30px;
+  border-radius: 12px;
+}
+.trend-box h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+.trend-box p {
+  font-size: 15px;
+  line-height: 2;
+  opacity: 0.95;
+}
+/* Summary Box */
+.summary-box {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 30px 40px;
+  margin: 0 40px 30px;
+  border-radius: 12px;
+  border-left: 4px solid var(--accent);
+}
+.summary-box h3 {
+  font-size: 20px;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+.summary-box p {
+  font-size: 15px;
+  color: #444;
+  line-height: 2;
+}
+/* Color Palette */
+.color-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0 40px 40px;
+}
+.color-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+.color-dot {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+/* Page indicator */
+.page-num {
+  position: absolute;
+  top: 20px; right: 20px;
+  font-size: 12px;
+  color: var(--gray);
+  background: var(--light);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+/* Note box */
+.note-box {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 10px 40px 10px;
+  font-size: 14px;
+  color: #856404;
+}
+.note-box strong { color: #d63200; }
+/* Timeline */
+.timeline-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 4px 0;
+}
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px;
+  color: var(--gray);
+  font-size: 14px;
+}
+/* Category Divider */
+.category-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 40px 40px 20px;
+}
+.category-divider .line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+.category-divider .num {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--accent);
+  opacity: 0.15;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-sidebar { display: none; }
+  .main-content { margin-left: 0; }
+  .section, .trend-box, .summary-box, .note-box { margin-left: 16px; margin-right: 16px; }
+  .cards-grid { grid-template-columns: 1fr; padding: 0 16px 20px; }
+  .hero { padding: 50px 20px; }
+  .hero h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar Nav -->
+<nav class="nav-sidebar">
+  <h2>📂 目录导航</h2>
+  <a href="#hero">首页</a>
+  <a href="#cat1">学院风</a>
+  <a href="#cat1" class="sub">飞行员夹克</a>
+  <a href="#cat1" class="sub">亚麻混纺夹克</a>
+  <a href="#cat1" class="sub">衬衫外套</a>
+  <a href="#cat1" class="sub">哈灵顿夹克</a>
+  <a href="#cat1" class="sub">棒球夹克</a>
+  <a href="#cat2">工装风</a>
+  <a href="#cat2" class="sub">战术夹克</a>
+  <a href="#cat2" class="sub">工装夹克</a>
+  <a href="#cat2" class="sub">谷仓夹克</a>
+  <a href="#cat2" class="sub">行政夹克</a>
+  <a href="#cat3">防风衣</a>
+  <a href="#cat3" class="sub">科技冲锋衣</a>
+  <a href="#cat3" class="sub">轻薄防风</a>
+  <a href="#cat4">棉质轻型</a>
+  <a href="#cat4" class="sub">绒面材质</a>
+  <a href="#cat4" class="sub">灯芯绒材质</a>
+  <a href="#cat4" class="sub">帆布/工装</a>
+  <a href="#cat5">新奇</a>
+  <a href="#cat5" class="sub">炫彩外套</a>
+  <a href="#cat5" class="sub">卫衣夹克</a>
+  <a href="#cat5" class="sub">动物纹元素</a>
+  <a href="#cat6">运动装和功能</a>
+  <a href="#cat6" class="sub">机能风夹克</a>
+  <a href="#cat6" class="sub">防晒/骑行类</a>
+  <a href="#cat7">风衣/棉羽</a>
+  <a href="#cat7" class="sub">羊毛/毛呢大衣</a>
+  <a href="#cat7" class="sub">羊绒大衣</a>
+  <a href="#cat7" class="sub">排骨服/面包服</a>
+  <a href="#cat7" class="sub">绗缝工艺</a>
+</nav>
+
+<!-- Main Content -->
+<div class="main-content">
+
+<!-- Hero -->
+<div class="hero" id="hero">
+  <h1>常规款外套开款推荐</h1>
+  <div class="subtitle">Outerwear Style Guide</div>
+  <div class="meta">男士外套 · 7大风格品类 · 65页完整推荐</div>
+</div>
+
+<!-- ==================== 类别1: 学院风 ==================== -->
+<div class="category-divider" id="cat1">
+  <span class="num">01</span>
+  <div class="line"></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.2</span>
+    <div class="trend-tag">Trend Style</div>
+    <h2>学院风</h2>
+    <p class="desc">打破传统常春藤风格（Ivy Style）的精英壁垒，将哈佛红、耶鲁蓝的学院符号与嘻哈文化、数字潮流碰撞。</p>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士学院风夹克</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.3</span>
+    <h2 style="font-size:24px;">飞行员夹克</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士学院风夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">传统升级</div>
+      </div>
+      <div class="card-body">
+        <div class="tag-group">
+          <span class="tag red">毛领/拼接领</span>
+          <span class="tag blue">摩洛哥元素</span>
+          <span class="tag green">假两件</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.4</span>
+    <h2 style="font-size:24px;">质感面料 — 亚麻混纺夹克</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士学院风夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">亚麻混纺</div>
+      </div>
+      <div class="card-body">
+        <div class="tag-group">
+          <span class="tag teal">¼开襟领</span>
+          <span class="tag gray">质感面料</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.5</span>
+    <h2 style="font-size:24px;">直身衬衫外套</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士学院风夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">工装衬衫外套</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag orange">工装风</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">刺绣/提花衬衫外套</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag purple">刺绣</span><span class="tag purple">提花</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">搭扣细节</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag gray">搭扣</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.6</span>
+    <h2 style="font-size:24px;">过渡夹克</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士学院风夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">泡泡纱</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag teal">泡泡纱面料</span><span class="tag gray">过渡季</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.7-9</span>
+    <h2 style="font-size:24px;">工装/军事类 — 哈灵顿夹克 & 飞行员夹克</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士学院风夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">哈灵顿夹克</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag blue">尼龙</span><span class="tag orange">斜纹棉</span><span class="tag green">亚麻</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">飞行员夹克 — 材质方向</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag red">刺绣</span><span class="tag pink">动物纹理</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">哈灵顿夹克 — 进阶款</div></div>
+      <div class="card-body">
+        <div class="tag-group">
+          <span class="tag purple">皱感面料 crinkle</span>
+          <span class="tag orange">亮色</span>
+          <span class="tag teal">双面穿</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.10</span>
+    <h2 style="font-size:24px;">都市基础风 — 棒球夹克</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士学院风夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">拼色/拼接</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag red">拼色</span><span class="tag blue">拼接</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">刺绣款</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag purple">刺绣徽章</span><span class="tag orange">跨门襟</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.11</span>
+    <h2 style="font-size:24px;">工装/军事类 — 飞行员夹克 图案款</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士学院风夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">图案方向</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag green">迷彩</span><span class="tag purple">花卉格纹</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 类别2: 工装风 ==================== -->
+<div class="category-divider" id="cat2">
+  <span class="num">02</span>
+  <div class="line"></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.12</span>
+    <div class="trend-tag">Trend Style</div>
+    <h2>工装风</h2>
+    <p class="desc">经典版型复刻，硬朗剪裁。融合复古、军事、机能与轻工装多元风格。</p>
+  </div>
+  <div class="cards-grid" style="padding-top:20px;">
+    <div class="card">
+      <div class="card-header"><div class="card-title">复古工装风</div></div>
+      <div class="card-body"><p style="font-size:14px;color:#666;">丹宁、帆布、做旧工艺、经典版型复刻</p></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">军事工装风</div></div>
+      <div class="card-body"><p style="font-size:14px;color:#666;">迷彩印花、战术口袋、硬朗剪裁</p></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">机能工装风</div></div>
+      <div class="card-body"><p style="font-size:14px;color:#666;">科技面料、模块化设计、反光细节</p></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">轻工装风</div></div>
+      <div class="card-body"><p style="font-size:14px;color:#666;">简化功能性，融入通勤与休闲场景</p></div>
+    </div>
+  </div>
+  <div class="path" style="margin:0 40px 30px;">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.13-14</span>
+    <h2 style="font-size:24px;">工装风 — 款式方向</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">拼接领工装</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag blue">拼接领</span><span class="tag gray">军事风</span><span class="tag orange">蜡油</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">马甲</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag teal">马甲款</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">净色 — 户外属性款</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag green">户外属性</span><span class="tag gray">净色</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">净色 — 休闲工装款</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag blue">休闲</span><span class="tag gray">净色</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.15</span>
+    <h2 style="font-size:24px;">工装/军事类 — 战术夹克 简约款</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">面料方向</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag teal">肌理面料（泡泡纱）</span><span class="tag green">亚麻混纺</span><span class="tag blue">尼龙梭织</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">细节设计</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag orange">可调节腰带</span><span class="tag red">拼接</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.16</span>
+    <h2 style="font-size:24px;">工装/军事类 — 工装夹克 休闲款</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">图案方向</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag purple">经典条格</span><span class="tag green">迷彩/枯叶图案</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.17</span>
+    <h2 style="font-size:24px;">工装/军事类 — 工装夹克 潮流款</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">潮流元素</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag orange">消防员搭扣</span><span class="tag red">拼接款</span><span class="tag purple">线迹装饰/刺绣/反光条</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.18</span>
+    <h2 style="font-size:24px;">工装/军事类 — 工装夹克 简约款</h2>
+    <p style="font-size:16px;color:var(--accent);font-weight:600;padding:0 40px 10px;">谷仓夹克 Barn Jacket</p>
+    <div class="path" style="margin:0 40px;">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">面料与风格</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag orange">蜡棉 "Waxed Look"</span><span class="tag red">撞色/灯芯绒/皮质翻领</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">版型</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag blue">短款、双向拉链</span><span class="tag teal">短款箱型 BOXY FIT</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.19</span>
+    <h2 style="font-size:24px;">都市基础风 — 行政夹克</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">面料</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag green">亚麻</span><span class="tag purple">羊毛混纺</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">细节</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag gray">低调条格</span><span class="tag blue">立领</span><span class="tag teal">隐藏门襟</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.20</span>
+    <h2 style="font-size:24px;">工装/军事类 — 战术夹克 图案款</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">装饰细节</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag purple">线迹装饰</span><span class="tag orange">金属装饰（搭扣/D型环/金属撞钉）</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="note-box">
+  ⚠️ <strong>注意：</strong>迷彩好卖，但是注意规避 CP 色侵权
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.21</span>
+    <h2 style="font-size:24px;">工装/军事类 — 军装夹克</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">款式方向</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag gray">经典款</span><span class="tag blue">简化</span><span class="tag teal">立体口袋</span><span class="tag red">双排扣</span><span class="tag purple">刺绣款</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.22</span>
+    <h2 style="font-size:24px;">精致化版型 — 截短</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">截短版型</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag orange">截短版型</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 类别3: 防风衣 ==================== -->
+<div class="category-divider" id="cat3">
+  <span class="num">03</span>
+  <div class="line"></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.23</span>
+    <h2 style="font-size:24px;">防晒轻薄类 — 非专业</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士防风衣</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.24</span>
+    <div class="trend-tag">Trend Style</div>
+    <h2 style="font-size:28px;">休闲商务</h2>
+    <p class="desc">或者说是一种高级的简约风，整体干净利落，通过材质细节/服装搭配呈现出 Clean Fit。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.25</span>
+    <h2 style="font-size:24px;">运动夹克方向</h2>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.26</span>
+    <h2 style="font-size:24px;">薄外套</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士防风衣</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">面料方向</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag green">天丝</span><span class="tag gray">薄纤维/碳纤维</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.27</span>
+    <h2 style="font-size:24px;">防晒轻薄类 — 非专业</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士防风衣</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">特殊工艺</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag orange">金属涂层</span><span class="tag teal">降温 12°C</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.28</span>
+    <h2 style="font-size:24px;">科技冲锋衣</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">冲锋衣类型</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag blue">轻薄防风过渡</span><span class="tag red">混合冲锋衣</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>◆ 趋势小结</h3>
+  <p>从"专业登山等运动装备"转向 <strong>Urban Technical（都市机能）</strong> + <strong>Quiet Outdoor（静奢户外）</strong> + <strong>Lightweight Shell（轻量壳层）</strong></p>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.29</span>
+    <h2 style="font-size:24px;">趋势小结 — 关键元素</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">半开襟</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">拼接（撞色拼接/面料拼接）</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">线迹装饰（对比色织带/反光条）</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">三合一夹克</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">实用口袋设计（模块化口袋/内袋）</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">可调节设计</div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.30-34</span>
+    <h2 style="font-size:24px;">户外机能类 — 冲锋衣系列</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士防风衣</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">线迹装饰 / 三合一</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag purple">线迹装饰</span><span class="tag red">三合一 3-IN-1</span><span class="tag gray">简约冲锋衣</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">图案款</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag green">图案</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">非常规门襟款 / 拼色拼接</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag orange">非常规门襟</span><span class="tag red">拼色/拼接</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">简约款</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag orange">亮色</span><span class="tag teal">隐藏式拉链/透气拉链/内袋</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.33</span>
+    <h2 style="font-size:24px;">运动生活类 — 户外休闲运动</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">设计元素</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag purple">线迹装饰</span><span class="tag orange">反光条</span><span class="tag red">拼色</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 类别4: 棉质轻型 ==================== -->
+<div class="category-divider" id="cat4">
+  <span class="num">04</span>
+  <div class="line"></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.35</span>
+    <div class="trend-tag">Trend Style</div>
+    <h2>浓情复古</h2>
+    <p class="desc">采用一种休闲而时尚的方式，注重美学，通过更新的复古廓形，倡导年轻的自我表达方式；利用华丽的印花和丰富的装饰，从逝去的时代汲取灵感，打造现代传承造型。</p>
+  </div>
+  <div class="color-palette">
+    <div class="color-chip"><span class="color-dot" style="background:#d32f2f;"></span>樱桃红漆色</div>
+    <div class="color-chip"><span class="color-dot" style="background:#42a5f5;"></span>清晖蓝</div>
+    <div class="color-chip"><span class="color-dot" style="background:#a1887f;"></span>灰调赭石色</div>
+    <div class="color-chip"><span class="color-dot" style="background:#37474f;"></span>晚山新黛</div>
+    <div class="color-chip"><span class="color-dot" style="background:#ff6f00;"></span>电光橙</div>
+    <div class="color-chip"><span class="color-dot" style="background:#bf360c;"></span>红土色</div>
+    <div class="color-chip"><span class="color-dot" style="background:#78909c;"></span>沉稳灰</div>
+    <div class="color-chip"><span class="color-dot" style="background:#5d4037;"></span>巧克力酱色</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.36</span>
+    <h2 style="font-size:24px;">牛仔夹克 — 潮流 特殊装饰</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">装饰细节</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag red">红色对比车缝线</span><span class="tag purple">线迹装饰</span><span class="tag blue">拼接</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.37</span>
+    <h2 style="font-size:24px;">直身衬衫外套</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士棉质轻型夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">工装衬衫外套</div></div><div class="card-body"><div class="tag-group"><span class="tag orange">工装</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">刺绣/提花衬衫外套</div></div><div class="card-body"><div class="tag-group"><span class="tag purple">刺绣</span><span class="tag purple">提花</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">搭扣细节</div></div><div class="card-body"><div class="tag-group"><span class="tag gray">搭扣</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.38</span>
+    <h2 style="font-size:24px;">绒面材质：羊羔绒/摇粒绒</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">绒面材质</div></div>
+      <div class="card-body">
+        <div class="tag-group"><span class="tag orange">羊羔绒</span><span class="tag pink">摇粒绒</span></div>
+        <p style="margin-top:10px;font-size:13px;color:var(--gray);"><span class="timeline-tag">8月小量，9月-11月加站</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.39</span>
+    <h2 style="font-size:24px;">衬衫外套 — 格纹式</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士棉质轻型夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">格纹式衬衫外套</div></div><div class="card-body"><div class="tag-group"><span class="tag purple">格纹</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.40</span>
+    <h2 style="font-size:24px;">灯芯绒材质</h2>
+    <div class="path">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士棉质轻型夹克</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">灯芯绒</div></div><div class="card-body"><div class="tag-group"><span class="tag brown" style="background:#efebe9;color:#5d4037;">灯芯绒</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.41</span>
+    <h2 style="font-size:24px;">帆布/工装夹克</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">帆布/工装</div></div><div class="card-body"><div class="tag-group"><span class="tag orange">帆布</span><span class="tag blue">工装夹克</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.42</span>
+    <h2 style="font-size:24px;">门襟设计</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">门襟与装饰</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag teal">盘扣</span><span class="tag red">双排扣</span><span class="tag orange">消防员搭扣</span><span class="tag purple">刺绣贴布/烫钻</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 类别5: 新奇 ==================== -->
+<div class="category-divider" id="cat5">
+  <span class="num">05</span>
+  <div class="line"></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.43</span>
+    <h2 style="font-size:24px;">LGPT/炫彩外套</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 新奇物品 &gt; 新奇服装和产品 &gt; 新奇服装 &gt; 男士新奇服装 &gt; 男士新奇夹克和外套</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.44</span>
+    <h2 style="font-size:24px;">都市基础风 — 卫衣夹克 潮流款</h2>
+    <div class="path">路径参考：服装、鞋靴和珠宝饰品 &gt; 新奇物品 &gt; 新奇服装和产品 &gt; 新奇服装 &gt; 男士新奇服装 &gt; 男士新奇夹克和外套</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">潮流元素</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag purple">刺绣徽标/贴布/烫钻/铆钉</span><span class="tag red">线迹</span><span class="tag gray">做旧</span><span class="tag teal">双面穿</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.45</span>
+    <h2 style="font-size:24px;">爆品元素 — 动物纹</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">Deer Print</div></div><div class="card-body"><div class="tag-group"><span class="tag green">鹿纹</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">奶牛</div></div><div class="card-body"><div class="tag-group"><span class="tag gray">奶牛纹</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">豹纹</div></div><div class="card-body"><div class="tag-group"><span class="tag orange">豹纹</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.46</span>
+    <h2 style="font-size:24px;">丰富材质与版型</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">网眼卫衣</div></div>
+      <div class="card-body"><p style="font-size:14px;color:#666;">在原卫衣布上叠加一层网眼料，增加质感</p></div>
+    </div>
+    <div class="card"><div class="card-header"><div class="card-title">刺绣卫衣</div></div><div class="card-body"><div class="tag-group"><span class="tag purple">刺绣</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">提花/印花</div></div><div class="card-body"><div class="tag-group"><span class="tag purple">提花</span><span class="tag red">印花</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">钢印/压印</div></div><div class="card-body"><div class="tag-group"><span class="tag gray">钢印</span><span class="tag gray">压印</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">半开襟高领</div></div><div class="card-body"><div class="tag-group"><span class="tag teal">半开襟</span><span class="tag teal">高领</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">肌理面料/飞行员版型</div></div><div class="card-body"><div class="tag-group"><span class="tag blue">肌理面料</span><span class="tag blue">飞行员版型</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">拼接</div></div><div class="card-body"><div class="tag-group"><span class="tag red">拼接</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.47</span>
+    <h2 style="font-size:24px;">丰富材质与版型（续）</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">短款</div></div><div class="card-body"><div class="tag-group"><span class="tag orange">短款</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">背心款</div></div><div class="card-body"><div class="tag-group"><span class="tag teal">背心</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">罗纹圈口加高</div></div><div class="card-body"><div class="tag-group"><span class="tag gray">罗纹圈口</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">柔软：绒面</div></div><div class="card-body"><div class="tag-group"><span class="tag pink">绒面</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">内里加绒款</div></div><div class="card-body"><div class="tag-group"><span class="tag orange">内里加绒</span></div></div></div>
+  </div>
+</div>
+
+<!-- ==================== 类别6: 运动装和功能 ==================== -->
+<div class="category-divider" id="cat6">
+  <span class="num">06</span>
+  <div class="line"></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.48</span>
+    <div class="trend-tag">Trend Style</div>
+    <h2>机能户外</h2>
+    <p class="desc">"机能溯野"（Functional Tracing）与"都市通勤"（Urban Commute）的深度融合。服装必须在满足极限户外功能的同时，具备都市美学的适配性，实现从山野到街头的无缝切换。它不仅是实用主义的选择，更是一种生活态度的表达。</p>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>◆ 趋势小结</h3>
+  <p>轻量专业化 + 全天候防护 + 日常通勤兼容</p>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.49-50</span>
+    <h2 style="font-size:24px;">趋势关键元素 & 场景</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">拼色</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">线迹装饰</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">轻薄透气设计</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">便携可折叠</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">通风网眼设计</div></div></div>
+  </div>
+  <div class="cards-grid" style="padding-top:0;">
+    <div class="card"><div class="card-header"><div class="card-title">工业风</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">涂鸦街潮</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">光照强烈的室外</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">特定运动场景</div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.51-52</span>
+    <h2 style="font-size:24px;">户外机能类 — 机能风夹克 & 特殊材质</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">机能风夹克</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag blue">机能风</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">特殊材质</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag purple">特殊材质</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">二合一外套：背包+外套</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag orange">二合一</span><span class="tag teal">背包+外套</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">透气网眼/防风片</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag green">透气网眼</span><span class="tag gray">防风片</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">可折叠</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag teal">可折叠</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.53</span>
+    <h2 style="font-size:24px;">运动生活类 — 防晒类 & 骑行类</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">防晒类</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag green">轻薄透气</span><span class="tag orange">防晒</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">骑行类</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag blue">骑行</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.54</span>
+    <h2 style="font-size:24px;">热销视觉</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">干净棚拍</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">健身房</div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">球场/看台/更衣室</div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.55-56</span>
+    <h2 style="font-size:24px;">细抓绒 / 灯芯绒 / 丝绒</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">材质方向</div></div>
+      <div class="card-body">
+        <div class="tag-group"><span class="tag teal">细抓绒</span><span class="tag brown" style="background:#efebe9;color:#5d4037;">灯芯绒材质</span><span class="tag purple">丝绒材质</span></div>
+        <p style="margin-top:10px;"><span class="timeline-tag">7-8月小量测新，9月上新</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 类别7: 风衣/棉羽 ==================== -->
+<div class="category-divider" id="cat7">
+  <span class="num">07</span>
+  <div class="line"></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.57</span>
+    <h2 style="font-size:24px;">时尚廓形：牛角扣/羊毛/毛呢大衣</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">牛角扣大衣</div></div><div class="card-body"><div class="tag-group"><span class="tag orange">牛角扣</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">羊毛大衣</div></div><div class="card-body"><div class="tag-group"><span class="tag purple">羊毛</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">毛呢大衣</div></div><div class="card-body"><div class="tag-group"><span class="tag gray">毛呢</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.58</span>
+    <h2 style="font-size:24px;">梭织简约式</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">梭织简约</div></div><div class="card-body"><div class="tag-group"><span class="tag blue">梭织</span><span class="tag gray">简约</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">落肩/军事风</div></div><div class="card-body"><div class="tag-group"><span class="tag teal">落肩</span><span class="tag green">军事风</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.59</span>
+    <h2 style="font-size:24px;">柔软材质：羊绒大衣</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">羊绒大衣</div></div><div class="card-body"><div class="tag-group"><span class="tag pink">羊绒</span><span class="tag purple">日韩式</span></div></div></div>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>风衣小结 — 秋冬趋势</h3>
+  <p>从过去"商务正式感"转向日常化，强调宽肩长线条、柔和垂感、军事/英伦复古结构，以及更适合日常通勤与层次穿搭的轻奢氛围。</p>
+  <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
+    <span class="tag purple">羊毛</span>
+    <span class="tag pink">羊绒</span>
+    <span class="tag teal">宽松落肩</span>
+    <span class="tag blue">日韩系</span>
+    <span class="tag gray">经典基础</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.61</span>
+    <h2 style="font-size:24px;">Clean Fit — 棉羽绒方向</h2>
+    <p style="font-size:14px;color:var(--gray);margin-top:8px;"><span class="timeline-tag">上新时间：7-10月</span></p>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">排骨服</div></div><div class="card-body"><div class="tag-group"><span class="tag orange">排骨服</span><span class="tag teal">半开襟</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">面包服</div></div><div class="card-body"><div class="tag-group"><span class="tag red">面包服</span><span class="tag teal">半开襟</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">大廓形</div></div><div class="card-body"><div class="tag-group"><span class="tag blue">大廓形</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">复古灯芯绒</div></div><div class="card-body"><div class="tag-group"><span class="tag brown" style="background:#efebe9;color:#5d4037;">复古灯芯绒</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">亮面</div></div><div class="card-body"><div class="tag-group"><span class="tag orange">亮面</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">针织面</div></div><div class="card-body"><div class="tag-group"><span class="tag purple">针织面</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">功能性</div></div><div class="card-body"><div class="tag-group"><span class="tag green">功能性</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.62</span>
+    <h2 style="font-size:24px;">绗缝</h2>
+    <p style="font-size:14px;color:var(--gray);margin-top:8px;"><span class="timeline-tag">上新时间：7-10月</span></p>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><div class="card-header"><div class="card-title">基础款</div></div><div class="card-body"><div class="tag-group"><span class="tag gray">基础款</span></div></div></div>
+    <div class="card"><div class="card-header"><div class="card-title">绗缝背心</div></div><div class="card-body"><div class="tag-group"><span class="tag teal">绗缝</span><span class="tag teal">背心</span></div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.63</span>
+    <h2 style="font-size:24px;">印花布料/绣花 & 发热功能概念</h2>
+    <p style="font-size:14px;color:var(--gray);margin-top:8px;"><span class="timeline-tag">上新时间：8-10月</span></p>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header"><div class="card-title">印花布料/绣花</div></div>
+      <div class="card-body"><div class="tag-group"><span class="tag red">印花</span><span class="tag purple">绣花</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">发热功能概念</div></div>
+      <div class="card-body">
+        <div class="tag-group"><span class="tag orange">发热功能</span></div>
+        <p style="margin-top:8px;font-size:13px;color:var(--gray);">温度范围：~30°C → ~40°C → ~50°C</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="page-num">P.64</span>
+    <h2 style="font-size:24px;">派克大衣延改棉衣/长款羽绒服</h2>
+    <p style="font-size:14px;color:var(--gray);margin-top:8px;"><span class="timeline-tag">上新时间：9-10月</span></p>
+  </div>
+</div>
+
+<div class="summary-box" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);color:#fff;border-left-color:var(--accent);">
+  <h3 style="color:#fff;">棉羽小结 — 秋冬趋势</h3>
+  <p style="color:rgba(255,255,255,0.85);">亮面机能转向"哑光高级感+包裹式轮廓"，强调哑光、围巾一体化与城市户外（Urban Outdoor）氛围。</p>
+  <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
+    <span class="tag orange">粗/细排骨服</span>
+    <span class="tag red">面包服</span>
+    <span class="tag purple">绗缝工艺</span>
+    <span class="tag teal">爆款版型延改材质</span>
+    <span class="tag green">发热概念产品</span>
+    <span class="tag pink">热点图案/撞色设计与长款版型</span>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>常规款外套开款推荐 · 男士外套7大风格品类</p>
+  <p style="margin-top:8px;font-size:12px;opacity:0.6;">共65页 · 学院风 / 工装风 / 防风衣 / 棉质轻型 / 新奇 / 运动装和功能 / 风衣棉羽</p>
+</div>
+
+</div>
+</body>
+</html>
