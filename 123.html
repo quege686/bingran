@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>男装外套 · 导航总览</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--bg2:#12121a;--card:#161620;--card2:#1c1c28;--border:#252535;--border2:#2d2d42;--text:#e8e8f0;--text2:#a0a0b8;--text3:#606078;--accent:#e85d2f;--accent2:#f5a623;--green:#10b981;--blue:#2563eb;--purple:#8b5cf6;--pink:#ec4899}
+html{scroll-behavior:smooth}
+body{font-family:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* Hero — 更紧凑 */
+.hero{text-align:center;padding:32px 20px 24px;background:linear-gradient(180deg,rgba(232,93,47,0.08),transparent)}
+.hero h1{font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,#e85d2f,#f5a623,#2563eb,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.hero .sub{font-size:0.72rem;color:var(--text3);line-height:1.5}
+
+/* Search */
+.search-wrap{position:sticky;top:0;z-index:50;background:rgba(10,10,15,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:10px 20px}
+.search-box{max-width:800px;margin:0 auto;position:relative}
+.search-box input{width:100%;padding:8px 14px 8px 36px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:0.82rem;outline:none;transition:border .2s}
+.search-box input:focus{border-color:var(--accent)}
+.search-box .icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:0.9rem;opacity:0.5}
+
+/* Nav pills — 快速跳转 */
+.nav-pills{display:flex;flex-wrap:wrap;gap:6px;max-width:800px;margin:0 auto;padding:8px 0 0}
+.nav-pills a{font-size:0.68rem;color:var(--text2);background:var(--card);border:1px solid var(--border);border-radius:16px;padding:3px 10px;text-decoration:none;transition:all .15s}
+.nav-pills a:hover{color:var(--accent);border-color:var(--accent);background:rgba(232,93,47,0.08)}
+
+/* Layout — 更紧凑 */
+.container{max-width:800px;margin:0 auto;padding:20px 16px 50px}
+
+/* Section */
+.section{margin-bottom:28px;scroll-margin-top:56px}
+.section.hidden{display:none}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.section-head .sicon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.section-head h2{font-size:1rem;font-weight:700}
+.section-head .count{font-size:0.65rem;color:var(--text3);background:var(--card);padding:2px 8px;border-radius:16px;border:1px solid var(--border)}
+.section-intro{font-size:0.72rem;color:var(--accent2);margin-bottom:10px;padding:6px 12px;background:rgba(245,166,35,0.06);border-radius:6px;border:1px solid rgba(245,166,35,0.12)}
+
+/* Card — 更紧凑，双列 */
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card{display:flex;flex-direction:column;justify-content:center;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--text);transition:all .15s;position:relative;min-height:56px}
+.card:hover{background:var(--card2);border-color:var(--accent);transform:translateY(-1px)}
+.card-title{font-size:0.8rem;font-weight:600;line-height:1.4}
+.card-desc{font-size:0.62rem;color:var(--text3);margin-top:2px}
+.card .tag{position:absolute;top:8px;right:10px;font-size:0.55rem;font-weight:700;padding:1px 6px;border-radius:4px}
+.tag-green{background:rgba(16,185,129,0.12);color:#34d399;border:1px solid rgba(16,185,129,0.25)}
+.tag-orange{background:rgba(232,93,47,0.12);color:#f87171;border:1px solid rgba(232,93,47,0.25)}
+.tag-blue{background:rgba(37,99,235,0.12);color:#60a5fa;border:1px solid rgba(37,99,235,0.25)}
+.tag-pink{background:rgba(236,72,153,0.12);color:#f472b6;border:1px solid rgba(236,72,153,0.25)}
+.tag-purple{background:rgba(139,92,246,0.12);color:#a78bfa;border:1px solid rgba(139,92,246,0.25)}
+
+/* Text-only card */
+.text-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;justify-content:center;min-height:56px;opacity:0.6}
+.text-card .card-title{font-size:0.8rem;font-weight:600}
+.text-card .card-desc{font-size:0.62rem;color:var(--text3)}
+
+/* Copy btn */
+.copy-btn{font-size:0.6rem;color:var(--text3);background:var(--bg2);border:1px solid var(--border);border-radius:5px;padding:2px 8px;cursor:pointer;transition:all .15s;margin-top:4px;align-self:flex-start}
+.copy-btn:hover{color:var(--text);border-color:var(--accent)}
+.copy-btn.copied{color:#34d399;border-color:#10b981}
+
+/* Contact card — 更紧凑，横排双列 */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;transition:all .15s}
+.contact-card:hover{background:var(--card2);border-color:var(--blue)}
+.contact-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#fff;flex-shrink:0}
+.contact-info{flex:1;min-width:0}
+.contact-name{font-size:0.78rem;font-weight:600;line-height:1.3}
+.contact-en{font-size:0.62rem;color:var(--text3);line-height:1.3}
+.contact-phone{font-size:0.7rem;color:var(--accent2);font-weight:600;font-family:monospace;line-height:1.3}
+.contact-card .copy-btn{margin-top:0;flex-shrink:0}
+
+/* Invite box — 更紧凑 */
+.invite-box{background:linear-gradient(135deg,rgba(37,99,235,0.08),rgba(6,182,212,0.05));border:1px solid rgba(37,99,235,0.2);border-radius:10px;padding:12px 16px;margin-bottom:8px}
+.invite-box .label{font-size:0.62rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.invite-box .title{font-size:0.8rem;font-weight:600;margin-bottom:4px}
+.invite-box .note{font-size:0.68rem;color:var(--text2);margin-bottom:6px}
+.invite-code{display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px dashed var(--blue);border-radius:6px;padding:4px 12px;font-size:0.75rem;font-family:monospace;font-weight:700;color:var(--accent2)}
+.invite-url{font-size:0.62rem;color:var(--text3);margin-top:6px;word-break:break-all}
+
+/* Questionnaire — 更紧凑 */
+.quest-box{background:linear-gradient(135deg,rgba(245,166,35,0.08),rgba(232,93,47,0.04));border:1px solid rgba(245,166,35,0.2);border-radius:10px;padding:12px 16px;margin-bottom:8px}
+.quest-box .label{font-size:0.62rem;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.quest-box .title{font-size:0.8rem;font-weight:600;margin-bottom:6px}
+.quest-box .url{font-size:0.62rem;color:var(--text3);word-break:break-all;margin-bottom:8px}
+.quest-rules{font-size:0.7rem;color:var(--text2);line-height:1.7}
+.quest-rules li{margin-bottom:2px;padding-left:14px;position:relative;list-style:none}
+.quest-rules li::before{content:"•";position:absolute;left:4px;color:var(--accent)}
+
+/* Price rules box */
+.price-box{background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(99,102,241,0.04));border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:12px 16px;margin-bottom:8px}
+.price-box .label{font-size:0.62rem;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.price-box .title{font-size:0.8rem;font-weight:600;margin-bottom:6px}
+.price-rules{font-size:0.7rem;color:var(--text2);line-height:1.7}
+.price-rules li{margin-bottom:2px;padding-left:14px;position:relative;list-style:none}
+.price-rules li::before{content:"▸";position:absolute;left:2px;color:var(--purple)}
+
+/* Path — 更紧凑 */
+.path-group{margin-bottom:12px}
+.path-group-title{font-size:0.76rem;font-weight:700;color:var(--text);margin-bottom:6px;padding-left:2px}
+.path-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:6px;transition:all .15s}
+.path-item:hover{background:var(--card2);border-color:var(--green)}
+.path-tag{display:inline-block;font-size:0.62rem;font-weight:600;color:var(--text);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:5px;padding:1px 7px;margin-bottom:4px}
+.path-exempt{font-size:0.55rem;font-weight:700;color:#34d399;background:rgba(16,185,129,0.15);padding:1px 5px;border-radius:3px;margin-left:5px}
+.path-text{font-size:0.68rem;color:var(--text2);word-break:break-all;line-height:1.5}
+
+/* Divider */
+.divider{text-align:center;font-size:0.72rem;color:var(--text3);padding:8px 0;font-weight:600}
+
+/* Back top */
+.back-top{position:fixed;bottom:20px;right:20px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:all .25s;z-index:90}
+.back-top.show{opacity:1}
+.back-top:hover{border-color:var(--accent);color:var(--accent)}
+
+@media(max-width:600px){
+  .hero h1{font-size:1.2rem}
+  .card-grid,.contact-grid{grid-template-columns:1fr}
+  .container{padding:14px 10px 36px}
+  .card-title{font-size:0.76rem}
+  .hero{padding:24px 16px 18px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>男装外套 · 导航总览</h1>
+  <div class="sub">提升销量 · 对接招商 · 上款路径 · 开款推荐 · 商品上新 · JIT · 发货 · 定制品 · 避坑&广告</div>
+</div>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="搜索标题、路径、关键词..." oninput="doSearch(this.value)">
+  </div>
+  <div class="nav-pills" id="navPills"></div>
+</div>
+
+<div class="container">
+<script>document.getElementById("navPills").innerHTML="<a href=\"#sales\">\ud83d\ude80 \u63d0\u5347\u9500\u91cf</a><a href=\"#contact\">\ud83e\udd1d \u5bf9\u63a5\u62db\u5546</a><a href=\"#paths\">\ud83d\udccd \u4e0a\u6b3e\u8def\u5f84</a><a href=\"#recommend\">\ud83c\udfa8 \u5f00\u6b3e\u63a8\u8350</a><a href=\"#newproduct\">\ud83d\udce6 \u5546\u54c1\u4e0a\u65b0</a><a href=\"#jit\">\ud83d\udd04 JIT\u6a21\u5f0f</a><a href=\"#shipping\">\ud83d\ude9a \u53d1\u8d27\u6307\u5f15</a><a href=\"#custom\">\u2702\ufe0f \u5b9a\u5236\u54c1</a><a href=\"#guide\">\ud83d\udee1\ufe0f \u907f\u5751\u6307\u5357 & \u5e7f\u544a\u6295\u653e</a>";</script>
+
+  <div class="section" id="sales" data-search="提升销量">
+    <div class="section-head">
+      <div class="sicon" style="background:linear-gradient(135deg,#e85d2f,#f5a623)">🚀</div>
+      <h2>提升销量</h2>
+      <span class="count">7条</span>
+    </div>
+    <div class="card-grid">
+    <a class="card" href="https://pangdalong-afk.github.io/sunbingran/meizhouresou-index.html" target="_blank" rel="noopener">
+      <div class="card-title">美洲站点年度节日活动热搜词梳理</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/2.html" target="_blank" rel="noopener">
+      <div class="card-title">男装标题优化</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/3.html" target="_blank" rel="noopener">
+      <div class="card-title">服装标题分维度枚举词</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/Latinmodel.html" target="_blank" rel="noopener">
+      <div class="card-title">拉美高转化图指南</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/picturetitle.html" target="_blank" rel="noopener">
+      <div class="card-title">图片+标题美化</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/vision.html" target="_blank" rel="noopener">
+      <div class="card-title">视觉优化指南</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/style.html" target="_blank" rel="noopener">
+      <div class="card-title">外套7月趋势+复色上款注意事项</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="contact" data-search="对接招商">
+    <div class="section-head">
+      <div class="sicon" style="background:linear-gradient(135deg,#2563eb,#06b6d4)">🤝</div>
+      <h2>对接招商</h2>
+      <span class="count">8条</span>
+    </div>
+    <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-avatar">孙</div>
+      <div class="contact-info">
+        <div class="contact-name">孙冰燃</div>
+        <div class="contact-en">klee.sun</div>
+        <div class="contact-phone">13511744912</div>
+      </div>
+      <button class="copy-btn" onclick="copyText(this,'孙冰燃 klee.sun 13511744912')">复制</button>
+    </div>
+    <div class="contact-card">
+      <div class="contact-avatar">胖</div>
+      <div class="contact-info">
+        <div class="contact-name">胖达龙</div>
+        <div class="contact-en">lucian.tan</div>
+        <div class="contact-phone">13357040487</div>
+      </div>
+      <button class="copy-btn" onclick="copyText(this,'胖达龙 lucian.tan 13357040487')">复制</button>
+    </div>
+    <div class="contact-card">
+      <div class="contact-avatar">伍</div>
+      <div class="contact-info">
+        <div class="contact-name">伍舒宁</div>
+        <div class="contact-en">sienna.wu</div>
+        <div class="contact-phone">15602993307</div>
+      </div>
+      <button class="copy-btn" onclick="copyText(this,'伍舒宁 sienna.wu 15602993307')">复制</button>
+    </div>
+    <div class="contact-card">
+      <div class="contact-avatar">依</div>
+      <div class="contact-info">
+        <div class="contact-name">依江月</div>
+        <div class="contact-en">dumia.yang</div>
+        <div class="contact-phone">Withx_yjy</div>
+      </div>
+      <button class="copy-btn" onclick="copyText(this,'依江月 dumia.yang Withx_yjy')">复制</button>
+    </div>
+    <div class="contact-card">
+      <div class="contact-avatar">卓</div>
+      <div class="contact-info">
+        <div class="contact-name">卓枫</div>
+        <div class="contact-en">wayne.feng</div>
+        <div class="contact-phone">zhuofengkj666</div>
+      </div>
+      <button class="copy-btn" onclick="copyText(this,'卓枫 wayne.feng zhuofengkj666')">复制</button>
+    </div>
+    </div>
+    <div class="invite-box">
+      <div class="label">🏪 入驻邀请</div>
+      <div class="title">半托新商家/全托商家开新店 均可用入驻专属邀请码</div>
+      <div class="note">必填邀请码！！！</div>
+      <div class="invite-code">邀请码：rufpsz <button class="copy-btn" onclick="copyText(this,'rufpsz')">复制</button></div>
+      <div class="invite-url">https://seller.kuajingmaihuo.com/mobile-main/register.html?invitationCode=rufpsz</div>
+    </div>
+    <div class="quest-box">
+      <div class="label">📋 下单问卷</div>
+      <div class="title">下单问卷表</div>
+      <div class="url">https://seller.kuajingmaihuo.com/questionnaire?surveyId=19958660310</div>
+      <div class="quest-rules"><li>按照要求申请（SKU尺码件数），不符合规则的不下。</li><li>申请下单的必须当日发出，否则一周内不再下。</li><li>仅下买手为【冰燃、胖达龙、伍舒宁、依江月、卓枫】的单。</li><li>注意现在是按SKU ID来填写喔！</li></div>
+      <button class="copy-btn" onclick="copyText(this,'https://seller.kuajingmaihuo.com/questionnaire?surveyId=19958660310')">复制链接</button>
+    </div>
+    <div class="price-box">
+      <div class="label">💰 核价规则</div>
+      <div class="title">核价规则</div>
+      <div class="price-rules"><li>系统给价能做就过，不能做给对应买手SKC目标价格+理由申请</li><li>SKC：XXX 最低价XX，原因：面料费XX元 损耗费XX元 辅料XX+XX+XX元 工价XX元 成本XX元 利润30%</li><li>冰燃这边：第一遍申请人审24h刷价，人审不过继续提报我，再去人工审核</li><li>二次人工审核给不到合适价位→放弃 或 换一组图重新上连接（站内比价主要看主图）</li></div>
+    </div>
+  </div>
+
+  <div class="section" id="paths" data-search="上款路径">
+    <div class="section-head">
+      <div class="sicon" style="background:linear-gradient(135deg,#10b981,#34d399)">📍</div>
+      <h2>上款路径</h2>
+      <span class="count">4条</span>
+    </div>
+    <div class="section-intro">💡 类目一定要对，才能精准对接流量资源哦！上款选【欧美尺码】</div>
+    <div class="path-group">
+      <div class="path-group-title">男士外套</div>
+      <div class="path-item">
+        <span class="path-tag">工装</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 工装</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 工装')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">防风衣</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士轻型夹克 > 男士防风衣</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士轻型夹克 > 男士防风衣')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">学院风夹克</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士轻型夹克 > 男士学院风夹克</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士轻型夹克 > 男士学院风夹克')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">新奇夹克</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇夹克和外套</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇夹克和外套')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">棉质轻型夹克</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士轻型夹克 > 男士棉质轻型夹克</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士轻型夹克 > 男士棉质轻型夹克')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">皮革夹克</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士皮革和人造革夹克及外套 > 男士人造革夹克/男士皮革夹克</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士皮革和人造革夹克及外套 > 男士人造革夹克/男士皮革夹克')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">运动功能夹克</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士运动装和功能夹克 > 男士紧身运动装和功能夹克/男士运动装和功能保暖夹克</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士运动装和功能夹克 > 男士紧身运动装和功能夹克/男士运动装和功能保暖夹克')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">抓绒衫</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士运动装和功能夹克 > 抓绒衫</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士运动装和功能夹克 > 抓绒衫')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">抓绒外套</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士抓绒夹克和外套</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士抓绒夹克和外套')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">羊毛外套</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士羊毛夹克和外套</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士外套 > 男士羊毛夹克和外套')">复制路径</button>
+      </div>
+    </div>
+    <div class="path-group">
+      <div class="path-group-title">男士上装</div>
+      <div class="path-item">
+        <span class="path-tag">Polo衫</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装上衣、T恤、衬衫 > 男装Polo衫</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装上衣、T恤、衬衫 > 男装Polo衫')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">T恤/卫衣/套装</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇田径服</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇田径服')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">休闲运动Polo</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动衫、T恤 > 男士休闲运动Polo衫</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动衫、T恤 > 男士休闲运动Polo衫')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">新奇Polo</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇T恤、衬衫、Polo衫</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇T恤、衬衫、Polo衫')">复制路径</button>
+      </div>
+    </div>
+    <div class="path-group">
+      <div class="path-group-title">男士下装</div>
+      <div class="path-item">
+        <span class="path-tag">长裤</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">工装裤</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士工装裤</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士工装裤')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">新奇长裤</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇长裤</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇长裤')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">其他长裤</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 其他(男士休闲运动长裤)</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 其他(男士休闲运动长裤)')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">运动长裤</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤')">复制路径</button>
+      </div>
+      <div class="path-item">
+        <span class="path-tag">宽松运动长裤</span><span class="path-exempt">免审</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤')">复制路径</button>
+      </div>
+    </div>
+    <div class="path-group">
+      <div class="path-group-title">男士套装</div>
+      <div class="path-item">
+        <span class="path-tag">新奇田径服</span>
+        <div class="path-text">服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇田径服</div>
+        <button class="copy-btn" onclick="copyText(this,'服装、鞋靴和珠宝饰品 > 新奇物品 > 新奇服装和产品 > 新奇服装 > 男士新奇服装 > 男士新奇田径服')">复制路径</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="recommend" data-search="开款推荐">
+    <div class="section-head">
+      <div class="sicon" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">🎨</div>
+      <h2>开款推荐</h2>
+      <span class="count">9条</span>
+    </div>
+    <div class="card-grid">
+    <a class="card" href="https://quege686.github.io/bingran/leather.html" target="_blank" rel="noopener">
+      <div class="card-title">皮革夹克开款</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/printing.html" target="_blank" rel="noopener">
+      <div class="card-title">精品向印花开款</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/woolen.html" target="_blank" rel="noopener">
+      <div class="card-title">毛织外套开款</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/movel.html" target="_blank" rel="noopener">
+      <div class="card-title">新奇外套开款</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/workwear.html" target="_blank" rel="noopener">
+      <div class="card-title">工装外套开款</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/schoolwear.html" target="_blank" rel="noopener">
+      <div class="card-title">学院风外套开款</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/woolen.html" target="_blank" rel="noopener">
+      <div class="card-title">棉质轻型外套开款</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/windbreaker.html" target="_blank" rel="noopener">
+      <div class="card-title">防风衣开款</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    <a class="card" href="https://quege686.github.io/bingran/warm.html" target="_blank" rel="noopener">
+      <div class="card-title">功能保暖开款</div>
+      <div class="card-desc">网页</div>
+      <span class="tag tag-blue">网页</span>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="newproduct" data-search="商品上新">
+    <div class="section-head">
+      <div class="sicon" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">📦</div>
+      <h2>商品上新</h2>
+      <span class="count">7条</span>
+    </div>
+    <div class="card-grid">
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/yhtz/e59db44a-c5ca-46d0-aaa7-381047ffd9b2.pdf" target="_blank" rel="noopener">
+      <div class="card-title">发布商品的指引与注意事项</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/yhtz/eb6c4e08-83c3-4155-bf9f-cf883abbb37c.pdf" target="_blank" rel="noopener">
+      <div class="card-title">男装测量手法</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/yhtz/9594c6a1-14ed-4d99-8eb0-6af48705679e.pdf" target="_blank" rel="noopener">
+      <div class="card-title">标码男装尺码参考</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/nzyh/e8d0fdd2-44e4-4802-9e88-bb920d23afb2.pdf" target="_blank" rel="noopener">
+      <div class="card-title">实物寄样指引</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/nzyh/8f0a044c-2c27-4cda-9a64-9c89ca99e411.pdf" target="_blank" rel="noopener">
+      <div class="card-title">男装审版规范</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/nzyh/238f2f03-79cc-43ed-a64c-b942a2d75ae2.pdf" target="_blank" rel="noopener">
+      <div class="card-title">男装图片要求</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/zsmsgw/1df7e56a-6f52-4e61-b0d6-7bd8289abf17.jpg" target="_blank" rel="noopener">
+      <div class="card-title">复色加码教程</div>
+      <div class="card-desc">图片</div>
+      <span class="tag tag-purple">图片</span>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="jit" data-search="JIT模式">
+    <div class="section-head">
+      <div class="sicon" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)">🔄</div>
+      <h2>JIT模式</h2>
+      <span class="count">3条</span>
+    </div>
+    <div class="card-grid">
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/zsmsgw/1ab096a3-6636-48c4-84a1-5b3c7c2f171e.pdf" target="_blank" rel="noopener">
+      <div class="card-title">JIT模式介绍和开通指引</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/zsmsgw/178a1913-d874-48be-b115-28485b0b30f3.pdf" target="_blank" rel="noopener">
+      <div class="card-title">JIT模式规则解读与申诉要求</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/zsmsgw/254f098a-87cb-4a10-b769-2449e2a9dc4f.pdf" target="_blank" rel="noopener">
+      <div class="card-title">JIT转备货教程</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="shipping" data-search="发货指引">
+    <div class="section-head">
+      <div class="sicon" style="background:linear-gradient(135deg,#84cc16,#22c55e)">🚚</div>
+      <h2>发货指引</h2>
+      <span class="count">7条</span>
+    </div>
+    <div class="card-grid">
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/shoes/fd98988d-5360-459a-90b2-2a6527af6175.png" target="_blank" rel="noopener">
+      <div class="card-title">拆单发货教程</div>
+      <div class="card-desc">图片</div>
+      <span class="tag tag-purple">图片</span>
+    </a>
+    <div class="text-card">
+      <div class="card-title">水洗唛标准</div>
+      <div class="card-desc">暂无链接</div>
+    </div>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/nzyh/2eee0dae-58e9-4e1e-b21b-991ab1bbe64c.png" target="_blank" rel="noopener">
+      <div class="card-title">发货标签张贴指南</div>
+      <div class="card-desc">图片</div>
+      <span class="tag tag-purple">图片</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/nzyh/3c42f723-c401-4e0e-af74-8bf6f2a80ad5.pdf" target="_blank" rel="noopener">
+      <div class="card-title">包装要求</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/zsmsgw/87206710-4ee6-43d0-9379-2de8fe436300.mp4" target="_blank" rel="noopener">
+      <div class="card-title">①区分条码和打包标签</div>
+      <div class="card-desc">视频</div>
+      <span class="tag tag-pink">视频</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/zsmsgw/ac690bfc-d4d8-44d8-998c-c1ccfcb60b47.mp4" target="_blank" rel="noopener">
+      <div class="card-title">②一箱多唛(袋子包装)</div>
+      <div class="card-desc">视频</div>
+      <span class="tag tag-pink">视频</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/zsmsgw/f953eb11-fc90-4bd0-b13d-2cdc92bc8fb7.mp4" target="_blank" rel="noopener">
+      <div class="card-title">③一箱一唛</div>
+      <div class="card-desc">视频</div>
+      <span class="tag tag-pink">视频</span>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="custom" data-search="定制品">
+    <div class="section-head">
+      <div class="sicon" style="background:linear-gradient(135deg,#a855f7,#6366f1)">✂️</div>
+      <h2>定制品</h2>
+      <span class="count">2条</span>
+    </div>
+    <div class="card-grid">
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/zsmsgw/82d20591-fd0d-4ac0-a920-1f6ad795b722.pdf" target="_blank" rel="noopener">
+      <div class="card-title">定制品上新指引与相关规范</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    <a class="card" href="https://bdl.cdnfe.com/upload_bdl/zsmsgw/ccef1d28-cb79-4d07-ac3a-b83f9559cc70.pdf" target="_blank" rel="noopener">
+      <div class="card-title">定制品订单处理和发货包装</div>
+      <div class="card-desc">PDF</div>
+      <span class="tag tag-orange">PDF</span>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="guide" data-search="避坑指南 & 广告投放">
+    <div class="section-head">
+      <div class="sicon" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">🛡️</div>
+      <h2>避坑指南 & 广告投放</h2>
+      <span class="count">12条</span>
+    </div>
+    <a class="card" href="https://mp.weixin.qq.com/s/sS_2U1bhSOJ1xx4HuPspXw" target="_blank" rel="noopener">
+      <div class="card-title">实拍图保姆级教程</div>
+      <div class="card-desc">微信</div>
+      <span class="tag tag-blue">微信</span>
+    </a>
+    <a class="card" href="https://mp.weixin.qq.com/s/Gm551T03h2ouq0ilfpSygg" target="_blank" rel="noopener">
+      <div class="card-title">资质文件合规秘诀</div>
+      <div class="card-desc">微信</div>
+      <span class="tag tag-blue">微信</span>
+    </a>
+    <a class="card" href="https://mp.weixin.qq.com/s/wMiO3rju13mhDDhlrmhTDA" target="_blank" rel="noopener">
+      <div class="card-title">低价引流避坑指南</div>
+      <div class="card-desc">微信</div>
+      <span class="tag tag-blue">微信</span>
+    </a>
+    <a class="card" href="https://mp.weixin.qq.com/s/UQ-sK0Uk-PKROr9_n16mSA" target="_blank" rel="noopener">
+      <div class="card-title">内容信息发布避坑指南</div>
+      <div class="card-desc">微信</div>
+      <span class="tag tag-blue">微信</span>
+    </a>
+    <a class="card" href="https://mp.weixin.qq.com/s/kzo7HBSYHSvmBXfxT8yiIg" target="_blank" rel="noopener">
+      <div class="card-title">商品图片发布避坑指南</div>
+      <div class="card-desc">微信</div>
+      <span class="tag tag-blue">微信</span>
+    </a>
+    <a class="card" href="https://mp.weixin.qq.com/s/wko6ZBcpme9sMbdEzLC3wg" target="_blank" rel="noopener">
+      <div class="card-title">描述不符避坑指南</div>
+      <div class="card-desc">微信</div>
+      <span class="tag tag-blue">微信</span>
+    </a>
+    <a class="card" href="https://mp.weixin.qq.com/s/Tqm31aD1d7hz04ZPdYB_Jw" target="_blank" rel="noopener">
+      <div class="card-title">重复铺货避坑指南</div>
+      <div class="card-desc">微信</div>
+      <span class="tag tag-blue">微信</span>
+    </a>
+    <div class="divider">—— 初级内容 ——</div>
+    <a class="card" href="https://seller.kuajingmaihuo.com/main/course/detail?courseId=2503090000022" target="_blank" rel="noopener">
+      <div class="card-title">Temu广告账号快速搭建流程分享</div>
+      <div class="card-desc">课程</div>
+      <span class="tag tag-green">课程</span>
+    </a>
+    <div class="divider">—— 进阶内容 ——</div>
+    <a class="card" href="https://seller.kuajingmaihuo.com/main/course/detail?courseId=2503130000024" target="_blank" rel="noopener">
+      <div class="card-title">Temu广告投放起量方法分享</div>
+      <div class="card-desc">课程</div>
+      <span class="tag tag-green">课程</span>
+    </a>
+    <a class="card" href="https://seller.kuajingmaihuo.com/main/course/detail?courseId=2503130000838" target="_blank" rel="noopener">
+      <div class="card-title">商家投放广告流程SOP&答疑</div>
+      <div class="card-desc">课程</div>
+      <span class="tag tag-green">课程</span>
+    </a>
+  </div>
+</div>
+
+<div class="back-top" id="backTop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+function copyText(btn,text){
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent="✓";btn.classList.add("copied");
+    setTimeout(function(){btn.textContent="复制";btn.classList.remove("copied")},1200);
+  });
+}
+function doSearch(q){
+  q=q.trim().toLowerCase();
+  var sections=document.querySelectorAll(".section");
+  if(!q){sections.forEach(function(s){s.classList.remove("hidden")});return;}
+  sections.forEach(function(sec){
+    var hasMatch=false;
+    var cards=sec.querySelectorAll(".card,.text-card,.contact-card,.path-item,.invite-box,.quest-box,.price-box,.divider");
+    cards.forEach(function(c){
+      var t=(c.textContent||"").toLowerCase();
+      var match=t.indexOf(q)>=0;
+      c.style.display=match?"":"none";
+      if(match)hasMatch=true;
+    });
+    sec.classList.toggle("hidden",!hasMatch);
+  });
+}
+window.addEventListener("scroll",function(){
+  var b=document.getElementById("backTop");
+  b.classList.toggle("show",window.scrollY>300);
+});
+</script>
+</body>
+</html>
