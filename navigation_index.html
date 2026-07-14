@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>男装运营导航中心</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --card-bg: #1a1d27;
+  --card-hover: #222631;
+  --border: #2a2e3a;
+  --text: #e4e7ed;
+  --text-dim: #8b919e;
+  --text-muted: #5c6270;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Hero ── */
+.hero {
+  background: linear-gradient(135deg, #1a1d27 0%, #0f1117 50%, #1a1520 100%);
+  padding: 60px 20px 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(ellipse at center, rgba(232,93,47,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e85d2f, #f5a623, #db2777, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.hero .subtitle {
+  font-size: 1rem;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+.hero .stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.hero .stat-item {
+  text-align: center;
+}
+.hero .stat-num {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.hero .stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ── search ── */
+.search-wrap {
+  max-width: 600px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+.search-wrap input {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color .2s;
+}
+.search-wrap input:focus { border-color: #e85d2f; }
+.search-wrap input::placeholder { color: var(--text-muted); }
+
+/* ── sections ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+.section {
+  margin-bottom: 48px;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.section-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+.section-title-wrap { flex: 1; }
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+.section-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+.section-badge {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--card-bg);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+/* ── group ── */
+.group {
+  margin-bottom: 24px;
+}
+.group-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  padding-left: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.group-name::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+}
+.group[data-color="orange"] .group-name::before { background: #e85d2f; }
+.group[data-color="blue"]   .group-name::before { background: #2563eb; }
+.group[data-color="green"]  .group-name::before { background: #059669; }
+.group[data-color="pink"]   .group-name::before { background: #db2777; }
+
+/* ── card grid ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  transition: all .2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover {
+  background: var(--card-hover);
+  border-color: var(--theme-c, var(--border));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+  line-height: 1.4;
+}
+.card-tag {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tag-free {
+  background: rgba(5,150,105,0.15);
+  color: #34d399;
+  border: 1px solid rgba(5,150,105,0.3);
+}
+.tag-link {
+  background: rgba(232,93,47,0.15);
+  color: #f87171;
+  border: 1px solid rgba(232,93,47,0.3);
+}
+.tag-enter {
+  background: rgba(37,99,235,0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(37,99,235,0.3);
+}
+.tag-design {
+  background: rgba(219,39,119,0.15);
+  color: #f472b6;
+  border: 1px solid rgba(219,39,119,0.3);
+}
+.tag-survey {
+  background: rgba(245,166,35,0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245,166,35,0.3);
+}
+.card-desc {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  word-break: break-all;
+}
+.card-highlight {
+  font-size: 0.8rem;
+  color: var(--text);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  white-space: pre-line;
+  line-height: 1.6;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+.card-action {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.card:hover .card-action {
+  color: var(--theme-c, var(--text-dim));
+}
+.card-copy {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.card-copy:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.1);
+}
+.card-copy.copied {
+  color: #34d399;
+  border-color: rgba(5,150,105,0.4);
+}
+
+/* hidden by search */
+.card.hidden { display: none; }
+.group.hidden { display: none; }
+.section.hidden { display: none; }
+
+/* ── back to top ── */
+.back-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .25s;
+  z-index: 100;
+}
+.back-top.show { opacity: 1; }
+.back-top:hover { background: var(--card-hover); }
+
+/* ── footer ── */
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ── responsive ── */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.6rem; }
+  .hero .stats { gap: 16px; }
+  .hero .stat-num { font-size: 1.2rem; }
+  .card-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+
+<!-- Hero -->
+<section class="hero">
+  <h1>男装运营导航中心</h1>
+  <p class="subtitle">提升销量 · 对接招商 · 上款路径 · 开款参考</p>
+  <div class="stats">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">板块</div></div>
+    <div class="stat-item"><div class="stat-num">33</div><div class="stat-label">条目</div></div>
+    <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">免审路径</div></div>
+    <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">开款指南</div></div>
+  </div>
+</section>
+
+
+<!-- Search -->
+<div class="search-wrap">
+  <input type="text" id="searchInput" placeholder="搜索标题、路径、关键词..." oninput="doSearch(this.value)">
+</div>
+
+<div class="container">
+
+<!-- Section: 提升销量 -->
+<section class="section" id="sec-boost" data-section="boost">
+  <div class="section-header">
+    <span class="section-icon">🚀</span>
+    <div class="section-title-wrap">
+      <div class="section-title">提升销量</div>
+      <div class="section-subtitle">运营工具与优化指南</div>
+    </div>
+    <span class="section-badge">6 条</span>
+  </div>
+
+  <div class="group" data-color="orange" data-group="boost-0">
+    <div class="group-name">运营工具与指南</div>
+    <div class="card-grid">
+      <a class="card" href="https://pangdalong-afk.github.io/sunbingran/meizhouresou-index.html" target="_blank" rel="noopener" style="--theme-c: #e85d2f;" data-text="美洲站点年度节日活动热搜词梳理 美洲站点年度节日活动热搜词梳理 热搜词">
+        <div class="card-top">
+          <div class="card-title">美洲站点年度节日活动热搜词梳理</div>
+          <span class="card-tag tag-link">热搜词</span>
+        </div>
+        <div class="card-desc">美洲站点年度节日活动热搜词梳理</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://pangdalong-afk.github.io/sunbingran/meizhouresou-index.html')">复制链接</button>
+        </div>
+      </a>
+      <a class="card" href="https://quege686.github.io/bingran/2.html" target="_blank" rel="noopener" style="--theme-c: #e85d2f;" data-text="男装标题优化 男装标题优化指南 标题优化">
+        <div class="card-top">
+          <div class="card-title">男装标题优化</div>
+          <span class="card-tag tag-link">标题优化</span>
+        </div>
+        <div class="card-desc">男装标题优化指南</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://quege686.github.io/bingran/2.html')">复制链接</button>
+        </div>
+      </a>
+      <a class="card" href="https://quege686.github.io/bingran/3.html" target="_blank" rel="noopener" style="--theme-c: #e85d2f;" data-text="服装标题分维度枚举词 服装标题分维度枚举词对照表 枚举词">
+        <div class="card-top">
+          <div class="card-title">服装标题分维度枚举词</div>
+          <span class="card-tag tag-link">枚举词</span>
+        </div>
+        <div class="card-desc">服装标题分维度枚举词对照表</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://quege686.github.io/bingran/3.html')">复制链接</button>
+        </div>
+      </a>
+      <a class="card" href="https://quege686.github.io/bingran/Latinmodel.html" target="_blank" rel="noopener" style="--theme-c: #e85d2f;" data-text="拉美高转化图指南 拉美高转化图指南 拉美">
+        <div class="card-top">
+          <div class="card-title">拉美高转化图指南</div>
+          <span class="card-tag tag-link">拉美</span>
+        </div>
+        <div class="card-desc">拉美高转化图指南</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://quege686.github.io/bingran/Latinmodel.html')">复制链接</button>
+        </div>
+      </a>
+      <a class="card" href="https://quege686.github.io/bingran/picturetitle.html" target="_blank" rel="noopener" style="--theme-c: #e85d2f;" data-text="图片+标题美化 图片+标题美化指南 美化">
+        <div class="card-top">
+          <div class="card-title">图片+标题美化</div>
+          <span class="card-tag tag-link">美化</span>
+        </div>
+        <div class="card-desc">图片+标题美化指南</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://quege686.github.io/bingran/picturetitle.html')">复制链接</button>
+        </div>
+      </a>
+      <a class="card" href="https://quege686.github.io/bingran/vision.html" target="_blank" rel="noopener" style="--theme-c: #e85d2f;" data-text="视觉优化指南 视觉优化指南 视觉">
+        <div class="card-top">
+          <div class="card-title">视觉优化指南</div>
+          <span class="card-tag tag-link">视觉</span>
+        </div>
+        <div class="card-desc">视觉优化指南</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://quege686.github.io/bingran/vision.html')">复制链接</button>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Section: 对接招商 -->
+<section class="section" id="sec-recruit" data-section="recruit">
+  <div class="section-header">
+    <span class="section-icon">🤝</span>
+    <div class="section-title-wrap">
+      <div class="section-title">对接招商</div>
+      <div class="section-subtitle">入驻邀请与开店指引</div>
+    </div>
+    <span class="section-badge">2 条</span>
+  </div>
+
+  <div class="group" data-color="blue" data-group="recruit-0">
+    <div class="group-name">商家入驻</div>
+    <div class="card-grid">
+      <a class="card" href="https://seller.kuajingmaihuo.com/mobile-main/register.html?invitationCode=rufpsz" target="_blank" rel="noopener" style="--theme-c: #2563eb;" data-text="半托新商家/全托商家开新店 — 入驻专属邀请码 半托新商家/全托商家开新店均可用入驻专属邀请码 入驻">
+        <div class="card-top">
+          <div class="card-title">半托新商家/全托商家开新店 — 入驻专属邀请码</div>
+          <span class="card-tag tag-enter">入驻</span>
+        </div>
+        <div class="card-desc">半托新商家/全托商家开新店均可用入驻专属邀请码</div>
+        <div class="card-highlight">邀请码：rufpsz（必填邀请码！！！）</div>
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://seller.kuajingmaihuo.com/mobile-main/register.html?invitationCode=rufpsz')">复制链接</button>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="group" data-color="blue" data-group="recruit-1">
+    <div class="group-name">下单问卷表</div>
+    <div class="card-grid">
+      <a class="card" href="https://seller.kuajingmaihuo.com/questionnaire?surveyId=19958660310" target="_blank" rel="noopener" style="--theme-c: #2563eb;" data-text="下单问卷表 下单问卷表 问卷">
+        <div class="card-top">
+          <div class="card-title">下单问卷表</div>
+          <span class="card-tag tag-survey">问卷</span>
+        </div>
+        <div class="card-desc">下单问卷表</div>
+        <div class="card-highlight">1. 按照要求申请（SKU尺码件数），不符合规则的不下
+2. 申请下单的必须当日发出，否则一周内不再下
+3. 仅下买手为【冰燃、胖达龙、伍舒宁、依江月、卓枫】的单
+注意现在是按SKU ID来填写喔！</div>
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://seller.kuajingmaihuo.com/questionnaire?surveyId=19958660310')">复制链接</button>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Section: 上款路径 -->
+<section class="section" id="sec-path" data-section="path">
+  <div class="section-header">
+    <span class="section-icon">📍</span>
+    <div class="section-title-wrap">
+      <div class="section-title">上款路径</div>
+      <div class="section-subtitle">类目路径指引 — 选「欧美尺码」</div>
+    </div>
+    <span class="section-badge">21 条</span>
+  </div>
+
+  <div class="group" data-color="green" data-group="path-0">
+    <div class="group-name">男士外套</div>
+    <div class="card-grid">
+      <a class="card"  style="--theme-c: #059669;" data-text="工装 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 工装 免审">
+        <div class="card-top">
+          <div class="card-title">工装</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 工装</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 工装')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士防风衣 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士轻型夹克 &amp;gt; 男士防风衣 免审">
+        <div class="card-top">
+          <div class="card-title">男士防风衣</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士防风衣</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士轻型夹克 &amp;gt; 男士防风衣')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士学院风夹克 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士轻型夹克 &amp;gt; 男士学院风夹克 免审">
+        <div class="card-top">
+          <div class="card-title">男士学院风夹克</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士学院风夹克</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士轻型夹克 &amp;gt; 男士学院风夹克')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士新奇夹克和外套 服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇夹克和外套 免审">
+        <div class="card-top">
+          <div class="card-title">男士新奇夹克和外套</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 新奇物品 &gt; 新奇服装和产品 &gt; 新奇服装 &gt; 男士新奇服装 &gt; 男士新奇夹克和外套</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇夹克和外套')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士棉质轻型夹克 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士轻型夹克 &amp;gt; 男士棉质轻型夹克 免审">
+        <div class="card-top">
+          <div class="card-title">男士棉质轻型夹克</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士轻型夹克 &gt; 男士棉质轻型夹克</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士轻型夹克 &amp;gt; 男士棉质轻型夹克')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士皮革/人造革夹克 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士皮革和人造革夹克及外套 &amp;gt; 男士人造革夹克/男士皮革夹克 免审">
+        <div class="card-top">
+          <div class="card-title">男士皮革/人造革夹克</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士皮革和人造革夹克及外套 &gt; 男士人造革夹克/男士皮革夹克</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士皮革和人造革夹克及外套 &amp;gt; 男士人造革夹克/男士皮革夹克')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士运动装和功能夹克 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士运动装和功能夹克 &amp;gt; 男士紧身运动装和功能夹克/男士运动装和功能保暖夹克 免审">
+        <div class="card-top">
+          <div class="card-title">男士运动装和功能夹克</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士运动装和功能夹克 &gt; 男士紧身运动装和功能夹克/男士运动装和功能保暖夹克</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士运动装和功能夹克 &amp;gt; 男士紧身运动装和功能夹克/男士运动装和功能保暖夹克')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="抓绒衫 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士运动装和功能夹克 &amp;gt; 抓绒衫 免审">
+        <div class="card-top">
+          <div class="card-title">抓绒衫</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士运动装和功能夹克 &gt; 抓绒衫</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士运动装和功能夹克 &amp;gt; 抓绒衫')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="抓绒外套 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士抓绒夹克和外套 免审">
+        <div class="card-top">
+          <div class="card-title">抓绒外套</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士抓绒夹克和外套</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士抓绒夹克和外套')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="羊毛外套 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士羊毛夹克和外套 免审">
+        <div class="card-top">
+          <div class="card-title">羊毛外套</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士外套 &gt; 男士羊毛夹克和外套</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士外套 &amp;gt; 男士羊毛夹克和外套')">复制路径</button>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="group" data-color="green" data-group="path-1">
+    <div class="group-name">男士上装</div>
+    <div class="card-grid">
+      <a class="card"  style="--theme-c: #059669;" data-text="男装polo衫 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男装上衣、t恤、衬衫 &amp;gt; 男装polo衫 免审">
+        <div class="card-top">
+          <div class="card-title">男装Polo衫</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男装上衣、T恤、衬衫 &gt; 男装Polo衫</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男装上衣、T恤、衬衫 &amp;gt; 男装Polo衫')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="新奇田径服（t恤/卫衣/套装） 服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇田径服 免审">
+        <div class="card-top">
+          <div class="card-title">新奇田径服（T恤/卫衣/套装）</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 新奇物品 &gt; 新奇服装和产品 &gt; 新奇服装 &gt; 男士新奇服装 &gt; 男士新奇田径服</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇田径服')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士休闲运动polo衫 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士休闲运动服 &amp;gt; 男士休闲运动衫、t恤 &amp;gt; 男士休闲运动polo衫 免审">
+        <div class="card-top">
+          <div class="card-title">男士休闲运动Polo衫</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士休闲运动服 &gt; 男士休闲运动衫、T恤 &gt; 男士休闲运动Polo衫</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士休闲运动服 &amp;gt; 男士休闲运动衫、T恤 &amp;gt; 男士休闲运动Polo衫')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士新奇t恤/衬衫/polo衫 服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇t恤、衬衫、polo衫 免审">
+        <div class="card-top">
+          <div class="card-title">男士新奇T恤/衬衫/Polo衫</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 新奇物品 &gt; 新奇服装和产品 &gt; 新奇服装 &gt; 男士新奇服装 &gt; 男士新奇T恤、衬衫、Polo衫</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇T恤、衬衫、Polo衫')">复制路径</button>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="group" data-color="green" data-group="path-2">
+    <div class="group-name">男士下装</div>
+    <div class="card-grid">
+      <a class="card"  style="--theme-c: #059669;" data-text="男士休闲裤（长裤） 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男装长裤 &amp;gt; 男士休闲裤 免审">
+        <div class="card-top">
+          <div class="card-title">男士休闲裤（长裤）</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男装长裤 &gt; 男士休闲裤</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男装长裤 &amp;gt; 男士休闲裤')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士工装裤 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士工装裤 免审">
+        <div class="card-top">
+          <div class="card-title">男士工装裤</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士工装裤</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士工装裤')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士新奇长裤 服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇长裤 免审">
+        <div class="card-top">
+          <div class="card-title">男士新奇长裤</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 新奇物品 &gt; 新奇服装和产品 &gt; 新奇服装 &gt; 男士新奇服装 &gt; 男士新奇长裤</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇长裤')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="其他男士休闲运动长裤 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士休闲运动服 &amp;gt; 男士休闲运动长裤 &amp;gt; 其他(男士休闲运动长裤) 免审">
+        <div class="card-top">
+          <div class="card-title">其他男士休闲运动长裤</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士休闲运动服 &gt; 男士休闲运动长裤 &gt; 其他(男士休闲运动长裤)</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士休闲运动服 &amp;gt; 男士休闲运动长裤 &amp;gt; 其他(男士休闲运动长裤)')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士运动长裤 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士休闲运动服 &amp;gt; 男士休闲运动长裤 &amp;gt; 男士运动长裤 免审">
+        <div class="card-top">
+          <div class="card-title">男士运动长裤</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士休闲运动服 &gt; 男士休闲运动长裤 &gt; 男士运动长裤</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士休闲运动服 &amp;gt; 男士休闲运动长裤 &amp;gt; 男士运动长裤')">复制路径</button>
+        </div>
+      </a>
+      <a class="card"  style="--theme-c: #059669;" data-text="男士宽松运动长裤 服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士休闲运动服 &amp;gt; 男士休闲运动长裤 &amp;gt; 男士宽松运动长裤 免审">
+        <div class="card-top">
+          <div class="card-title">男士宽松运动长裤</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 男士时尚 &gt; 男装 &gt; 男士休闲运动服 &gt; 男士休闲运动长裤 &gt; 男士宽松运动长裤</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 男士时尚 &amp;gt; 男装 &amp;gt; 男士休闲运动服 &amp;gt; 男士休闲运动长裤 &amp;gt; 男士宽松运动长裤')">复制路径</button>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="group" data-color="green" data-group="path-3">
+    <div class="group-name">男士套装</div>
+    <div class="card-grid">
+      <a class="card"  style="--theme-c: #059669;" data-text="男士新奇田径服（套装） 服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇田径服 免审">
+        <div class="card-top">
+          <div class="card-title">男士新奇田径服（套装）</div>
+          <span class="card-tag tag-free">免审</span>
+        </div>
+        <div class="card-desc">服装、鞋靴和珠宝饰品 &gt; 新奇物品 &gt; 新奇服装和产品 &gt; 新奇服装 &gt; 男士新奇服装 &gt; 男士新奇田径服</div>
+        
+        <div class="card-footer">
+          <span class="card-action">📋 复制路径</span>
+          <button class="card-copy" onclick="copyText(event, '服装、鞋靴和珠宝饰品 &amp;gt; 新奇物品 &amp;gt; 新奇服装和产品 &amp;gt; 新奇服装 &amp;gt; 男士新奇服装 &amp;gt; 男士新奇田径服')">复制路径</button>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Section: 开款参考 -->
+<section class="section" id="sec-design" data-section="design">
+  <div class="section-header">
+    <span class="section-icon">🎨</span>
+    <div class="section-title-wrap">
+      <div class="section-title">开款参考</div>
+      <div class="section-subtitle">开款指南与设计参考</div>
+    </div>
+    <span class="section-badge">4 条</span>
+  </div>
+
+  <div class="group" data-color="pink" data-group="design-0">
+    <div class="group-name">开款指南</div>
+    <div class="card-grid">
+      <a class="card" href="https://quege686.github.io/bingran/leather.html" target="_blank" rel="noopener" style="--theme-c: #db2777;" data-text="皮革夹克开款 皮革夹克开款指南 皮革">
+        <div class="card-top">
+          <div class="card-title">皮革夹克开款</div>
+          <span class="card-tag tag-design">皮革</span>
+        </div>
+        <div class="card-desc">皮革夹克开款指南</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://quege686.github.io/bingran/leather.html')">复制链接</button>
+        </div>
+      </a>
+      <a class="card" href="https://quege686.github.io/bingran/printing.html" target="_blank" rel="noopener" style="--theme-c: #db2777;" data-text="精品向印花开款 精品向印花开款指南 印花">
+        <div class="card-top">
+          <div class="card-title">精品向印花开款</div>
+          <span class="card-tag tag-design">印花</span>
+        </div>
+        <div class="card-desc">精品向印花开款指南</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://quege686.github.io/bingran/printing.html')">复制链接</button>
+        </div>
+      </a>
+      <a class="card" href="https://quege686.github.io/bingran/woolen.html" target="_blank" rel="noopener" style="--theme-c: #db2777;" data-text="毛织外套开款 毛织外套开款指南 毛织">
+        <div class="card-top">
+          <div class="card-title">毛织外套开款</div>
+          <span class="card-tag tag-design">毛织</span>
+        </div>
+        <div class="card-desc">毛织外套开款指南</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://quege686.github.io/bingran/woolen.html')">复制链接</button>
+        </div>
+      </a>
+      <a class="card" href="https://quege686.github.io/bingran/coat.html" target="_blank" rel="noopener" style="--theme-c: #db2777;" data-text="学院风/工装等外套开款 学院风/工装等外套开款指南 外套">
+        <div class="card-top">
+          <div class="card-title">学院风/工装等外套开款</div>
+          <span class="card-tag tag-design">外套</span>
+        </div>
+        <div class="card-desc">学院风/工装等外套开款指南</div>
+        
+        <div class="card-footer">
+          <span class="card-action">🔗 打开链接</span>
+          <button class="card-copy" onclick="copyText(event, 'https://quege686.github.io/bingran/coat.html')">复制链接</button>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="back-top" id="backTop" onclick="scrollTop()">↑</div>
+
+
+<div class="footer">男装运营导航中心 · 持续更新中</div>
+
+
+<script>
+function copyText(e, text) {
+  e.preventDefault();
+  e.stopPropagation();
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = e.target;
+    var orig = btn.textContent;
+    btn.textContent = '✓ 已复制';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = orig;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+function doSearch(q) {
+  q = q.trim().toLowerCase();
+  var cards = document.querySelectorAll('.card');
+  var groups = document.querySelectorAll('.group');
+  var sections = document.querySelectorAll('.section');
+  
+  if (!q) {
+    cards.forEach(function(c) { c.classList.remove('hidden'); });
+    groups.forEach(function(g) { g.classList.remove('hidden'); });
+    sections.forEach(function(s) { s.classList.remove('hidden'); });
+    return;
+  }
+  
+  cards.forEach(function(c) {
+    var text = c.getAttribute('data-text') || '';
+    if (text.indexOf(q) >= 0) {
+      c.classList.remove('hidden');
+    } else {
+      c.classList.add('hidden');
+    }
+  });
+  
+  groups.forEach(function(g) {
+    var visible = g.querySelectorAll('.card:not(.hidden)');
+    if (visible.length === 0) {
+      g.classList.add('hidden');
+    } else {
+      g.classList.remove('hidden');
+    }
+  });
+  
+  sections.forEach(function(s) {
+    var visible = s.querySelectorAll('.group:not(.hidden)');
+    if (visible.length === 0) {
+      s.classList.add('hidden');
+    } else {
+      s.classList.remove('hidden');
+    }
+  });
+}
+
+function scrollTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.onscroll = function() {
+  var btn = document.getElementById('backTop');
+  if (window.scrollY > 300) {
+    btn.classList.add('show');
+  } else {
+    btn.classList.remove('show');
+  }
+};
+</script>
+</body>
+</html>
