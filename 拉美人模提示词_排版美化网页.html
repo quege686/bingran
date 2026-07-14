@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拉美人模提示词指南</title>
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #5b21b6;
+            --primary-light: #f5f3ff;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --success: #10b981;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --warning: #f59e0b;
+            --warning-light: #fffbeb;
+            --bg: #faf5ff;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --text-mid: #4b5563;
+            --text-light: #9ca3af;
+            --border: #e5e7eb;
+            --radius: 14px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #a78bfa 100%);
+            color: white;
+            padding: 56px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%; right: -15%;
+            width: 450px; height: 450px;
+            background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50%; left: -20%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(167,139,250,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        .hero .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+            max-width: 640px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 32px 20px 80px;
+        }
+        
+        /* TOC */
+        .toc {
+            position: sticky;
+            top: 16px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 36px;
+            z-index: 100;
+        }
+        .toc h3 {
+            font-size: 15px;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+        .toc-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+        .toc-list li { }
+        .toc-list a {
+            color: var(--text-mid);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: var(--primary-light);
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        .toc-list a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        /* Main Section */
+        .main-section { margin-bottom: 48px; scroll-margin-top: 90px; }
+        .section-header {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 24px;
+            padding: 14px 0;
+            border-bottom: 3px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sec-icon { font-size: 26px; }
+        .section-desc {
+            font-size: 14px;
+            color: var(--text-mid);
+            margin-bottom: 20px;
+            padding: 10px 16px;
+            background: var(--accent-light);
+            border-radius: 8px;
+        }
+        
+        /* Intro Card */
+        .intro-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+            border-left: 5px solid var(--primary);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .intro-text {
+            font-size: 15px;
+            color: var(--text-mid);
+            line-height: 2;
+            margin-bottom: 8px;
+        }
+        .intro-text:last-child { margin-bottom: 0; }
+        
+        /* Sub Section */
+        .sub-section {
+            margin: 24px 0;
+            padding: 24px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .sub-header {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--border);
+        }
+        
+        /* Content Text */
+        .content-text {
+            font-size: 15px;
+            color: var(--text);
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+        .content-text.bold { font-weight: 700; }
+        
+        /* Tips List */
+        .tips-list { display: flex; flex-direction: column; gap: 10px; }
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #f9fafb;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            font-size: 14px;
+            color: var(--text-mid);
+        }
+        .tip-dot { color: var(--primary); font-size: 10px; margin-top: 4px; }
+        
+        /* Direction Cards */
+        .direction-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .direction-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text);
+        }
+        .dir-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px; height: 28px;
+            min-width: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        
+        /* Formula Card */
+        .formula-card {
+            margin: 20px 0;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);
+            border-radius: var(--radius);
+            color: white;
+        }
+        .formula-label {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .formula-content {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.8;
+        }
+        
+        /* Link Grid */
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+            margin: 16px 0;
+        }
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+        }
+        .link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        .link-icon { font-size: 18px; }
+        .link-name { font-size: 14px; font-weight: 700; color: var(--primary-dark); }
+        .link-desc { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+        
+        /* Tool Grid */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+            margin: 16px 0;
+        }
+        .tool-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 18px 16px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .tool-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        .tool-name { font-size: 16px; font-weight: 700; color: var(--primary-dark); }
+        .tool-note {
+            font-size: 11px;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        /* Ref Link */
+        .ref-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 16px;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .ref-link:hover { background: var(--primary); color: white; }
+        
+        /* Warning */
+        .warning-card {
+            margin: 16px 0;
+            padding: 18px 22px;
+            background: var(--warning-light);
+            border-left: 5px solid var(--warning);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-size: 14px;
+            color: var(--text-mid);
+            line-height: 1.8;
+        }
+        .warning-card.danger {
+            background: var(--danger-light);
+            border-left-color: var(--danger);
+        }
+        .warning-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--danger);
+            margin-bottom: 8px;
+        }
+        .warning-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 16px 0;
+        }
+        .warning-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 16px;
+            background: #fff5f5;
+            border-radius: 8px;
+            border: 1px solid #fed7d7;
+            font-size: 14px;
+            color: var(--text-mid);
+        }
+        .warn-icon { font-size: 14px; min-width: 20px; }
+        
+        /* Table */
+        .table-wrapper {
+            margin: 20px 0;
+            overflow-x: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            background: var(--card-bg);
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .data-table th {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 700;
+            white-space: nowrap;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .data-table th:first-child { border-top-left-radius: var(--radius); }
+        .data-table th:last-child { border-top-right-radius: var(--radius); }
+        .data-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        .data-table tr:nth-child(even) td { background: #fafafa; }
+        .data-table tr:hover td { background: var(--primary-light); }
+        .data-table tr:last-child td { border-bottom: none; }
+        
+        .model-table td:first-child { font-weight: 700; color: var(--primary-dark); white-space: nowrap; }
+        .model-table td:nth-child(3) { font-weight: 600; color: var(--accent); }
+        .case-table td:first-child { font-weight: 600; }
+        
+        /* Category Title */
+        .cat-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 28px 0 16px;
+            padding: 8px 16px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        /* Steps Card */
+        .steps-card {
+            margin: 24px 0;
+            padding: 24px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .steps-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+        .steps-flow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            flex: 1;
+            min-width: 200px;
+        }
+        .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px; height: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 700;
+            min-width: 28px;
+        }
+        .step-arrow {
+            font-size: 20px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        /* Back to Top */
+        .back-top {
+            position: fixed;
+            bottom: 32px; right: 32px;
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, #a78bfa 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(124,58,237,0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-top.visible { opacity: 1; visibility: visible; }
+        .back-top:hover { transform: translateY(-3px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 24px; }
+            .hero .subtitle { font-size: 13px; }
+            .section-header { font-size: 20px; }
+            .data-table { font-size: 12px; }
+            .data-table th, .data-table td { padding: 8px 10px; }
+            .container { padding: 20px 14px 60px; }
+            .toc-list { flex-direction: column; }
+            .direction-cards, .link-grid, .tool-grid { grid-template-columns: 1fr; }
+            .steps-flow { flex-direction: column; }
+            .step-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="badge">🎨 AI商详指南</div>
+        <h1>拉美人模提示词指南</h1>
+        <p class="subtitle">涵盖图片核心要点、AI生图框架、规避要点、人模提示词分类表、AI改图案例及拉美参考网站</p>
+    </div>
+    
+    <div class="container">
+        <div class="toc">
+            <h3>📑 快速导航</h3>
+            <ul class="toc-list">
+                <li><a href="#sec1">📸 图片核心要点</a></li>
+                <li><a href="#sec2">🤖 AI图制作</a></li>
+                <li><a href="#sec3">⚠️ 规避要点</a></li>
+                <li><a href="#sec4">👔 人模提示词表</a></li>
+                <li><a href="#sec5">🎯 AI改图案例</a></li>
+                <li><a href="#sec6">🌐 参考网站</a></li>
+            </ul>
+        </div>
+        
+        <section class="main-section" id="sec1">
+<h2 class="section-header"><span class="sec-icon">📸</span>一、图片核心要点</h2>
+<div class="intro-card">
+<p class="intro-text">所谓爆款男装主图，它本质上是一个点击率装置。</p>
+<p class="intro-text">它要在用户快速滑动搜索页的0.5秒内，完成三件事：</p>
+<p class="intro-text">男装用户比女装用户更偏理性决策。他们需要快速确认品类和版型。</p>
+</div>
+<div class="sub-section">
+<h3 class="sub-header">✦ 图片重点</h3>
+<div class="tips-list">
+<div class="tip-item"><span class="tip-dot">●</span><span>服装主体控制在画面60%-80%，宁可更大，不要更小</span></div>
+<div class="tip-item"><span class="tip-dot">●</span><span>如果标注重点，请突出一个核心卖点，太多容易显杂乱，且数字要大，颜色对比要强</span></div>
+<div class="tip-item"><span class="tip-dot">●</span><span>场景图要和用户消费心理相符</span></div>
+<div class="tip-item"><span class="tip-dot">●</span><span>注重版型、面料质感的呈现。比如高壮男模图/硬挺3d图</span></div>
+</div>
+<a href="https://mp.weixin.qq.com/s/FrfcE-gE8nylZSHPM3dGtg" class="ref-link" target="_blank">📎 男装爆款主图拆解</a>
+</div>
+</section>
+<section class="main-section" id="sec2">
+<h2 class="section-header"><span class="sec-icon">🤖</span>二、AI图制作指南</h2>
+<div class="sub-section">
+<p class="content-text">站内广告明确把ai图建成了一个推广包，专门推广ai图产品~</p>
+<p class="content-text bold">有两个方向做：</p>
+<div class="direction-cards">
+<div class="direction-card"><span class="dir-num">1</span><span>刷到其他不错的商品主图，直接用ai套自己的款式上去</span></div>
+<div class="direction-card"><span class="dir-num">2</span><span>已经有3d/人模图，用场景描述+人模描述来改主图</span></div>
+</div>
+</div>
+<div class="formula-card">
+<div class="formula-label">AI生图提示词框架</div>
+<div class="formula-content">[产品事实描述：产品A + 材质/颜色/造型特征]+ [镜头角度：正面/45°/俯拍/微距/手持]+ [光线：柔光箱 / 自然窗光 / 戏剧侧光 / 环形光]+ [背景环境：纯白 / 渐变 / 生活场景 + 道具上限]+ [画幅&amp;硬约束：比例 + 无文字无logo无水印 + 商业摄影关键词]</div>
+</div>
+<div class="sub-section">
+<h3 class="sub-header">✦ 参考资源</h3>
+<div class="link-grid">
+<a href="https://mp.weixin.qq.com/s/0WNISiBU5lqsMmrdFNB4-g" class="link-card" target="_blank"><span class="link-icon">🔗</span><span class="link-name">AI生图提示词框架</span></a>
+<a href="https://mp.weixin.qq.com/s/IO-Ncc_TbwMVQUZEzYv_JQ" class="link-card" target="_blank"><span class="link-icon">🔗</span><span class="link-name">服装类实操提示词</span></a>
+<a href="https://mp.weixin.qq.com/s/vzlbJHTZssxDwE5iA_61Q" class="link-card" target="_blank"><span class="link-icon">🔗</span><span class="link-name">AI适用场景举例</span></a>
+<a href="https://mp.weixin.qq.com/s/R41Ld_ABSmPmt9do1xUXMw" class="link-card" target="_blank"><span class="link-icon">🔗</span><span class="link-name">视频提示词</span></a>
+</div>
+</div>
+<div class="sub-section">
+<h3 class="sub-header">✦ AI改图软件</h3>
+<div class="tool-grid">
+<a href="https://www.doubao.com/chat/" class="tool-card" target="_blank"><div class="tool-name">豆包</div><span class="tool-note">亲测好用</span></a>
+<a href="https://lmarena.ai/zh/c/019bbc60-fd4e-79e6-b572-9491d3dea86d" class="tool-card" target="_blank"><div class="tool-name">LMArena</div><span class="tool-note">亲测好用</span></a>
+<a href="https://www.lovart.ai/zh" class="tool-card" target="_blank"><div class="tool-name">Lovart</div></a>
+<a href="https://www.flux.ai/p" class="tool-card" target="_blank"><div class="tool-name">Flux</div></a>
+<a href="https://www.midjourney.com/home" class="tool-card" target="_blank"><div class="tool-name">Midjourney</div></a>
+<a href="https://gemini.google.com/app/ef5a4023cc0e6a14" class="tool-card" target="_blank"><div class="tool-name">Gemini</div><span class="tool-note">个人感觉也好用</span></a>
+</div>
+</div>
+</section>
+<section class="main-section" id="sec3">
+<h2 class="section-header"><span class="sec-icon">⚠️</span>三、规避要点</h2>
+<div class="warning-card">
+<p>图片上，自己拍图不要出现大牌logo /杂志等元素 容易限流，装饰 避免有vogue单词/三条杠/四条杠/lv /苹果等撞大牌的元素出现；模特需要注意纹身装饰/不要漏敏感部位包括男性ru房/私处毛发等 ！</p>
+</div>
+<div class="warning-card danger">
+<h4 class="warning-title">🚫 常见禁投广告元素</h4>
+<p>常见禁投广告元素：酒精、战争、耶稣受难古兰经、伊斯兰教相关、猪、佛祖、十字架、基督教相关、犹太教相关、邪眼、巫术等相关商品，酒瓶/酒杯等；不要使用带有侵权元素的图片（如未授权的品牌名称、品牌商标、IP形象、其他平台logo等）；政治 /政治人物和名人/ 非真人形象、政治旗帜或logo，例如：东德相关 、库尔德斯坦旗帜 政治符号或口号，例如： 和平主义标志 、无政府主义标志 、共济会</p>
+</div>
+<div class="warning-list">
+<div class="warning-item"><span class="warn-icon">❌</span><span>不能出现打码、反光等情况</span></div>
+<div class="warning-item"><span class="warn-icon">❌</span><span>不能出现有明显边界线的地图、不能有种族歧视，不能出现类似skin color等描述</span></div>
+<div class="warning-item"><span class="warn-icon">❌</span><span>各类证书（不论是否真实拥有）都不能放，也不要出现相关描述。如：UL certified US Adapter</span></div>
+</div>
+</section>
+<section class="main-section" id="sec4">
+<h2 class="section-header"><span class="sec-icon">👔</span>四、拉美人模提示词分类表</h2>
+<p class="section-desc">按品类×风格维度，详细列出人模特征、肢体姿势、配饰配件、视觉背景</p>
+<div class="table-wrapper">
+<table class="data-table model-table">
+<thead><tr>
+<th>品类</th>
+<th>核心产品定位</th>
+<th>主要风格</th>
+<th>人模特征</th>
+<th>肢体/姿势</th>
+<th>配饰配件</th>
+<th>视觉背景</th>
+</tr></thead><tbody>
+<tr>
+<td></td>
+<td>运动速干类T恤/背心 肌肉剪裁&amp;紧身T恤/背心</td>
+<td>运动健身风</td>
+<td>20-30岁左右 拉丁裔男性 利落寸头/短发 肌肉型身材 身上微汗 神态阳刚</td>
+<td>侧身摆动 拉伸 举哑铃 拉扯衣服展示弹力 侧身卧推 手持篮球 双手叉腰 附身系鞋带</td>
+<td>运动手环/手表 运动鞋 护腕 大容量水壶 健身包</td>
+<td>逆光户外田径场 工业风器械健身房 公园跑道 动感单车房 街头篮球场 举重台</td>
+</tr>
+<tr>
+<td></td>
+<td>常规polo衫 高克重针织衫 肌理面料</td>
+<td>质感老钱风</td>
+<td>25-35岁左右 拉丁裔熟男 胡茬修剪整齐 宽阔肩膀 饱满手臂 自信从容</td>
+<td>慢步走姿 单手插兜 目光远眺 微侧身 斜靠门框 调节手表 坐靠椅背</td>
+<td>质感皮带 圆盘皮带表 极细银手链 墨镜 皮带</td>
+<td>复古暖调色背景 庄园风庭院 欧式古典建筑 肌理石砖墙 高端度假露台 海滨长廊 露天咖啡厅</td>
+</tr>
+<tr>
+<td></td>
+<td>宽松版型T恤/polo 宽肩背心 球衣球服元素</td>
+<td>高街潮牌风</td>
+<td>20-25岁左右 年轻拉丁裔男性 匀称的运动型身材 明显手臂线条 痞帅感</td>
+<td>低头盯地 冷酷不看镜头 双手自然下垂 单手拎包 大步前迈 单手摸后颈 双手微张</td>
+<td>棒球帽/鸭舌帽 大容量斜挎包 复古双肩包 古巴粗链 腰链/腰饰</td>
+<td>水泥灰冷外墙 铁艺围栏老街 地下通道 复古地铁站 美式复古黄滤镜</td>
+</tr>
+<tr>
+<td></td>
+<td>热带印花元素T恤 沙滩宽松背心 亚麻/棉麻材质</td>
+<td>阳光热带风</td>
+<td>20-30岁左右 拉丁裔男性 小麦色/古铜色皮肤 阳光型倒三角身材 自信露齿大笑 侧脸胡须线条 充满生命力</td>
+<td>双手抱头仰卧 单手插兜 倚靠沙滩椅 迎着阳光漫步 双手自然垂下</td>
+<td>复古太阳镜 多层皮革编织手链 古巴细项链 兽牙/木质项链 编织凉鞋</td>
+<td>绿茵草地 沙滩搭配棕榈树 晚霞晕染天空 阳光直射椰子树 原木木门旁 度假村泳池 浅色石墙</td>
+</tr>
+<tr>
+<td></td>
+<td>商品展示方式 展示方式占比依次降序</td>
+<td>1、T恤-人模上身+多色块罗列展示（在虾皮占比最高）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2、T恤-人模多姿态/多方位展示</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>3、T恤多件装-多人模多色上身</td>
+</tr>
+<tr>
+<td>套装</td>
+<td>亚麻/棉麻材质 热带元素印花 古巴领衬衫套装 针织面料</td>
+<td>海滩度假风</td>
+<td>25-35岁 成熟拉美型男 小麦色/古铜色皮肤 精致薄络腮胡 眼神温柔深邃 不看镜头 有钱有闲松弛感 匀称身材 领口敞开2~3颗 微漏胸肌</td>
+<td>单手插兜 手扶衣领 单手轻扶太阳镜 手拿墨镜 半躺在沙滩椅上 双手抱头享受阳光 微侧身 赤脚沙滩漫步 向前迈步</td>
+<td>多层皮革编织手链 粗犷风金属戒指 双带编织凉鞋 平底人字拖 皮带指针手表 大表盘钢带手表 复古太阳镜 手持冰饮品 草编鞋</td>
+<td>高饱和度蓝天大海 成排高椰子树 游艇木质甲板 度假村游泳池 海浪拍打的礁石边 原木大门旁 海滨木栈道 阳光充沛泳池 带植物光影大理石墙 遮阳伞下</td>
+</tr>
+<tr>
+<td></td>
+<td>净色/简约基础款 常规印花套装 高克重针织感 肌理面料</td>
+<td>休闲日常风</td>
+<td>25-35岁 拉美裔轻熟男性 短络腮胡 挺拔匀称身材 神态松弛</td>
+<td>双手自然垂落 手插裤兜 手摸领口 双手交叉抱臂 倚靠墙面 坐姿插兜 单手摸下巴 外套挂在肩上 向前迈步</td>
+<td>胸前细吊坠项链 墨镜 手拎衣服 手持咖啡/饮品 钛钢手链/手表 皮质手绳 手拿包 头戴式耳机</td>
+<td>低饱和色棚拍背景 都市街道 冷色水泥墙 采光好的落地窗前 实木家具室内 街角玻璃窗前 阳光米色砖墙 白色石柱前 原木风书房 石子台阶</td>
+</tr>
+<tr>
+<td></td>
+<td>修身/紧身运动套装 训练服 压缩套装</td>
+<td>运动健身风</td>
+<td>20-30岁左右 拉丁裔硬朗男性 利落寸头/短发 肌肉型身材 身上微汗 神态阳刚</td>
+<td>侧身摆动 拉伸 举哑铃 侧身卧推 手持篮球 双手叉腰 双手抱头 附身系鞋带 侧身跑步</td>
+<td>运动手环/手表 运动鞋 护腕 大容量水壶 健身包</td>
+<td>逆光户外田径场 工业风器械健身房 公园跑道 动感单车房 街头篮球场 举重台</td>
+</tr>
+<tr>
+<td></td>
+<td>常规印花套装 净色/简约基础套装</td>
+<td>都市街头风</td>
+<td>25-30岁 拉美裔男性 小麦色/古铜色皮肤 挺拔匀称身材</td>
+<td>斜插站立 大跨步向前走 双腿随意张开坐 走下台阶</td>
+<td>钛钢手链/手表 手拿手机 钛钢细银项链 墨镜 斜挎包</td>
+<td>都市街道 土色露台 水泥阶梯 模糊汽车与斑马线</td>
+</tr>
+<tr>
+<td></td>
+<td>商品展示方式 展示方式占比依次降序</td>
+<td>1、套装-多人模多色上身（占比最大）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2、套装-上装正反面印花展示</td>
+</tr>
+<tr>
+<td>长裤/牛仔裤</td>
+<td>运动健身长裤 压缩训练长裤 尼龙速干</td>
+<td>运动训练风</td>
+<td>20-30岁左右 小麦色皮肤 刀刻般腹肌 手臂线条饱满</td>
+<td>拉伸大腿 半跪 双手叉腰 附身系鞋带 侧身跑步 高抬腿定格 大步向前奔跑 手拉开口袋 手向外扯裤子</td>
+<td>运动手环/手表 运动鞋 护腕 大容量水壶 健身包 跑步鞋</td>
+<td>逆光户外田径场 工业风器械健身房 公园跑道 动感单车房 街头篮球场 举重台 防滑瑜伽垫</td>
+</tr>
+<tr>
+<td></td>
+<td>常规工装裤 净色/印花/基础卫裤 直筒牛仔裤 垂感休闲裤</td>
+<td>休闲日常</td>
+<td>25-35岁 小麦色/古铜色皮肤 腰腹无赘肉 臀腿线条不臃肿</td>
+<td>双手自然垂落 手插裤兜 倚靠墙 侧身向前迈步 斜靠单腿微曲 双腿直立</td>
+<td>钢带手表 细银手链 手拎衣服 白色板鞋/运动鞋</td>
+<td>低饱和色背景 都市街道 沥青路面 冷色水泥墙 采光好的落地窗前 汽车旁 实木家具室内 街角玻璃窗前 阳光米色砖墙 石子台阶/石子路</td>
+</tr>
+<tr>
+<td></td>
+<td>亚麻/棉麻材质</td>
+<td>度假风</td>
+<td>小麦色/古铜色皮肤 刀刻般腹肌 清晰鲨鱼线 结实腿部</td>
+<td>手斜插裤兜 稳重站立 赤脚沙滩漫步 向前迈步</td>
+<td>多层皮革编织手链 粗犷风金属戒指 双带编织凉鞋 平底人字拖 皮带指针手表</td>
+<td>镜头直拉腹部以下特写 高饱和度蓝天大海 成排高椰子树 游艇木质甲板 度假村游泳池 海浪拍打的礁石边 木质门旁</td>
+</tr>
+<tr>
+<td></td>
+<td>潮流牛仔 阔腿/弯刀版型 降落伞裤</td>
+<td>街潮时尚</td>
+<td>20-30岁 古铜色皮肤 腰腹无赘肉 小腿结实</td>
+<td>双手斜插裤兜 单手拉开衣摆 侧身迈步向前走 单脚微微点地</td>
+<td>古巴手链 钢带手表 板鞋/黄靴 涂鸦滑板</td>
+<td>工业风卷帘门前 斑驳混凝土墙 强日光户外街角 涂鸦墙</td>
+</tr>
+<tr>
+<td></td>
+<td>西裤 休闲裤 垂坠阔腿长裤</td>
+<td>商务休闲</td>
+<td>身材比例匀称 腿部线条修长 阳刚肤色</td>
+<td>单手插兜 双腿交叠坐姿 迈步前行 双手自然下垂 侧身展示细节</td>
+<td>雅致皮鞋 白色球鞋 质感皮带 金属腕表</td>
+<td>低饱和背景 街头靠近路面 水泥地 咖啡厅落地窗</td>
+</tr>
+<tr>
+<td></td>
+<td>商品展示方式 展示方式占比依次降序</td>
+<td>1、长裤-人模正反展示+细节放大（占比最大）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2、长裤-人模上身+多色块罗列展示</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>3、长裤-人模多姿态/多方位展示</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>4、长裤-腿上穿一条地上铺一条</td>
+</tr>
+<tr>
+<td>短裤</td>
+<td>运动健身短裤 压缩训练裤</td>
+<td>运动训练风</td>
+<td>20-30岁左右 小麦色皮肤 刀刻般腹肌 小腿跟腱修长 小腿线条有力 大腿肌肉群饱满</td>
+<td>拉伸大腿 半跪 双手叉腰 附身系鞋带 侧身跑步 高抬腿定格 大步向前奔跑 手拉开口袋</td>
+<td>运动手环/手表 运动鞋 护腕 大容量水壶 健身包 跑步鞋</td>
+<td>逆光户外田径场 工业风器械健身房 公园跑道 动感单车房 街头篮球场 举重台 防滑瑜伽垫</td>
+</tr>
+<tr>
+<td></td>
+<td>篮球裤 宽松牛仔短裤</td>
+<td>美式街潮风</td>
+<td>20-30岁 古铜色皮肤 腰腹无赘肉 小腿结实</td>
+<td>双手斜插裤兜 单手拉开衣摆 侧身迈步向前走 单脚微微点地</td>
+<td>黑框太阳镜 黑皮革编织手链 黑钢腕表 老爹鞋/篮球鞋 中筒白袜</td>
+<td>工业风卷帘门前 斑驳混凝土墙 强日光户外街角 美式篮球场</td>
+</tr>
+<tr>
+<td></td>
+<td>常规工装短裤 紧身牛仔短裤 西装短裤</td>
+<td>休闲日常风</td>
+<td>25-35岁 小麦色/古铜色皮肤 腰腹无赘肉 臀腿线条不臃肿</td>
+<td>双手自然垂落 手插裤兜 倚靠墙 侧身向前迈步 斜靠单腿微曲 双腿直立</td>
+<td>钢带手表 细银手链 皮带 手持手机 板鞋/运动鞋/凉鞋</td>
+<td>低饱和色背景 都市街道 沥青路面 冷色水泥墙 采光好的落地窗前 汽车旁 街角玻璃窗前 阳光米色砖墙 石子台阶/石子路</td>
+</tr>
+<tr>
+<td></td>
+<td>亚麻/棉麻材质 净色/印花沙滩裤 泳裤</td>
+<td>海滩度假风</td>
+<td>小麦色/古铜色皮肤 刀刻般腹肌 清晰鲨鱼线 结实腿部</td>
+<td>手斜插裤兜 稳重站立 赤脚沙滩漫步 向前迈步</td>
+<td>多层皮革编织手链 粗犷风金属戒指</td>
+<td>镜头直拉腹部以下特写 高饱和度蓝天大海 成排高椰子树 游艇木质甲板 度假村游泳池 海浪拍打的礁石边 木质门旁</td>
+</tr>
+<tr>
+<td></td>
+<td>商品展示方式 展示方式占比依次降序</td>
+<td>1、短裤-人模上身+多色块罗列展示（占比最大）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2、短裤-人模多姿态/多方位展示</td>
+</tr>
+<tr>
+<td>衬衫/马甲</td>
+<td>净色/基础款衬衫 简约/条纹/格纹 亚麻/棉麻材质</td>
+<td>休闲日常风</td>
+<td>25-35岁 拉美裔轻熟男性 短络腮胡 挺拔匀称身材 神态松弛</td>
+<td>双手自然垂落 手插裤兜 整理领口 双手交叉抱臂 坐姿手自然搭着椅子 倚靠墙面 坐姿插兜 单手摸下巴 向前迈步</td>
+<td>胸前细吊坠项链 墨镜 大托特包 手持咖啡/饮品 钛钢手链/手表 皮质手表/手绳</td>
+<td>低饱和色背景 都市街道 马路 冷色水泥墙 采光好的落地窗前 实木家具室内 街角玻璃窗前 阳光米色砖墙 原木风书房 石子台阶 木质门旁</td>
+</tr>
+<tr>
+<td></td>
+<td>针织/肌理面料 略带设计感衬衫</td>
+<td>老钱感</td>
+<td>25-35岁 成熟拉美型男 小麦色/古铜色皮肤 精致薄络腮胡 眼神温柔深邃 不看镜头 有钱有闲松弛感 匀称身材 领口敞开2~3颗 微漏胸肌</td>
+<td>单手插兜 手扶衣领 单手轻扶太阳镜 手拿墨镜 半躺在沙滩椅上 双手抱头享受阳光 微侧身 赤脚沙滩漫步 向前迈步</td>
+<td>多层皮革编织手链 粗犷风金属戒指 双带编织凉鞋 平底人字拖 皮带指针手表 大表盘钢带手表 复古太阳镜 手持冰饮品 草编鞋</td>
+<td>高饱和度蓝天大海 成排高椰子树 游艇木质甲板 度假村游泳池 海浪拍打的礁石边 原木大门旁 海滨木栈道 阳光充沛泳池 带植物光影大理石墙 遮阳伞下</td>
+</tr>
+<tr>
+<td></td>
+<td>热带元素印花 亚麻/棉麻材质 针织/肌理面料</td>
+<td>海滩度假风</td>
+<td>25-35岁 成熟拉美型男 精致薄络腮胡 眼神温柔深邃 不看镜头 有钱有闲松弛感 匀称身材 领口敞开2~3颗</td>
+<td>单手/双手插兜 整理手上饰品 单手轻扶太阳镜 手拿墨镜 半躺在沙滩椅上 双手抱头享受阳光 微侧身 坐姿叉开腿俯视镜头</td>
+<td>多层皮革编织手链 粗犷风金属戒指 皮带指针手表 钢带手表 复古太阳镜 手持冰饮品</td>
+<td>高饱和度蓝天大海 成排高椰子树 游艇木质甲板 度假村游泳池 海浪拍打的礁石边 原木大门旁 海滨木栈道 阳光充沛泳池 带植物光影大理石墙</td>
+</tr>
+<tr>
+<td></td>
+<td>正装衬衫</td>
+<td>商务休闲风</td>
+<td>25-35岁 成熟拉美男性 侧颜深邃立体 干净利落短发 精致胡渣 身材比例匀称 阳刚肤色</td>
+<td>单手插兜 双腿交叠坐姿 迈步前行 双手自然下垂 侧身展示细节</td>
+<td>质感皮带 金属腕表 商务皮包</td>
+<td>低饱和背景 街道背景 咖啡厅/办公室落地窗</td>
+</tr>
+<tr>
+<td></td>
+<td>商品展示方式 展示方式占比依次降序</td>
+<td>1、衬衫-人模上身+多色块罗列展示（占比最大）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2、衬衫-人模多姿态/多方位展示</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>3、衬衫-细节放大</td>
+</tr>
+<tr>
+<td>外套</td>
+<td>外套</td>
+<td>/</td>
+<td>25-30岁 拉丁裔型男 身材健硕 深邃五官轮廓 健康小麦色皮肤</td>
+<td>双手插夹克兜 整理衣领 身体侧倾 手臂交叉抱胸 雨中奔跑 手扶腰间拉链 挺胸展现版型 放松注视前方</td>
+<td>简约单色内搭 斜跨大包 鸭舌运帽 黑框墨镜</td>
+<td>温暖纯色背景 都市暖阳街头 沥青公路 迷雾森林 室内健身房 人文街道 绿意公园</td>
+</tr>
+<tr>
+<td></td>
+<td>商品展示方式 展示方式占比依次降序</td>
+<td>1、外套-多人模/多姿态展示（占比最大）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2、外套-细节放大/正反展示</td>
+</tr>
+<tr>
+<td>正装</td>
+<td>正装</td>
+<td>/</td>
+<td>30-35岁 成熟拉美男性 小麦色/古铜色皮肤 精致络腮胡 自信大方 匀称身材</td>
+<td>站立插兜 手扶领结 整理西装扣 整理袖口 轻微侧身</td>
+<td>皮带指针手表 大表盘钢带手表 复古墨镜</td>
+<td>婚礼现场 商务会议 酒店大堂 会所 游艇码头 城市街景 宴会厅 纯色高级影棚</td>
+</tr>
+<tr>
+<td>功能服</td>
+<td>功能服</td>
+<td>/</td>
+<td>医疗服： 亲和干净 神态松弛 安保/工装/户外作业类： 成熟稳重 健壮/普通体型</td>
+<td>双手插袋 整理衣领 坐姿 正背面展示 侧身展示</td>
+<td>听诊器 维修工具</td>
+<td>医院走廊 诊室 更衣间 药房 门店 办公室 服务台 仓库/工厂 工地</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="main-section" id="sec5">
+<h2 class="section-header"><span class="sec-icon">🎯</span>五、AI改图实操案例</h2>
+<div class="table-wrapper">
+<table class="data-table case-table">
+<thead><tr>
+<th>第一步：定位产品、风格</th>
+<th>第二步：将产品、风格、原商品图、风格对应要素喂给ai</th>
+</tr></thead><tbody>
+<tr>
+<td>case1： ①定位产品-常规polo衫 ②定位风格-质感老钱风</td>
+<td>ai改图话术： 我的产品是图一的这件polo衫，请你根据图二的几类提示词，将你认为适配的关键词相互组合在一起生成一个质感老钱风商详</td>
+</tr>
+<tr>
+<td>case2： ①定位产品-运动健身短裤 ②定位风格-运动训练风</td>
+<td>ai改图话术： 我的产品是图一的这件运动短裤，请你根据图二的几类提示词，将你认为适配的关键词相互组合在一起生成一个拉美运动训练风商详</td>
+</tr>
+<tr>
+<td>case3： ①定位产品-正装衬衫 ②定位风格-商务休闲风</td>
+<td>ai改图话术： 我的产品是图一的这件衬衫，请你根据图二的几类提示词，将你认为适配的关键词相互组合在一起生成一个拉美商务休闲风商详，谢谢</td>
+</tr>
+</tbody></table></div>
+<div class="steps-card">
+<h3 class="steps-title">📝 商详改造速成三部曲</h3>
+<div class="steps-flow">
+<div class="step-item"><span class="step-num">1</span><span>定位 - 你的产品是什么</span></div>
+<div class="step-arrow">→</div>
+<div class="step-item"><span class="step-num">2</span><span>定位 - 你要做什么风格</span></div>
+<div class="step-arrow">→</div>
+<div class="step-item"><span class="step-num">3</span><span>将对应风格的人模特征、肢体/姿势、配饰、背景直接喂给AI</span></div>
+</div>
+</div>
+</section>
+<section class="main-section" id="sec6">
+<h2 class="section-header"><span class="sec-icon">🌐</span>六、拉美重点参考网站</h2>
+<h3 class="cat-title">🛒 电商平台</h3>
+<div class="link-grid">
+<a href="https://mx.aliexpress.com/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">速卖通</div><div class="link-desc">拉美常用跨境零售平台</div></div></a>
+<a href="https://www.etsy.com/mx/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Etsy</div><div class="link-desc">来自美国，主要做复古类的原创类的商品</div></div></a>
+<a href="https://www.mercadolibre.com/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">美客多</div><div class="link-desc">拉美最大最核心的综合电商平台</div></div></a>
+<a href="https://linio.falabella.com.co/linio-co" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Falabella</div><div class="link-desc">南美综合零售+电商平台</div></div></a>
+<a href="https://linio.falabella.com.co/linio-co" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Linio</div><div class="link-desc">已并入Falabella体系，哥伦比亚、智利、秘鲁等市场常见</div></div></a>
+</div>
+<h3 class="cat-title">🏷️ 独立站 / 品牌</h3>
+<div class="link-grid">
+<a href="https://www.arturocalle.com/hombre" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Arturo Calle</div><div class="link-desc">哥伦比亚国民男装</div></div></a>
+<a href="https://www.gef.co/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Gef</div><div class="link-desc">哥伦比亚自己的&quot;优衣库&quot;</div></div></a>
+<a href="https://www.mercadolibre.com.co/tienda/patprimo" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">PatPrimo</div><div class="link-desc">哥伦比亚本地老牌，主打性价比高的基础款和日常休闲装</div></div></a>
+<a href="https://www.leonisa.com/pages/leo" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Leonisa</div><div class="link-desc">哥伦比亚本土著名内衣及塑身衣品牌</div></div></a>
+<a href="https://www.americanino.com/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Americanino</div><div class="link-desc">受众偏年轻化，牛仔系列最出名</div></div></a>
+<a href="https://co.hm.com/hombre" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">H&amp;M</div><div class="link-desc">哥伦比亚市占率高</div></div></a>
+<a href="https://www.puntoblanco.co/collections/hombres" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Punto Blanco</div></div></a>
+<a href="https://www.mattelsa.net/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Mattelsa</div><div class="link-desc">受众偏年轻化</div></div></a>
+<a href="https://www.lazzarmexico.com/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Lazzar</div><div class="link-desc">墨西哥本地的工作服/制服供应商网站</div></div></a>
+<a href="https://boxraw.com/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">BOXRAW</div><div class="link-desc">拳击版Gymshark + 街头运动品牌</div></div></a>
+<a href="https://playabendita.com/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Playabendita</div><div class="link-desc">墨西哥泳装/海滩服饰品牌独立站</div></div></a>
+</div>
+<h3 class="cat-title">📱 社媒</h3>
+<div class="link-grid">
+<a href="https://es.pinterest.com/" class="link-card" target="_blank"><span class="link-icon">🔗</span><div><div class="link-name">Pinterest</div><div class="link-desc">国外版本的小红书，有很多视觉参考</div></div></a>
+</div>
+</section>
+    </div>
+    
+    <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">↑</button>
+    
+    <script>
+        const backTop = document.querySelector('.back-top');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) backTop.classList.add('visible');
+            else backTop.classList.remove('visible');
+        });
+        document.querySelectorAll('.toc-list a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
