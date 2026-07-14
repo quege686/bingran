@@ -1,5 +1,10 @@
 分维度枚举词_中英对照
-外套对接冰燃
+冰燃及组内英文名/联系方式 
+孙冰燃 klee.sun  13511744912
+​胖达龙 lucian.tan   13357040487
+伍舒宁 sienna.wu  15602993307
+依江月 dumia.yang   Withx_yjy 
+卓枫  wayne.feng  zhuofengkj666
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
