@@ -106,11 +106,78 @@ a:hover{color:#7eb8ff;border-bottom-color:#7eb8ff;}
 ::-webkit-scrollbar-thumb{background:#2a3050;border-radius:3px;}
 ::-webkit-scrollbar-thumb:hover{background:#3a4060;}
 
-/* 响应式 */
+/* ===== 手机端响应式 ===== */
 @media(max-width:768px){
-  .sidebar{width:100%;max-height:180px;position:relative;}
-  .container{flex-direction:column;}
-  .content{max-width:100%;padding:20px;}
+  .header{padding:14px 16px;flex-direction:column;align-items:flex-start;gap:6px;}
+  .header h1{font-size:18px;}
+  .header .subtitle{font-size:11px;}
+  .header .badge{font-size:11px;padding:3px 10px;}
+  
+  .container{flex-direction:column;min-height:auto;}
+  
+  /* 侧边栏变为顶部横向滚动条 */
+  .sidebar{
+    width:100%;max-height:none;position:sticky;top:0;z-index:100;
+    display:flex;overflow-x:auto;overflow-y:hidden;
+    padding:0;border-right:none;border-bottom:1px solid #2a2a3a;
+    -webkit-overflow-scrolling:touch;
+  }
+  .sidebar-item{
+    padding:10px 12px;border-left:none;border-bottom:3px solid transparent;
+    white-space:nowrap;font-size:12px;flex-shrink:0;
+  }
+  .sidebar-item.active{border-left:none;border-bottom-color:#4a9eff;}
+  .sidebar-item .num{width:18px;height:18px;font-size:10px;}
+  .sidebar-item .tag{display:none;}
+  
+  /* 内容区全宽 */
+  .content{max-width:100%;padding:16px;overflow-y:visible;}
+  
+  /* 标题缩小 */
+  .step-header .step-num{width:32px;height:32px;font-size:15px;border-radius:8px;}
+  .step-header h2{font-size:16px;}
+  .step-header .step-tag{font-size:10px;}
+  .step-desc{padding:12px 14px;font-size:13px;line-height:1.7;}
+  
+  /* 表格横向滚动 */
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table{font-size:12px;}
+  th{padding:8px 10px;}
+  td{padding:8px 10px;}
+  
+  /* 概览调整 */
+  .overview{padding:20px 0;}
+  .overview h2{font-size:22px;}
+  .overview p{font-size:13px;}
+  .overview-cards{grid-template-columns:1fr;gap:10px;}
+  .overview-card{padding:14px;}
+  .overview-card .icon{font-size:24px;}
+  .overview-card h3{font-size:14px;}
+  .overview-card p{font-size:11px;}
+  
+  /* 检查清单 */
+  .checklist-title{font-size:14px;}
+  .check-item{padding:10px 12px;font-size:12px;}
+  
+  /* 子标题 */
+  .sub-title{font-size:13px;}
+  
+  /* 提示框 */
+  .tip-box{padding:10px 12px;font-size:12px;line-height:1.6;}
+  
+  /* 优先级表格 */
+  .priority-table th{font-size:11px;}
+}
+
+/* 超小屏幕 */
+@media(max-width:400px){
+  .header h1{font-size:16px;}
+  .step-header{flex-wrap:wrap;gap:8px;}
+  .step-header h2{font-size:14px;}
+  table{font-size:11px;}
+  th{padding:6px 8px;}
+  td{padding:6px 8px;}
+  .content{padding:12px;}
 }
 </style>
 </head>
@@ -128,46 +195,46 @@ a:hover{color:#7eb8ff;border-bottom-color:#7eb8ff;}
 
 <!-- 左侧导航 -->
 <div class="sidebar">
-  <div class="sidebar-item active" onclick="showPage('overview')">
+  <div class="sidebar-item active" onclick="showPage('overview', event)">
     <span class="num">0</span> 总览
   </div>
-  <div class="sidebar-item" onclick="showPage('step1')">
+  <div class="sidebar-item" onclick="showPage('step1', event)">
     <span class="num">1</span> 商品状态
     <span class="tag tag-hard">硬伤</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('step2')">
+  <div class="sidebar-item" onclick="showPage('step2', event)">
     <span class="num">2</span> SKU在架与加站
     <span class="tag tag-hard">硬伤</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('step3')">
+  <div class="sidebar-item" onclick="showPage('step3', event)">
     <span class="num">3</span> 违规处罚
     <span class="tag tag-hard">硬伤</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('step4')">
+  <div class="sidebar-item" onclick="showPage('step4', event)">
     <span class="num">4</span> 库存排查
     <span class="tag tag-hard">硬伤</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('step5')">
+  <div class="sidebar-item" onclick="showPage('step5', event)">
     <span class="num">5</span> 图片与信息
     <span class="tag tag-soft">改进</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('step6')">
+  <div class="sidebar-item" onclick="showPage('step6', event)">
     <span class="num">6</span> 供货价竞争力
     <span class="tag tag-soft">改进</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('step7')">
+  <div class="sidebar-item" onclick="showPage('step7', event)">
     <span class="num">7</span> 活动与流量
     <span class="tag tag-soft">改进</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('step8')">
+  <div class="sidebar-item" onclick="showPage('step8', event)">
     <span class="num">8</span> 评价与退货
     <span class="tag tag-soft">改进</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('step9')">
+  <div class="sidebar-item" onclick="showPage('step9', event)">
     <span class="num">9</span> 品牌化
     <span class="tag tag-soft">改进</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('summary')">
+  <div class="sidebar-item" onclick="showPage('summary', event)">
     <span class="num">✓</span> 汇总与优先级
   </div>
 </div>
@@ -697,7 +764,7 @@ a:hover{color:#7eb8ff;border-bottom-color:#7eb8ff;}
 </div><!-- end container -->
 
 <script>
-function showPage(pageId) {
+function showPage(pageId, ev) {
   // 隐藏所有
   document.querySelectorAll('.step-detail').forEach(function(el) {
     el.classList.remove('active');
@@ -711,11 +778,29 @@ function showPage(pageId) {
   document.querySelectorAll('.sidebar-item').forEach(function(el) {
     el.classList.remove('active');
   });
-  // 找到对应的导航项
-  event.currentTarget.classList.add('active');
+  // 兼容事件来源
+  var src = ev && ev.currentTarget ? ev.currentTarget : (ev && ev.target ? ev.target : null);
+  if (src && src.classList) {
+    src.classList.add('active');
+    // 手机端：横向滚动让当前项可见
+    if (window.innerWidth <= 768 && src.scrollIntoView) {
+      src.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    }
+  }
   // 滚动到顶部
-  document.querySelector('.content').scrollTop = 0;
+  var content = document.querySelector('.content');
+  if (content) content.scrollTop = 0;
   window.scrollTo(0, 0);
+  // 手机端：内容区滚到视图顶部
+  if (window.innerWidth <= 768) {
+    var contentTop = document.querySelector('.content');
+    if (contentTop && contentTop.getBoundingClientRect) {
+      var rect = contentTop.getBoundingClientRect();
+      if (rect.top < 0) {
+        window.scrollTo(0, rect.top + window.scrollY - 5);
+      }
+    }
+  }
 }
 </script>
 
