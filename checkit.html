@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TEMU男装商家每日必检</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --c1: #c0392b; --c1b: #fdf2f2;
+  --c2: #e67e22; --c2b: #fef9f2;
+  --c3: #9b59b6; --c3b: #f8f0fb;
+  --c4: #3498db; --c4b: #f0f7fc;
+  --c5: #34495e; --c5b: #f4f6f7;
+}
+html, body {
+  height: 100%; overflow: hidden;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #1a1a2e; color: #333;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 顶部进度条 */
+.progress-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 3px; background: rgba(255,255,255,0.1); z-index: 100;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #e67e22, #f39c12);
+  transition: width 0.3s ease; width: 14%;
+}
+
+/* 卡片容器 */
+.deck {
+  height: 100vh; overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.deck::-webkit-scrollbar { display: none; }
+
+/* 单张卡片 */
+.card {
+  min-height: 100vh; scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  padding: 60px 20px 80px 20px;
+  position: relative;
+}
+
+/* 卡片序号大数字 */
+.card-num {
+  position: absolute; top: 30px; right: 20px;
+  font-size: 80px; font-weight: 900;
+  opacity: 0.06; line-height: 1;
+}
+
+/* 卡片标题区 */
+.card-header { margin-bottom: 20px; }
+.card-tag {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 20px;
+  margin-bottom: 10px;
+}
+.card-title {
+  font-size: 26px; font-weight: 800;
+  margin-bottom: 6px;
+}
+.card-sub {
+  font-size: 13px; opacity: 0.6;
+}
+
+/* 检查项 */
+.check-list { flex: 1; }
+.check-item {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex; align-items: flex-start;
+  font-size: 15px; line-height: 1.6;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: all 0.2s;
+}
+.check-item.done {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+.check-box {
+  width: 24px; height: 24px; min-width: 24px;
+  border: 2.5px solid #ccc; border-radius: 6px;
+  margin-right: 12px; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: transparent;
+  transition: all 0.2s;
+}
+.check-item.done .check-box {
+  border-color: #27ae60; background: #27ae60; color: #fff;
+}
+.check-text .hl { font-weight: 700; }
+.check-text .tip {
+  display: block; font-size: 12px; color: #999; margin-top: 3px;
+}
+
+/* 底部翻页提示 */
+.card-footer {
+  text-align: center; font-size: 12px; color: rgba(255,255,255,0.3);
+  margin-top: 15px;
+}
+.card-footer .arrow {
+  display: inline-block;
+  animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* 各卡片配色 */
+.card-0 { background: linear-gradient(135deg, #1a3a5c, #2d5a87); }
+.card-0 .card-tag { background: rgba(255,255,255,0.15); color: #fff; }
+.card-0 .card-title { color: #fff; }
+.card-0 .card-sub { color: rgba(255,255,255,0.6); }
+.card-0 .check-text .hl { color: #3498db; }
+
+.card-1 { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+.card-1 .card-tag { background: rgba(255,255,255,0.2); color: #fff; }
+.card-1 .card-title { color: #fff; }
+.card-1 .card-sub { color: rgba(255,255,255,0.7); }
+.card-1 .check-text .hl { color: #c0392b; }
+.card-1 .card-num { color: #fff; }
+
+.card-2 { background: linear-gradient(135deg, #e67e22, #f39c12); }
+.card-2 .card-tag { background: rgba(255,255,255,0.2); color: #fff; }
+.card-2 .card-title { color: #fff; }
+.card-2 .card-sub { color: rgba(255,255,255,0.7); }
+.card-2 .check-text .hl { color: #e67e22; }
+.card-2 .card-num { color: #fff; }
+
+.card-3 { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+.card-3 .card-tag { background: rgba(255,255,255,0.2); color: #fff; }
+.card-3 .card-title { color: #fff; }
+.card-3 .card-sub { color: rgba(255,255,255,0.7); }
+.card-3 .check-text .hl { color: #9b59b6; }
+.card-3 .card-num { color: #fff; }
+
+.card-4 { background: linear-gradient(135deg, #2980b9, #3498db); }
+.card-4 .card-tag { background: rgba(255,255,255,0.2); color: #fff; }
+.card-4 .card-title { color: #fff; }
+.card-4 .card-sub { color: rgba(255,255,255,0.7); }
+.card-4 .check-text .hl { color: #2980b9; }
+.card-4 .card-num { color: #fff; }
+
+.card-5 { background: linear-gradient(135deg, #2c3e50, #34495e); }
+.card-5 .card-tag { background: rgba(255,255,255,0.2); color: #fff; }
+.card-5 .card-title { color: #fff; }
+.card-5 .card-sub { color: rgba(255,255,255,0.7); }
+.card-5 .check-text .hl { color: #34495e; }
+.card-5 .card-num { color: #fff; }
+
+/* 封面卡片 */
+.cover-logo {
+  font-size: 48px; margin-bottom: 15px;
+}
+.cover-title {
+  font-size: 28px; font-weight: 900; color: #fff;
+  margin-bottom: 8px; line-height: 1.3;
+}
+.cover-sub {
+  font-size: 14px; color: rgba(255,255,255,0.6);
+  margin-bottom: 30px;
+}
+.cover-info {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 20px;
+  margin-bottom: 20px;
+}
+.cover-info-item {
+  display: flex; align-items: center;
+  color: rgba(255,255,255,0.8); font-size: 14px;
+  margin-bottom: 10px;
+}
+.cover-info-item:last-child { margin-bottom: 0; }
+.cover-info-item .icon {
+  font-size: 20px; margin-right: 10px; min-width: 24px;
+}
+
+/* 完成卡片 */
+.card-done { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+.card-done .card-title { color: #fff; }
+.done-circle {
+  width: 80px; height: 80px;
+  border: 4px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; margin: 0 auto 20px;
+}
+.done-stats {
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px; padding: 16px;
+  margin-bottom: 15px;
+}
+.done-stats-item {
+  display: flex; justify-content: space-between;
+  color: rgba(255,255,255,0.9); font-size: 15px;
+  padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.done-stats-item:last-child { border-bottom: none; }
+.done-contact {
+  text-align: center; color: rgba(255,255,255,0.8);
+  font-size: 14px; line-height: 1.8;
+}
+
+/* 浮动圆点导航 */
+.dots {
+  position: fixed; right: 8px; top: 50%;
+  transform: translateY(-50%);
+  z-index: 50; display: flex; flex-direction: column; gap: 6px;
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transition: all 0.3s;
+}
+.dot.active {
+  background: #f39c12; transform: scale(1.4);
+}
+
+/* 浮动完成率 */
+.completion-badge {
+  position: fixed; top: 12px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.3); color: #fff;
+  font-size: 11px; padding: 3px 12px;
+  border-radius: 20px; z-index: 100;
+  backdrop-filter: blur(10px);
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="completion-badge" id="completionBadge">完成 0/20</div>
+<div class="dots" id="dots"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 封面 -->
+  <div class="card card-0">
+    <div class="cover-logo">📋</div>
+    <div class="cover-title">TEMU 男装商家<br>每日必检清单</div>
+    <div class="cover-sub">每日5分钟 · 异常项立即处理</div>
+    <div class="cover-info">
+      <div class="cover-info-item"><span class="icon">👤</span>冰燃 13511744912</div>
+      <div class="cover-info-item"><span class="icon">⏱️</span>每日5分钟快速过一遍</div>
+      <div class="cover-info-item"><span class="icon">✅</span>逐项打勾，异常立即处理</div>
+      <div class="cover-info-item"><span class="icon">📊</span>5大模块 · 20项检查</div>
+    </div>
+    <div class="card-footer" style="color:rgba(255,255,255,0.4)">
+      <span class="arrow">⬇</span> 上滑开始检查
+    </div>
+  </div>
+
+  <!-- 模块1 库存检查 -->
+  <div class="card card-1">
+    <div class="card-num">01</div>
+    <div class="card-header">
+      <span class="card-tag">每日必看 · 断货=没单</span>
+      <div class="card-title">库存检查</div>
+      <div class="card-sub">断货是最大杀手，库存第一优先</div>
+    </div>
+    <div class="check-list">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">各SKU仓内库存<span class="hl">大于0</span>，无<span class="hl">断货=没单</span><span class="tip">建议备货量为13天销量</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">补货到仓的款是否<span class="hl">质检合格</span>，能否回捞</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">检查<span class="hl">即将售罄</span>的SKU，有没有推单的填写<span class="hl">下单问卷</span></div>
+      </div>
+    </div>
+    <div class="card-footer"><span class="arrow">⬇</span> 上滑下一模块</div>
+  </div>
+
+  <!-- 模块2 商品动销 -->
+  <div class="card card-2">
+    <div class="card-num">02</div>
+    <div class="card-header">
+      <span class="card-tag">每日必看</span>
+      <div class="card-title">商品动销</div>
+      <div class="card-sub">关注动销趋势，0单及时处理</div>
+    </div>
+    <div class="check-list">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">最近一周有无跑出爆款，做好<span class="hl">爆款维护</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">连续<span class="hl">3天0单</span>的SKU→标记重点关注，换图/活动/广告安排</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">新品是否在售，<span class="hl">前端是否正常展示</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">昨日销量<span class="hl">突增/突降</span>的SKU→检查状态并记录原因</div>
+      </div>
+    </div>
+    <div class="card-footer"><span class="arrow">⬇</span> 上滑下一模块</div>
+  </div>
+
+  <!-- 模块3 违规&处罚 -->
+  <div class="card card-3">
+    <div class="card-num">03</div>
+    <div class="card-header">
+      <span class="card-tag">每日必看</span>
+      <div class="card-title">违规&处罚</div>
+      <div class="card-sub">处罚直接影响流量，48小时内必须申诉</div>
+    </div>
+    <div class="check-list">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">无<span class="hl">新增违规处罚</span><span class="tip">售假/侵权/描述不符等</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">已有处罚的→<span class="hl">48小时内申诉</span><span class="tip">未解罚找冰燃 13511744912</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">检查品质分，<span class="hl">低品质分马上整改</span></div>
+      </div>
+    </div>
+    <div class="card-footer"><span class="arrow">⬇</span> 上滑下一模块</div>
+  </div>
+
+  <!-- 模块4 商品&SKU状态 -->
+  <div class="card card-4">
+    <div class="card-num">04</div>
+    <div class="card-header">
+      <span class="card-tag">每日必看</span>
+      <div class="card-title">商品&SKU状态</div>
+      <div class="card-sub">保持上新节奏，关注数据表现</div>
+    </div>
+    <div class="check-list">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">有无每日上新款，<span class="hl">保持上新频率</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">审版、核价有没有<span class="hl">卡点</span>，卡了<span class="hl">联系冰燃</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">商品数据：主图点击率<span class="hl">低于3%</span>、有无类目热词→<span class="hl">标记优化</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">浏览站内/竞对爆款，看<span class="hl">竞品做了什么</span>，自己应该怎么做</div>
+      </div>
+    </div>
+    <div class="card-footer"><span class="arrow">⬇</span> 上滑下一模块</div>
+  </div>
+
+  <!-- 模块5 活动&广告 -->
+  <div class="card card-5">
+    <div class="card-num">05</div>
+    <div class="card-header">
+      <span class="card-tag">每日必看</span>
+      <div class="card-title">活动&广告</div>
+      <div class="card-sub">活动不掉线，广告不白跑</div>
+    </div>
+    <div class="check-list">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">已报名活动是否<span class="hl">正常进行中</span><span class="tip">未到期/未掉线</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">广告/商业化检查花费和数据，确保<span class="hl">投入产出比</span>合理</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">样品单管理：有没有<span class="hl">待拍摄</span>、<span class="hl">待寄出</span>的样品</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">有无好款可以<span class="hl">推给冰燃</span><span class="tip">附SPU+推荐理由</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">有无<span class="hl">开爆款思路</span>，没有的话找冰燃要<span class="hl">开款方向</span></div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-text">应季款、新款、滞销款<span class="hl">占比</span>自行计算，关注<span class="hl">销售数据</span></div>
+      </div>
+    </div>
+    <div class="card-footer"><span class="arrow">⬇</span> 上滑查看汇总</div>
+  </div>
+
+  <!-- 完成页 -->
+  <div class="card card-done">
+    <div class="card-header" style="text-align:center;">
+      <div class="done-circle">🎉</div>
+      <div class="card-title">今日检查完成！</div>
+      <div class="card-sub" style="color:rgba(255,255,255,0.7)">坚持每日自查，销量稳步提升</div>
+    </div>
+    <div class="done-stats" id="doneStats">
+      <div class="done-stats-item"><span>📦 库存检查</span><span id="s1">0/3</span></div>
+      <div class="done-stats-item"><span>📊 商品动销</span><span id="s2">0/4</span></div>
+      <div class="done-stats-item"><span>⚠️ 违规&处罚</span><span id="s3">0/3</span></div>
+      <div class="done-stats-item"><span>🏷️ 商品&SKU状态</span><span id="s4">0/4</span></div>
+      <div class="done-stats-item"><span>🎯 活动&广告</span><span id="s5">0/6</span></div>
+      <div class="done-stats-item" style="border-top:2px solid rgba(255,255,255,0.2);margin-top:4px;padding-top:8px;font-weight:bold;font-size:17px;"><span>✅ 总完成</span><span id="sTotal">0/20</span></div>
+    </div>
+    <div class="done-contact">
+      连续7天0单的SKU→用《无动销自查清单》全量排查<br>
+      断货是最大杀手，库存第一优先<br><br>
+      <strong>有问题找冰燃 13511744912</strong>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 打勾切换
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  updateStats();
+}
+
+// 统计
+var moduleCounts = [3, 4, 3, 4, 6];
+function updateStats() {
+  var cards = document.querySelectorAll('.card');
+  var total = 0, done = 0;
+  for (var i = 1; i <= 5; i++) {
+    var items = cards[i].querySelectorAll('.check-item');
+    var d = 0;
+    items.forEach(function(item) { if (item.classList.contains('done')) d++; });
+    total += items.length;
+    done += d;
+    document.getElementById('s' + i).textContent = d + '/' + items.length;
+  }
+  document.getElementById('sTotal').textContent = done + '/' + total;
+  document.getElementById('completionBadge').textContent = '完成 ' + done + '/' + total;
+  
+  // 进度条
+  var pct = (done / total) * 100;
+  document.getElementById('progressFill').style.width = Math.max(14, pct) + '%';
+}
+
+// 圆点导航
+var deck = document.getElementById('deck');
+var totalCards = document.querySelectorAll('.card').length;
+var dotsContainer = document.getElementById('dots');
+for (var i = 0; i < totalCards; i++) {
+  var dot = document.createElement('div');
+  dot.className = 'dot';
+  dot.onclick = (function(idx) {
+    return function() {
+      document.querySelectorAll('.card')[idx].scrollIntoView({ behavior: 'smooth' });
+    };
+  })(i);
+  dotsContainer.appendChild(dot);
+}
+
+// 滚动监听
+var scrollTimer;
+deck.addEventListener('scroll', function() {
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(function() {
+    var idx = Math.round(deck.scrollTop / window.innerHeight);
+    document.querySelectorAll('.dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === idx);
+    });
+    var pct = ((idx + 1) / totalCards) * 100;
+    if (idx === 0) pct = 14;
+    document.getElementById('progressFill').style.width = pct + '%';
+  }, 50);
+});
+
+// 初始化
+document.querySelector('.dot').classList.add('active');
+</script>
+
+</body>
+</html>
