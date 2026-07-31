@@ -1,809 +1,285 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TEMU男装商品无动销自查SOP </title>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<title>Temu男装商品无动销自查SOP</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#0f1117;color:#e0e0e0;overflow-x:hidden;}
-
-/* 顶部标题栏 */
-.header{background:linear-gradient(135deg,#1a1f35 0%,#2a3050 100%);padding:20px 30px;border-bottom:1px solid #2a3050;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-.header h1{font-size:28px;color:#7eb8ff;font-weight:700;}
-.header .subtitle{font-size:14px;color:#8899aa;margin-top:4px;}
-.header .badge{background:#1e3a5f;color:#7eb8ff;padding:6px 16px;border-radius:14px;font-size:14px;border:1px solid #2a4a6a;}
-
-/* 主容器 */
-.container{display:flex;min-height:calc(100vh - 70px);}
-
-/* 左侧导航 */
-.sidebar{width:200px;background:#161822;border-right:1px solid #2a2a3a;padding:15px 0;overflow-y:auto;max-height:calc(100vh - 70px);position:sticky;top:0;flex-shrink:0;}
-.sidebar-item{padding:8px 14px;cursor:pointer;border-left:3px solid transparent;transition:all .2s;font-size:12px;display:flex;align-items:center;gap:6px;}
-.sidebar-item:hover{background:#1e2030;}
-.sidebar-item.active{background:#1e2235;border-left-color:#4a9eff;color:#4a9eff;}
-.sidebar-item .num{background:#2a3050;width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
-.sidebar-item.active .num{background:#1a3a5f;color:#4a9eff;}
-.sidebar-item .tag{font-size:9px;padding:1px 4px;border-radius:4px;margin-left:auto;}
-.tag-hard{background:#3a1520;color:#ff6b6b;}
-.tag-soft{background:#1a2a15;color:#6bcf7f;}
-
-/* 右侧内容 */
-.content{flex:1;padding:30px 40px;overflow-y:auto;max-width:calc(100% - 200px);}
-
-/* 概览页 */
-.overview{text-align:center;padding:40px 20px;}
-.overview h2{font-size:32px;color:#7eb8ff;margin-bottom:20px;}
-.overview p{color:#99aabb;font-size:15px;line-height:1.8;max-width:600px;margin:0 auto 30px;}
-.overview-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:800px;margin:0 auto;}
-.overview-card{background:#1a1e2e;border:1px solid #2a2e3e;border-radius:12px;padding:20px;text-align:left;}
-.overview-card .icon{font-size:28px;margin-bottom:10px;}
-.overview-card h3{font-size:15px;color:#7eb8ff;margin-bottom:6px;}
-.overview-card p{font-size:12px;color:#8899aa;line-height:1.5;}
-
-/* 步骤详情 */
-.step-detail{display:none;}
-.step-detail.active{display:block;animation:fadeIn .3s ease;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
-.step-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-.step-header .step-num{background:linear-gradient(135deg,#4a9eff,#2670c0);width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;}
-.step-header h2{font-size:24px;color:#e0e0e0;font-weight:700;}
-.step-header .step-tag{font-size:11px;padding:3px 8px;border-radius:4px;}
-.step-tag-hard{background:#3a1520;color:#ff6b6b;border:1px solid #5a2030;}
-.step-tag-soft{background:#1a2a15;color:#6bcf7f;border:1px solid #2a4025;}
-
-.step-desc{background:#1a1e2e;border:1px solid #2a2e3e;border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:14px;line-height:1.8;color:#b0b8c8;}
-.step-desc strong{color:#7eb8ff;}
-
-/* 检查清单 */
-.checklist{margin-bottom:20px;}
-.checklist-title{font-size:16px;color:#7eb8ff;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-.checklist-title::before{content:"📋";font-size:16px;}
-.check-item{background:#161822;border:1px solid #2a2a3a;border-radius:8px;padding:12px 16px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.6;}
-.check-item .dot{width:8px;height:8px;border-radius:50%;background:#4a9eff;flex-shrink:0;margin-top:5px;}
-.check-item .dot-red{background:#ff6b6b;}
-.check-item .dot-green{background:#6bcf7f;}
-.check-item .dot-yellow{background:#f0c040;}
-
-/* 表格 */
-.table-wrap{overflow-x:auto;margin-bottom:20px;border-radius:8px;border:1px solid #2a2a3a;}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-th{background:#1e2235;color:#7eb8ff;padding:10px 14px;text-align:left;font-weight:600;border-bottom:1px solid #2a3050;white-space:nowrap;}
-td{padding:10px 14px;border-bottom:1px solid #1e1e2a;color:#b0b8c8;line-height:1.6;}
-tr:last-child td{border-bottom:none;}
-tr:hover td{background:#16182280;}
-
-/* 提示框 */
-.tip-box{background:#1a1e2e;border-left:3px solid #f0c040;padding:14px 18px;border-radius:0 8px 8px 0;margin-bottom:16px;font-size:13px;line-height:1.7;color:#c8c0a0;}
-.tip-box strong{color:#f0c040;}
-.tip-box.info{border-left-color:#4a9eff;color:#a0b8d0;}
-.tip-box.info strong{color:#4a9eff;}
-.tip-box.danger{border-left-color:#ff6b6b;color:#d0a0a0;}
-.tip-box.danger strong{color:#ff6b6b;}
-.tip-box.success{border-left-color:#6bcf7f;color:#a0c8a0;}
-.tip-box.success strong{color:#6bcf7f;}
-
-/* 链接 */
-a{color:#4a9eff;text-decoration:none;border-bottom:1px dotted #4a9eff44;}
-a:hover{color:#7eb8ff;border-bottom-color:#7eb8ff;}
-
-/* 优先级表格 */
-.priority-table th{background:#2a1a2a;}
-.priority-P0{color:#ff6b6b;font-weight:700;}
-.priority-P1{color:#ff9040;font-weight:700;}
-.priority-P2{color:#f0c040;font-weight:700;}
-.priority-P3{color:#6bcf7f;font-weight:700;}
-.priority-P4{color:#7eb8ff;font-weight:700;}
-
-/* 子节点 */
-.sub-section{margin-bottom:20px;}
-.sub-title{font-size:15px;color:#8899bb;margin-bottom:10px;padding-left:12px;border-left:3px solid #3a4055;}
-
-/* 滚动条 */
-::-webkit-scrollbar{width:6px;height:6px;}
-::-webkit-scrollbar-track{background:#0f1117;}
-::-webkit-scrollbar-thumb{background:#2a3050;border-radius:3px;}
-::-webkit-scrollbar-thumb:hover{background:#3a4060;}
-
-/* ===== 手机端响应式 ===== */
-@media(max-width:768px){
-  .header{padding:14px 16px;flex-direction:column;align-items:flex-start;gap:6px;}
-  .header h1{font-size:18px;}
-  .header .subtitle{font-size:11px;}
-  .header .badge{font-size:11px;padding:3px 10px;}
-  
-  .container{flex-direction:column;min-height:auto;}
-  
-  /* 侧边栏变为顶部横向滚动条 */
-  .sidebar{
-    width:100%;max-height:none;position:sticky;top:0;z-index:100;
-    display:flex;overflow-x:auto;overflow-y:hidden;
-    padding:0;border-right:none;border-bottom:1px solid #2a2a3a;
-    -webkit-overflow-scrolling:touch;
-  }
-  .sidebar-item{
-    padding:10px 12px;border-left:none;border-bottom:3px solid transparent;
-    white-space:nowrap;font-size:12px;flex-shrink:0;
-  }
-  .sidebar-item.active{border-left:none;border-bottom-color:#4a9eff;}
-  .sidebar-item .num{width:18px;height:18px;font-size:10px;}
-  .sidebar-item .tag{display:none;}
-  
-  /* 内容区全宽 */
-  .content{max-width:100%;padding:16px;overflow-y:visible;}
-  
-  /* 标题缩小 */
-  .step-header .step-num{width:32px;height:32px;font-size:15px;border-radius:8px;}
-  .step-header h2{font-size:16px;}
-  .step-header .step-tag{font-size:10px;}
-  .step-desc{padding:12px 14px;font-size:13px;line-height:1.7;}
-  
-  /* 表格横向滚动 */
-  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-  table{font-size:12px;}
-  th{padding:8px 10px;}
-  td{padding:8px 10px;}
-  
-  /* 概览调整 */
-  .overview{padding:20px 0;}
-  .overview h2{font-size:22px;}
-  .overview p{font-size:13px;}
-  .overview-cards{grid-template-columns:1fr;gap:10px;}
-  .overview-card{padding:14px;}
-  .overview-card .icon{font-size:24px;}
-  .overview-card h3{font-size:14px;}
-  .overview-card p{font-size:11px;}
-  
-  /* 检查清单 */
-  .checklist-title{font-size:14px;}
-  .check-item{padding:10px 12px;font-size:12px;}
-  
-  /* 子标题 */
-  .sub-title{font-size:13px;}
-  
-  /* 提示框 */
-  .tip-box{padding:10px 12px;font-size:12px;line-height:1.6;}
-  
-  /* 优先级表格 */
-  .priority-table th{font-size:11px;}
-}
-
-/* 超小屏幕 */
-@media(max-width:400px){
-  .header h1{font-size:16px;}
-  .step-header{flex-wrap:wrap;gap:8px;}
-  .step-header h2{font-size:14px;}
-  table{font-size:11px;}
-  th{padding:6px 8px;}
-  td{padding:6px 8px;}
-  .content{padding:12px;}
-}
-</style>
-</head>
-<body>
-
-<div class="header">
-  <div>
-    <h1>TEMU男装商品无动销自查SOP</h1>
-    <div class="subtitle">商家端操作指南 · V2.1 · 适用对象：男装品类全托管商家</div>
-  </div>
-  <div class="badge">9步自检</div>
+:root{--to:#FB7701;--tol:#FFF4E8;--td:#1A1A2E;--tg:#F5F6FA;--tb:#E8E8E8;--tr:#E63946;--tgr:#2A9D8F;--tbu:#1D7AE3;--bg:#FAFAFA;--cb:#FFFFFF;--tx:#2D2D2D;--txs:#666;--sh:0 1px 3px rgba(0,0,0,.08);--shh:0 4px 12px rgba(251,119,1,.15);--r:8px}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--tbu);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+.hdr{background:linear-gradient(135deg,var(--to) 0%,#FF9500 100%);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(251,119,1,.3)}
+.hdr-i{max-width:900px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.hdr-t{font-size:1.05rem;font-weight:700;letter-spacing:.5px}.hdr-s{font-size:.7rem;opacity:.85;margin-top:2px}.hdr-l{font-size:1.4rem;font-weight:900;letter-spacing:1px;white-space:nowrap}
+.toc{background:var(--cb);border-bottom:1px solid var(--tb);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.toc-i{max-width:900px;margin:0 auto;padding:8px 12px;display:flex;gap:6px;flex-wrap:nowrap}
+.toc-a{flex-shrink:0;padding:6px 12px;border-radius:20px;font-size:.75rem;color:var(--txs);cursor:pointer;transition:all .2s;white-space:nowrap;border:1px solid var(--tb);background:var(--cb)}
+.toc-a:hover{background:var(--to);color:#fff;border-color:var(--to)}
+.ctn{max-width:900px;margin:0 auto;padding:12px 14px 60px}
+.ib{background:var(--tol);border:1px solid #FFD9B8;border-radius:var(--r);padding:12px 14px;margin-bottom:14px;font-size:.82rem;color:var(--txs);line-height:1.7}
+.ib b{color:var(--to)}
+.sec{background:var(--cb);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:10px;overflow:hidden;border:1px solid var(--tb)}
+.sh{display:flex;align-items:center;padding:12px 14px;cursor:pointer;transition:background .2s;user-select:none;gap:10px}
+.sh:hover{background:var(--tol)}.sh.exp{background:var(--to);color:#fff}
+.sn{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--to);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700}
+.sh.exp .sn{background:#fff;color:var(--to)}
+.st{flex:1;font-size:.95rem;font-weight:600}
+.sa{flex-shrink:0;font-size:.7rem;transition:transform .3s;color:var(--txs)}.sh.exp .sa{color:#fff;transform:rotate(180deg)}
+.sb{display:none;padding:0 14px 14px}.sb.open{display:block;animation:fI .25s ease}
+@keyframes fI{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.ss{border-left:3px solid var(--to);margin:10px 0;padding-left:12px}
+.ssh{display:flex;align-items:center;cursor:pointer;padding:8px 0;gap:6px;user-select:none}.ssh:hover{color:var(--to)}
+.ssi{font-size:.7rem;transition:transform .2s;color:var(--to)}.ssh.open .ssi{transform:rotate(90deg)}
+.sst{font-size:.88rem;font-weight:600}.ssc{display:none;padding-top:6px}.ssc.open{display:block;animation:fI .2s ease}
+.ds{margin:6px 0;padding-left:10px;border-left:2px solid #E0E0E0}
+.dsh{display:flex;align-items:center;cursor:pointer;padding:6px 0;gap:6px;user-select:none;font-size:.84rem;font-weight:500;color:var(--txs)}
+.dsh:hover{color:var(--to)}.dsi{font-size:.65rem;transition:transform .2s;color:var(--to)}.dsh.open .dsi{transform:rotate(90deg)}
+.dsc{display:none;padding-top:4px}.dsc.open{display:block;animation:fI .2s ease}
+.p{margin:6px 0;font-size:.83rem;line-height:1.7;color:var(--tx)}.ps{color:var(--txs);font-size:.8rem}.pb{font-weight:600;color:var(--tx)}
+.pl{font-weight:600;color:var(--to);font-size:.8rem;margin-top:8px;margin-bottom:4px}
+.nb{background:#FFF8E1;border:1px solid #FFE082;border-radius:6px;padding:8px 10px;margin:8px 0;font-size:.8rem;color:#7C5800;line-height:1.6}
+.ab{background:#FFEBEE;border:1px solid #EF9A9A;border-radius:6px;padding:8px 10px;margin:8px 0;font-size:.8rem;color:#B71C1C;line-height:1.6}
+.ul{margin:6px 0 6px 18px;font-size:.82rem;line-height:1.7}.ul li{margin:3px 0}
+.ol{margin:6px 0 6px 20px;font-size:.82rem;line-height:1.7}.ol li{margin:3px 0}
+.lc{display:block;background:var(--tg);border:1px solid var(--tb);border-radius:6px;padding:8px 10px;margin:6px 0;font-size:.8rem;color:var(--tbu);transition:all .2s;text-decoration:none}
+.lc:hover{background:var(--tol);border-color:var(--to);text-decoration:none;box-shadow:var(--shh)}.lc::before{content:"\1F517 ";margin-right:4px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0;border-radius:6px;border:1px solid var(--tb)}
+table{width:100%;border-collapse:collapse;font-size:.78rem;min-width:400px}
+th{background:var(--to);color:#fff;padding:8px 6px;text-align:left;font-weight:600;white-space:nowrap}
+td{padding:6px 6px;border-bottom:1px solid var(--tb);vertical-align:top;word-break:break-word}
+tr:nth-child(even){background:var(--tg)}tr:last-child td{border-bottom:none}
+.ts{min-width:300px}.ts th{font-size:.75rem;padding:6px 4px}.ts td{font-size:.75rem;padding:5px 4px}
+.bd{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:600}
+.bh{background:#FFEBEE;color:#C62828}.bi{background:#E3F2FD;color:#1565C0}
+.bp0{background:#E63946;color:#fff}.bp1{background:#FF9800;color:#fff}.bp2{background:#FFC107;color:#333}.bp3{background:#4CAF50;color:#fff}.bp4{background:#2196F3;color:#fff}
+.qa{border-bottom:1px solid var(--tb);padding:10px 0}.qa:last-child{border-bottom:none}
+.qq{font-size:.84rem;font-weight:600;color:var(--td);margin-bottom:4px;cursor:pointer;display:flex;align-items:flex-start;gap:6px}.qq:hover{color:var(--to)}
+.qqi{color:var(--to);flex-shrink:0}.qaa{display:none;font-size:.8rem;color:var(--txs);line-height:1.7;padding-left:20px}.qaa.open{display:block;animation:fI .2s ease}
+.pc{display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:6px;margin:6px 0;background:var(--tg)}
+.pct{font-size:.82rem;font-weight:600;margin-bottom:2px}.pcd{font-size:.76rem;color:var(--txs);line-height:1.5}
+.ft{text-align:center;padding:20px 16px 16px;font-size:.72rem;color:var(--txs);line-height:1.7}.ftd{border:none;border-top:1px solid var(--tb);margin:0 0 12px}
+@media(max-width:480px){.hdr-t{font-size:.9rem}.hdr-s{font-size:.65rem}.hdr-l{font-size:1.15rem}.ctn{padding:10px 10px 50px}.sh{padding:10px 12px}.st{font-size:.86rem}.sb{padding:0 10px 10px}.p{font-size:.8rem}.ps,.ul,.ol{font-size:.78rem}th{padding:6px 4px;font-size:.74rem}td{padding:5px 4px;font-size:.73rem}.toc-a{font-size:.7rem;padding:5px 10px}}
+</style></head><body>
+<div class="hdr"><div class="hdr-i"><div><div class="hdr-t">男装商品无动销自查SOP</div><div class="hdr-s">商家端操作指南 · 全托管</div></div><div class="hdr-l">Temu</div></div></div>
+<div class="toc"><div class="toc-i">
+<div class="toc-a" onclick="scrollToSec('s0')">📌指南说明</div>
+<div class="toc-a" onclick="scrollToSec('s1')">🔍排查一览</div>
+<div class="toc-a" onclick="scrollToSec('s2')">①商品状态</div>
+<div class="toc-a" onclick="scrollToSec('s3')">②SKU在架</div>
+<div class="toc-a" onclick="scrollToSec('s4')">③违规处罚</div>
+<div class="toc-a" onclick="scrollToSec('s5')">④库存维护</div>
+<div class="toc-a" onclick="scrollToSec('s6')">⑤商品数据</div>
+<div class="toc-a" onclick="scrollToSec('s7')">⑥供货价</div>
+<div class="toc-a" onclick="scrollToSec('s8')">⑦活动广告</div>
+<div class="toc-a" onclick="scrollToSec('s9')">⑧质量售后</div>
+<div class="toc-a" onclick="scrollToSec('s10')">⑨品牌化</div>
+<div class="toc-a" onclick="scrollToSec('s11')">📋记录表</div>
+<div class="toc-a" onclick="scrollToSec('s12')">⚡优先级</div>
+<div class="toc-a" onclick="scrollToSec('s13')">💬常见Q&A</div>
+<div class="toc-a" onclick="scrollToSec('s14')">⚠️注意事项</div>
+</div></div><div class="ctn">
+<div class="sec" id="s0"><div class="sh" onclick="tgSec(this)"><div class="sn">0</div><div class="st">这份指南干啥用的 & 什么时候用</div><div class="sa">▼</div></div><div class="sb">
+<div class="ib">
+<div class="tw"><table class="ts tbl-small"><tr><th>适用范围</th><th>男装类目 商品上架后长期无销量或销量极低的自查排查</th></tr><tr><td>适用对象</td><td>Temu平台男装品类全托管商家</td></tr><tr><td>这份指南干啥用的</td><td>帮助商家按标准化流程逐项排查无动销原因，快速定位问题并采取纠正措施</td></tr></tr></table></div>
 </div>
-
-<div class="container">
-
-<!-- 左侧导航 -->
-<div class="sidebar">
-  <div class="sidebar-item active" onclick="showPage('overview', event)">
-    <span class="num">0</span> 总览
-  </div>
-  <div class="sidebar-item" onclick="showPage('step1', event)">
-    <span class="num">1</span> 商品状态
-    <span class="tag tag-hard">硬伤</span>
-  </div>
-  <div class="sidebar-item" onclick="showPage('step2', event)">
-    <span class="num">2</span> SKU在架与加站
-    <span class="tag tag-hard">硬伤</span>
-  </div>
-  <div class="sidebar-item" onclick="showPage('step3', event)">
-    <span class="num">3</span> 违规处罚
-    <span class="tag tag-hard">硬伤</span>
-  </div>
-  <div class="sidebar-item" onclick="showPage('step4', event)">
-    <span class="num">4</span> 库存排查
-    <span class="tag tag-hard">硬伤</span>
-  </div>
-  <div class="sidebar-item" onclick="showPage('step5', event)">
-    <span class="num">5</span> 图片与信息
-    <span class="tag tag-soft">改进</span>
-  </div>
-  <div class="sidebar-item" onclick="showPage('step6', event)">
-    <span class="num">6</span> 供货价竞争力
-    <span class="tag tag-soft">改进</span>
-  </div>
-  <div class="sidebar-item" onclick="showPage('step7', event)">
-    <span class="num">7</span> 活动与流量
-    <span class="tag tag-soft">改进</span>
-  </div>
-  <div class="sidebar-item" onclick="showPage('step8', event)">
-    <span class="num">8</span> 评价与退货
-    <span class="tag tag-soft">改进</span>
-  </div>
-  <div class="sidebar-item" onclick="showPage('step9', event)">
-    <span class="num">9</span> 品牌化
-    <span class="tag tag-soft">改进</span>
-  </div>
-  <div class="sidebar-item" onclick="showPage('summary', event)">
-    <span class="num">✓</span> 汇总与优先级
-  </div>
+<p class="p">这份指南是帮Temu男装商家一步步查清楚「为什么我的货卖不动」。东西上架了但一直没人买，照着这个一步步查，找到原因然后改过来，让货能卖出去。</p>
+<div class="ss"><div class="ssh" onclick="tgSub(this)"><span class="ssi">▶</span><span class="sst">什么时候用</span></div><div class="ssc">
+<p class="ps">碰到下面这些情况，就照着查一遍：</p>
+<ul class="ul"><li>商品上架超过7天，累计销量为0</li><li>商品日均销量明显低于同店铺其他正常动销商品</li><li>商品此前有动销，但突然连续7天以上无销量</li><li>商品参与平台活动后，活动期间仍无销量</li><li>商家批量上架男装商品后，整体有销量的SKU占比低于预期</li></ul>
+</div></div>
+<div class="ss"><div class="ssh" onclick="tgSub(this)"><span class="ssi">▶</span><span class="sst">一些词啥意思</span></div><div class="ssc">
+<div class="tw"><table class="ts tbl-small"><tr><th>术语</th><th>解释</th></tr><tr><td>无动销</td><td>商品上架后一段时间内（通常7天以上）无任何订单产生，或销量极低</td></tr><tr><td>生命周期状态</td><td>商品在平台上的状态，包括在售、审版中、已下架、已冻结等</td></tr><tr><td>加站</td><td>将商品/SKU加入目标销售站点的操作，加站后商品才能在该站点展示和售卖</td></tr><tr><td>在架</td><td>SKU在站点上处于可售卖状态，买家可以看到并下单</td></tr><tr><td>有销量的SKU占比</td><td>有销量的SKU数 / 总SKU数 × 100%，反映商品销售活跃度</td></tr><tr><td>价格区间</td><td>某一品类商品在平台上的主流售价区间，通常按销量分布确定</td></tr><tr><td>商品信息评分</td><td>平台对商品标题、属性、图片、描述等信息填得全不全和质量的综合评分</td></tr></tr></table></div>
+</div></div>
+</div></div>
+<div class="sec" id="s1"><div class="sh" onclick="tgSec(this)"><div class="sn">1</div><div class="st">查哪些东西一览（9大维度）</div><div class="sa">▼</div></div><div class="sb">
+<p class="p">请按以下8个维度依次排查。前4个维度为「硬伤问题（东西卖不了）」（直接导致商品无法售卖），后5个维度为「改进问题（能卖但卖不好）」（影响销量但商品仍可售卖）。建议优先排查硬伤问题（东西卖不了）。</p>
+<div class="tw"><table><tr><th>序号</th><th>类型</th><th>查什么</th><th>要确认啥</th></tr><tr><td>1</td><td>&lt;span class="bd bh"&gt;硬伤&lt;/span&gt;</td><td>商品状态</td><td>商品是否处于「在售」状态？是否被下架/冻结/处罚？</td></tr><tr><td>2</td><td>&lt;span class="bd bh"&gt;硬伤&lt;/span&gt;</td><td>SKU在架与加站状态</td><td>各SKU是否已加入目标站点？是否在架可售？</td></tr><tr><td>3</td><td>&lt;span class="bd bh"&gt;硬伤&lt;/span&gt;</td><td>查有没有被处罚</td><td>商品是否存在违规处罚导致被不让你卖、排名往后排或下架？</td></tr><tr><td>4</td><td>&lt;span class="bd bh"&gt;硬伤&lt;/span&gt;</td><td>查有没有库存</td><td>商品是否有可用库存？是否断货导致无法售卖？</td></tr><tr><td>5</td><td>&lt;span class="bd bi"&gt;改进&lt;/span&gt;</td><td>商品图片和信息好不好</td><td>主图/详情图质量是否过关？标题/属性/描述是否完善？</td></tr><tr><td>6</td><td>&lt;span class="bd bi"&gt;改进&lt;/span&gt;</td><td>供货价贵不贵、价格有没有竞争力</td><td>前台售价是否偏高？供货价是否有优化空间？是否被平台选入活动？</td></tr><tr><td>7</td><td>&lt;span class="bd bi"&gt;改进&lt;/span&gt;</td><td>有没有参加活动、广告？</td><td>是否被平台选入活动？是否有足够曝光和流量？</td></tr><tr><td>8</td><td>&lt;span class="bd bi"&gt;改进&lt;/span&gt;</td><td>评价好不好、退货多不多</td><td>商品是否有差评？退货率是否偏高？是否影响转化？</td></tr><tr><td>9</td><td>&lt;span class="bd bi"&gt;改进&lt;/span&gt;</td><td>品牌化做得好不好</td><td>品牌资质是否齐全？品牌露出与辨识度如何？品牌差异化是否明显？品牌资产是否在积累？</td></tr></tr></table></div>
+<div class="ab"><b>注意这几条</b><br>1. 先查硬伤再查改进：先排查1-4项硬伤问题（东西卖不了），确认商品能正常售卖后，再排查5-9项改进问题（能卖但卖不好）。<br>2. 全SKU覆盖：排查时需覆盖商品下所有SKU，不能只查主SKU。<br>3. 全站点覆盖：确认商品在每个目标站点的状态，不能只看一个站点。</div>
+</div></div>
+<div class="sec" id="s2"><div class="sh" onclick="tgSec(this)"><div class="sn">2</div><div class="st">步骤1：查商品SPU售卖状态</div><div class="sa">▼</div></div><div class="sb">
+<p class="pb">要查什么：看看你的商品现在是不是正常「在售」状态</p>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 1.1 自查操作路径</div><div class="dsc">
+<div class="tw"><table class="ts tbl-small"><tr><th>操作步骤</th><th>详细说明</th></tr><tr><td>Step 1：登录后台</td><td>登录Temu商家后台 确认登录账号有商品管理权限</td></tr><tr><td>Step 2：进入商品管理</td><td>导航至「商品管理」-「商品生命周期」页面 页面显示所有商品的生命周期状态列表</td></tr><tr><td>Step 3：搜索目标商品</td><td>在搜索框输入商品ID（Goods ID / SPU ID / SKC ID） 也可通过店铺ID筛选店铺下所有商品 建议一次查询多个商品ID，批量排查</td></tr><tr><td>Step 4：查看生命周期状态</td><td>查看商品的「生命周期状态」-待办</td></tr><tr><td>Step 5：查看代办信息</td><td>1.商品生命周期状态— 确认商品是否处于"在售"状态，是否被下架、冻结、审版未通过等 2.SKU在架状态— 确认各SKU是否已加入站点、是否在架可售 3.违规处罚— 商品是否存在违规处罚导致被限制售卖或下架 4.库存情况— 商品是否有可用库存，是否断货 5.流量待提升— 是否有低价同款抢流量</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 1.2 状态判断标准与处理方案</div><div class="dsc">
+<div class="tw"><table><tr><th>生命周期状态</th><th>是不是卖不了</th><th>可能原因</th><th>处理方案</th></tr><tr><td>在售</td><td>否 - 正常</td><td>状态正常，继续下一步排查</td><td>进入步骤2排查SKU状态</td></tr><tr><td>违规待整改</td><td>是 – 违规站点卖不了</td><td>看下面治理驳回原因详解</td><td>看治理驳回能不能捞 能捞可以自行提交申诉，不能确定dd对接人spu单独看</td></tr><tr><td>流量待提升</td><td>否 – 部分站点屏蔽尺码</td><td>站内有同款 且同款低价</td><td>1、生命周期查看同款详情，确实为同款，辛苦看下能否跟价（降供或报活动均能解除），能跟尽快操作尽早解除 2、生命周期查看同款详情，误识别为同款，【同款不准】先自行完善理由申诉，申诉被驳回确有疑问的，发【spu+商品不同点】反馈我直接处理 3、看不到同款详情，请截图+spu发我核实情况</td></tr><tr><td>已下架</td><td>是 - 卖不了</td><td>商家主动下架 / 平台强制下架（违规/质量不合格）</td><td>确认下架原因 → 修正问题 → 重新申请上架</td></tr><tr><td>草稿/未提交</td><td>是 - 卖不了</td><td>商品信息未填写完整或未提交审核</td><td>完善商品信息 → 提交审版</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 1.3 男装商品常见治理驳回原因详解</div><div class="dsc">
+<div class="tw"><table><tr><th>驳回类型</th><th>具体表现</th><th>修改方案</th></tr><tr><td>图片问题</td><td>主图有牛皮癣/水印/文字遮挡；图片模糊；图片比例不符；图片含违规内容</td><td>重新拍摄/修图，确保白底或场景图清晰无遮挡，符合平台图片规范</td></tr><tr><td>属性缺失</td><td>材质/版型/领型/袖长/适用季节等关键属性未填写</td><td>该填的都填上，能填的也尽量填，填得越全越好</td></tr><tr><td>资质问题</td><td>缺少品牌授权/质检报告/成分检测报告等</td><td>准备并上传相关资质文件，确保品牌授权链路完整</td></tr><tr><td>尺码问题</td><td>未提供尺码表/尺码表不完整/尺码数据有误</td><td>提供完整尺码表（含肩宽/胸围/衣长/袖长等），建议增加身高体重参考</td></tr><tr><td>描述不符</td><td>商品描述与图片/属性不一致（如描述纯棉但属性写聚酯纤维）</td><td>标题、图片、属性里写的内容要对得上，别一个地方写纯棉另一个地方写涤纶</td></tr></tr></table></div>
+</div></div>
+</div></div>
+<div class="sec" id="s3"><div class="sh" onclick="tgSec(this)"><div class="sn">3</div><div class="st">步骤2：查SKU售卖状态</div><div class="sa">▼</div></div><div class="sb">
+<p class="pb">要查什么：看看每个SKU（不同颜色/尺码）是不是都加站、是不是都在架能卖。有时候商品整体是在售的，但某个颜色或尺码没加站或者下架了，那个SKU就卖不了。</p>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 2.1 自查操作路径</div><div class="dsc">
+<div class="tw"><table class="ts tbl-small"><tr><th>操作步骤</th><th>详细说明</th></tr><tr><td>Step 1：进入商品详情</td><td>在「商品生命周期」页面，点击目标商品进入详情页 找到「SKU信息」</td></tr><tr><td>Step 2：查看SKU列表</td><td>页面会展示该商品下所有SKU的列表 记录每个SKU ID及其对应的状态信息</td></tr><tr><td>Step 3：检查在架状态</td><td>查看每个SKU的「在架状态」字段 状态应为「在架」才可被买家购买 若显示「不在架」或「已下架」，需进一步排查原因</td></tr><tr><td>Step 4：检查加站情况</td><td>查看每个SKU的「已加入站点」字段 确认目标销售站点是否在已加站列表中 若目标站点未加站，SKU将无法在该站点展示和售卖</td></tr><tr><td>Step 5：批量排查</td><td>若有大量商品需排查，建议按店铺维度批量查询 统计未加站/不在架的SKU数量和占比</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 2.2 判断标准与处理方案</div><div class="dsc">
+<div class="tw"><table><tr><th>SKU状态</th><th>是不是卖不了</th><th>可能原因</th><th>处理方案</th></tr><tr><td>已加站 + 在架</td><td>否 - 正常</td><td>SKU状态正常，可正常售卖</td><td>进入步骤3排查违规处罚</td></tr><tr><td>未加站</td><td>是 - 卖不了</td><td>未提交加站申请 / 加站审核未通过 / 加站后被移除</td><td>在商品管理页面提交加站申请，确认选择正确站点；若审核未通过，查看原因并修正后重新提交</td></tr><tr><td>已加站但不在架</td><td>是 - 卖不了</td><td>SKU被单独下架 / 库存为0 / 价格异常 / 违规处罚</td><td>依次排查：库存是否有货 → 价格是否正常 → 是否有违规处罚 → 修正后重新上架SKU</td></tr><tr><td>部分站点未加站</td><td>部分卖不了</td><td>SKU只加入了部分站点，其他站点无法售卖</td><td>确认目标销售站点清单，对未加站站点提交加站申请</td></tr></tr></table></div>
+<div class="nb"><b>男装品类加站注意这几条</b><br>1. 男装商品通常需要加入多个站点（如美国站、欧洲站等），确认每个目标站点都已加站。<br>2. 新品上架后建议尽快完成所有目标站点加站，避免遗漏导致部分站点无动销。<br>3. 加站后需确认SKU在该站点的在架状态，加站和在架是两个独立环节。</div>
+</div></div>
+</div></div>
+<div class="sec" id="s4"><div class="sh" onclick="tgSec(this)"><div class="sn">4</div><div class="st">步骤3：查有没有被处罚</div><div class="sa">▼</div></div><div class="sb">
+<p class="pb">要查什么：确认商品是否存在违规处罚，导致商品被不让你卖、搜索排名往后排或强制下架。即使商品显示「在售」，违规处罚也可能导致商品被排名往后排，大幅减少曝光。</p>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 3.1 自查操作路径</div><div class="dsc">
+<div class="tw"><table class="ts tbl-small"><tr><th>操作步骤</th><th>详细说明</th></tr><tr><td>Step 1：进入违规管理</td><td>在商家后台导航至「违规管理」或「处罚记录」页面 部分业务模式下在「消息中心」-「违规通知」中查看</td></tr><tr><td>Step 2：查询商品违规</td><td>输入商品ID（Goods ID / SKC ID / SKU ID）查询 也可通过店铺ID查询店铺下所有违规记录 建议按时间范围筛选（近30天/近90天）</td></tr><tr><td>Step 3：查看违规详情</td><td>查看违规类型、违规原因、处罚措施、处罚状态 查看是否可申诉及申诉截止时间 记录违规编号，便于后续跟踪</td></tr><tr><td>Step 4：检查处罚影响</td><td>确认处罚措施：强制下架/搜索排名往后排/限制上架/扣分等 确认处罚状态：已生效/已解除/申诉中 评估处罚对商品流量的影响程度</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 3.2 常见违规类型与处理方案</div><div class="dsc">
+<div class="tw"><table><tr><th>违规类型</th><th>处罚措施</th><th>常见原因（男装）</th><th>处理方案</th></tr><tr><td>侵权违规</td><td>下架+限制上架</td><td>使用知名品牌LOGO/图案/款式仿冒；商标侵权；图片盗用</td><td>确认侵权原因 → 删除侵权素材 → 更换原创设计/图片 → 重新提交审版</td></tr><tr><td>质量违规</td><td>下架</td><td>面料成分不符/做工缺陷/色牢度不达标/缩水变形严重</td><td>提升产品质量 → 提供质检报告 → 申请复检或申诉</td></tr><tr><td>描述不符</td><td>下架15天</td><td>实物与图片/描述不一致（如色差大/版型不符/面料与描述不符）</td><td>修正商品描述/图片/属性 → 确保与实物完全一致 → 提交修改审核</td></tr><tr><td>虚假宣传</td><td>下架15天/直接下架</td><td>夸大面料功能（如普通棉宣称为免烫/抗菌）虚标成分含量</td><td>修改宣传内容 → 确保宣传内容真实准确 → 提交修改审核</td></tr><tr><td>图片违规</td><td>驳回修改/下架</td><td>图片含牛皮癣/水印/不适当内容/低俗暗示</td><td>更换合规图片 → 确保图片符合平台规范 → 重新提交审版</td></tr><tr><td>Gcc</td><td>美国站禁售</td><td>皮衣/绒面非纯涤品 需要做gcc资质才能上美国</td><td>看看面料是不是填写准确 准确的做一下gcc资质</td></tr><tr><td>重复铺货</td><td>下架</td><td>同店铺上同款/不同店铺但已经被系统判定同经营者上同款</td><td>改款/下架同款</td></tr><tr><td>无违规记录</td><td>无处罚</td><td>商品无违规，继续下一步排查</td><td>进入步骤4排查库存</td></tr></tr></table></div>
+<div class="nb"><b>查有没有被处罚要点</b><br>1. 即使处罚已解除，之前的处罚记录可能仍影响搜索排名，建议多看几天。<br>2. 申诉有时效限制，收到处罚通知后请尽快处理，逾期可能不可申诉。<br>3. 男装品类重点关注：面料成分真实性、品牌侵权、尺码描述准确性。</div>
+<p class="pl">避坑指南链接：</p>
+<a class="lc" href="https://mp.weixin.qq.com/s/sS_2U1bhSOJ1xx4HuPspXw" target="_blank">✅ 实拍图保姆级教程</a>
+<a class="lc" href="https://mp.weixin.qq.com/s/Gm551T03h2ouq0ilfpSygg" target="_blank">✅ 资质文件合规秘诀</a>
+<a class="lc" href="https://mp.weixin.qq.com/s/wMiO3rju13mhDDhlrmhTDA" target="_blank">✅ 低价引流避坑指南</a>
+<a class="lc" href="https://mp.weixin.qq.com/s/UQ-sK0Uk-PKROr9_n16mSA" target="_blank">✅ 内容信息发布避坑指南</a>
+<a class="lc" href="https://mp.weixin.qq.com/s/kzo7HBSYHSvmBXfxT8yiIg" target="_blank">✅ 商品图片发布避坑指南</a>
+<a class="lc" href="https://mp.weixin.qq.com/s/wko6ZBcpme9sMbdEzLC3wg" target="_blank">✅ 描述不符避坑指南</a>
+<a class="lc" href="https://mp.weixin.qq.com/s/Tqm31aD1d7hz04ZPdYB_Jw" target="_blank">✅ 重复铺货避坑指南</a>
+</div></div>
+</div></div>
+<div class="sec" id="s5"><div class="sh" onclick="tgSec(this)"><div class="sn">5</div><div class="st">步骤4：库存维护</div><div class="sa">▼</div></div><div class="sb">
+<p class="pb">要查什么：看看你的货仓里还有没有货。</p>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 4.1 自查操作路径</div><div class="dsc">
+<div class="tw"><table class="ts tbl-small"><tr><th>操作步骤</th><th>详细说明</th></tr><tr><td>Step 1：进入库存管理</td><td>导航至「库存管理」或「库存中心」页面 确认进入全托管业务模式</td></tr><tr><td>Step 2：查询库存</td><td>输入商品ID / SKC ID / SKU ID查询库存 也可通过店铺ID批量查询 选择正确的仓组进行查询</td></tr><tr><td>Step 3：分析库存数据</td><td>查看各SKU的：可用库存、在途库存、总库存 可用库存 = 买家可下单购买的库存数量 在途库存 = 正在运输到仓的库存数量</td></tr><tr><td>Step 4：排查断货SKU</td><td>统计可用库存为0的SKU数量 对于断货SKU，确认是否有在途库存预计到货时间 对于长期断货SKU，评估是否需要下架该SKU避免影响商品整体权重</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 4.2 库存状态判断标准</div><div class="dsc">
+<div class="tw"><table><tr><th>库存状态</th><th>是不是卖不了</th><th>判断标准</th><th>处理方案</th></tr><tr><td>库存为0</td><td>是 - 完全卖不了</td><td>可用库存 = 0，无在途库存</td><td>紧急补货 → 安排发货入仓 → 到货后恢复售卖；预计到货时间超7天的建议暂时下架SKU</td></tr><tr><td>库存极少</td><td>部分卖不了</td><td>可用库存偏低（根据日均销量判断）</td><td>增加备货量 → 确保库存量</td></tr><tr><td>有在途库存</td><td>暂时卖不了</td><td>可用库存=0但有在途库存</td><td>观察备货单状态 有异常及时跟进 到仓质检以后观察质检是否准确 不准确及时申诉</td></tr><tr><td>库存为jit库存</td><td>否 - 正常</td><td>有无虚拟库存</td><td>确保虚拟库存充足 及时转备货</td></tr><tr><td>库存充足</td><td>否 - 正常</td><td>可用库存充足（满足较长时间销量）</td><td>进入步骤5排查商品图片与信息</td></tr></tr></table></div>
+<div class="nb"><b>男装备货建议</b><br>1. 男装换季提前备货：提前30-45天完成备货入仓，避免换季时节断货。<br>2. 爆款SKU安全库存：建议保持充足库存量，确保不断货。<br>3. 多SKU商品需逐个检查：不同颜色/尺码的SKU库存可能差异很大。<br>4. 不要只依赖系统推单，尤其是新品，有时候有动销但是依然达不到系统水位线，需要找买手下单！！！</div>
+</div></div>
+</div></div>
+<div class="sec" id="s6"><div class="sh" onclick="tgSec(this)"><div class="sn">6</div><div class="st">步骤5：查商品数据（图片、标题、转化等）</div><div class="sa">▼</div></div><div class="sb">
+<div class="pc"><div class="pct">商品数据</div><div class="pcd">卖家中心：https://agentseller-us.temu.com/main/flux-analysis<br>衡量指标：优秀主图glo点击率3.62% 优秀4%<br>确认商品主图、详情图、标题、属性、尺码表等信息质量是否达标。图片和信息质量直接影响商品的点击率和买的人比例，是男装品类无动销最常见的改进问题（能卖但卖不好）。</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 图片</div><div class="dsc">
+<p class="p">图片是决定买家点不点、买不买的最重要因素。一项一项查：<br>男装图片要求</p>
+<a class="lc" href="https://bdl.cdnfe.com/upload_bdl/nzyh/238f2f03-79cc-43ed-a64c-b942a2d75ae2.pdf" target="_blank">男装图片要求PDF</a>
+<a class="lc" href="https://quege686.github.io/bingran/picturetitle.html" target="_blank">图片+标题美化</a>
+<a class="lc" href="https://quege686.github.io/bingran/Latinmodel.html" target="_blank">拉美高转化图指南</a>
+<a class="lc" href="https://quege686.github.io/bingran/vision.html" target="_blank">视觉优化指南</a>
+<a class="lc" href="https://quege686.github.io/bingran/style.html" target="_blank">外套7月趋势+复色上款注意事项</a>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 5.2 商品信息检查</div><div class="dsc">
+<div class="tw"><table><tr><th>检查项</th><th>合格标准</th><th>不合格的影响</th><th>修改建议</th></tr><tr><td>标题</td><td>包含核心关键词：品类词+风格词+材质词+场景词；长度适中（建议30-60字符）；无堆砌</td><td>搜索曝光低，自然流量少</td><td>参考热搜词优化标题，确保核心关键词覆盖男装标题优化：https://quege686.github.io/bingran/2.html 美洲站点年度节日活动热搜词梳理：https://pangdalong-afk.github.io/sunbingran/meizhouresou-index.html</td></tr><tr><td>属性完整度</td><td>必填属性100%填写；选填属性填写率&gt;80%</td><td>商品信息评分低，影响搜索排名</td><td>逐一补全所有属性，特别是材质/版型/领型/袖长/季节</td></tr><tr><td>尺码表</td><td>包含肩宽/胸围/衣长/袖长等数据；提供身高体重参考；多尺码可选</td><td>退换货率高，买家不敢下单</td><td>完善尺码表数据，增加身高体重推荐尺码</td></tr><tr><td>商品描述</td><td>详细描述面料/工艺/版型特点/穿搭建议/洗护说明等卖点</td><td>卖点传达不充分，影响转化</td><td>把商品描述写详细，把最大的卖点和别人没有的好处写出来</td></tr><tr><td>信息一致性</td><td>标题/属性/描述/图片中信息一致（如面料成分各处一致）</td><td>信息矛盾可能导致违规处罚</td><td>挨个检查标题、图片、属性，确保说的都是一样的</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 标题</div><div class="dsc">
+<p class="p">图片+标题美化：https://quege686.github.io/bingran/picturetitle.html<br>男装标题优化：https://quege686.github.io/bingran/2.html<br>优质标题公式：品类词 + 风格词 + 材质词 + 场景词 + 卖点词</p>
+<div class="tw"><table class="ts tbl-small"><tr><th>关键词类型</th><th>男装品类参考词</th></tr><tr><td>品类词</td><td>T恤、衬衫、POLO衫、卫衣、夹克、外套、裤装、西装、马甲、针织衫等</td></tr><tr><td>风格词</td><td>休闲、商务、运动、复古、街头、极简、韩版、日系、美式等</td></tr><tr><td>材质词</td><td>纯棉、涤纶、亚麻、牛仔、羊毛、法兰绒、灯芯绒、速干面料等</td></tr><tr><td>场景词</td><td>日常休闲、办公通勤、约会、运动健身、旅行、度假、居家等</td></tr><tr><td>卖点词</td><td>透气、免烫、弹力、修身、宽松、抗皱、速干、保暖、轻薄等</td></tr></tr></table></div>
+</div></div>
+</div></div>
+<div class="sec" id="s7"><div class="sh" onclick="tgSec(this)"><div class="sn">7</div><div class="st">步骤6：查供货价有没有竞争力</div><div class="sa">▼</div></div><div class="sb">
+<div class="pc"><div class="pct">供货价</div><div class="pcd">要查什么：全托管模式下，商品售价由平台根据市场情况定价，商家主要通过供货价影响商品定价空间。排查重点是确认供货价是否有优化空间，以及商品前台售价在同类目中是否具有竞争力。若售价偏高，可通过降低供货价来间接影响前台定价。<br>Ps:这部分可以自己让ai判断 语句可参考 商品诊断-买手分析Prompt：https://quege686.github.io/bingran/Modification.html</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 6.1 自查操作路径</div><div class="dsc">
+<div class="tw"><table class="ts tbl-small"><tr><th>操作步骤</th><th>详细说明</th></tr><tr><td>Step 1：查看前台售价</td><td>在Temu买家端（APP或网站）搜索商品核心关键词 找到自己商品的前台展示售价 筛选同品类、同风格、同材质的竞品 记录前20名竞品的前台售价</td></tr><tr><td>Step 2：对比价格区间</td><td>计算竞品售价的平均值、中位数 确定该品类的主流价格区间 对比自身商品前台售价是否在主流价格区间内</td></tr><tr><td>Step 3：检查供货价</td><td>在商家后台查看商品的供货价 看看自己供货的成本还能不能降 对比同类面料/工艺的市场成本 若前台售价偏高，可考虑降低供货价为平台留出更多定价空间</td></tr><tr><td>Step 4：检查活动参与</td><td>确认商品是否被平台选入促销活动，活动价是否更有竞争力</td></tr></tr></table></div>
+<div class="nb"><b>全托管模式下价格怎么定</b><br>1. 全托管模式下，商品前台售价由平台根据市场情况自动定价，商家不直接设置售价。<br>2. 商家通过供货价间接影响定价空间：降低供货价可为平台留出更多降价余地。<br>3. 积极多参加平台活动（秒杀、折扣等），活动的时候平台会把价格调低，更好卖。</div>
+</div></div>
+</div></div>
+<div class="sec" id="s8"><div class="sh" onclick="tgSec(this)"><div class="sn">8</div><div class="st">步骤7：查活动、广告、流量</div><div class="sa">▼</div></div><div class="sb">
+<div class="pc"><div class="pct">活动、广告、商业化</div><div class="pcd">要查什么：确认商品是否有足够的曝光和流量。男装品类竞争激烈，若商品未参与任何活动且自然搜索排名靠后，很可能是流量不足导致无动销。<br>Temu广告账号快速搭建流程分享：https://seller.kuajingmaihuo.com/main/course/detail?courseId=2503090000022</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 7.1 自查操作路径</div><div class="dsc">
+<div class="tw"><table class="ts tbl-small"><tr><th>操作步骤</th><th>详细说明</th></tr><tr><td>Step 1：检查活动参与</td><td>在商家后台查看「活动管理」-「我的活动」 看看商品现在有没有在参加平台的活动 查看历史活动参与记录及效果数据</td></tr><tr><td>Step 2：检查搜索排名</td><td>在Temu买家端搜索商品核心关键词 翻页查找自己的商品排在第几页/第几位 记录多个关键词的搜索排名情况</td></tr><tr><td>Step 3：检查商品收录</td><td>搜索商品完整标题，确认是否能搜到 搜索商品ID，确认商品是否被平台收录 若搜不到，说明商品未被收录或被排名往后排</td></tr><tr><td>Step 4：检查评价情况</td><td>查看商品是否有买家评价 统计评价数量、好评率、差评内容 无评价的商品买的人比例通常低30%-50%</td></tr><tr><td>Step 5：分析流量数据</td><td>在商家后台查看商品流量数据（曝光量、点击量、买的人比例） 对比同类目均值，判断流量是否正常 若曝光量极低，说明商品缺乏流量来源</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 7.2 流量问题判断与处理方案</div><div class="dsc">
+<div class="tw"><table><tr><th>流量问题</th><th>判断标准</th><th>原因分析</th><th>处理方案</th></tr><tr><td>未参与活动</td><td>当前无任何活动在进行中</td><td>未被平台选入活动 / 商品不符合活动门槛 / 未提交活动报名</td><td>多看看有没有活动能报名 → 把商品做好让平台愿意选你 → 找对接人帮你推荐</td></tr><tr><td>搜索排名靠后</td><td>核心关键词搜索排在第5页以后</td><td>销量低/评价少/商品信息评分低/有违规排名往后排</td><td>优化标题关键词 → 提升图片质量 → 积累初期销量和评价 → 参与活动提升排名</td></tr><tr><td>商品未被收录</td><td>搜索完整标题无法找到商品</td><td>商品信息不完整 / 商品信息评分过低 / 违规处罚</td><td>把商品信息补全 → 信息填好填全</td></tr><tr><td>无评价</td><td>商品评价数 = 0</td><td>商品无销量基础 / 上架时间短</td><td>靠活动先把第一单卖出去 → 攒点好评 → 把东西做好 或者评价有礼功能</td></tr><tr><td>有差评</td><td>好评率 &lt; 90%</td><td>商品质量/尺码/描述存在问题</td><td>分析差评原因 → 整改</td></tr><tr><td>曝光量极低</td><td>日均曝光量极低</td><td>未被收录 / 权重极低 / 未参与活动</td><td>先看看商品有没有被收录 → 参加活动搞点流量 → 把信息填好让排名靠前</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 7.3 商家能自己报名的活动、广告和增长工具</div><div class="dsc">
+<p class="p">很多商家以为全托管模式下啥都只能等平台安排，其实不然。商家后台有不少活动、广告和增长工具是可以自己报名和设置的。下面把每一类能自己操作的工具详细列出来，照着做就行。</p>
+<p class="pl">A. 活动报名（商家自己能报的）</p>
+<p class="ps">操作位置：商家后台 →「活动管理」或「营销中心」→「活动报名」</p>
+<div class="tw"><table><tr><th>活动类型</th><th>是啥</th><th>怎么报+有啥要求</th><th>对卖货有啥用</th></tr><tr><td>秒杀活动</td><td>限时限量打折，价格很低</td><td>在活动报名入口找到秒杀活动 → 选商品 → 填活动价 要求：供货价要有优势，一般要低于日常价 要求：库存要够，不能活动中途断货 注意：秒杀价由平台审核，不是你填多少就多少</td><td>最快的方法搞出第一单 秒杀期间流量很大，曝光猛增 卖出去后能攒评价，后面自然搜索也能涨 适合：一直卖不动的货，用秒杀破零</td></tr><tr><td>折扣活动</td><td>打折促销，力度没秒杀大</td><td>在活动管理 → 折扣活动 → 选商品报名 要求：商品状态正常在售 要求：供货价合理，平台会根据供货价定折扣价 可以同时报多个商品一起做折扣</td><td>比秒杀温和，适合想冲量但又不想亏太多的货 折扣期间搜索排名会提升 适合：有少量动销但想冲量的商品</td></tr><tr><td>节日大促</td><td>平台大型促销活动（如黑五、圣诞等）</td><td>大促前1-2周后台会开放报名入口 在活动管理 → 大促报名 → 批量选品报名 要求：商品状态正常、库存充足 要求：供货价有竞争力，平台会筛选 注意：大促报名有截止时间，别错过</td><td>大促期间全平台流量最高 是清库存和冲销量的最好时机 适合：所有正常在售的货都要尽量报</td></tr><tr><td>日常促销</td><td>平时的常规促销位</td><td>在营销中心 → 日常促销 → 报名参加 要求：商品在售且有库存 门槛比秒杀和大促低，容易过</td><td>虽然没有大促流量大，但总比啥都不报强 适合：没赶上秒杀/大促的货，先报日常促销</td></tr></tr></table></div>
+<p class="pl">活动报名要注意的</p>
+<ol class="ol"><li>活动报名不一定都能通过，平台会筛选。</li><li>同一个商品可以同时报不同类型的活动，但同一时间段只能参加一个活动（具体看平台规则）。</li><li>报了活动一定要保证库存够！</li><li>活动结束后要马上看效果数据，卖了多少、转化怎么样，为下次报名积累经验。</li><li>活动报名入口不是一直开着的，要经常去后台看看有没有新活动可以报。</li></ol>
+<p class="pl">B. 广告投放（商家自己能开的）</p>
+<p class="pb">1️⃣ 登录授权</p>
+<p class="ps">访问 ads.temu.com 或通过商家后台左侧"商品推广"进入，主账号完成协议签署</p>
+<p class="pb">更多商家后台广告课程</p>
+<a class="lc" href="https://agentseller.temu.com/main/course/detail?courseId=2503090000022" target="_blank">（1）Temu广告账号快速搭建流程分享</a>
+<a class="lc" href="https://agentseller.temu.com/main/course/detail?courseId=2503130000024" target="_blank">（2）Temu广告投放起量方法分享</a>
+<div class="nb"><b>广告投放要注意的</b><br>1. 开广告之前先把图片和信息弄好！广告只是把人引来，图片丑、信息差的话，点进来也不买，白花钱。<br>2. 先从小预算开始试，比如每天设几十块钱的预算，看几天效果再决定要不要加预算。<br>3. 关注广告数据：曝光量、点击率、花了多少钱、卖了多少单。如果花了钱没出单，马上停掉找原因。</div>
+<p class="pl">C. 增长工具（商家自己能设置的）</p>
+<div class="tw"><table><tr><th>工具类型</th><th>是啥</th><th>怎么设</th><th>对卖货有啥用</th></tr><tr><td>多件优惠</td><td>买多件更便宜（如买2件9折）</td><td>在营销中心 → 多件优惠 → 设置规则 如：买2件5%off，买3件10%off 可以选择哪些SKU参加</td><td>提高客单价，一个买家买更多件 男装特别适合：买家可能同款不同色各买一件 适合：有多个SKU的商品（不同颜色/尺码）</td></tr><tr><td>满减活动</td><td>买满多少减多少</td><td>在营销中心 → 满减活动 → 设置 如：满$20减$2，满$30减$5 可以设置店铺级别或商品级别</td><td>刺激买家凑单，多买东西 适合：客单价偏低想拉高的商品 注意：全托管模式下满减力度由平台决定具体展示</td></tr><tr><td>评价有礼</td><td>买家写评价可以拿奖励</td><td>在营销中心 → 评价有礼 → 开启 买家写好评后可以获得优惠券等奖励</td><td>解决「没有评价」的问题 评价多了搜索排名也会提升 适合：新品评价少、想快速积累评价的商品</td></tr></tr></table></div>
+<div class="nb">工具是辅助，核心还是商品本身。图片好、价格有竞争力、质量OK，再加上这些工具才有效。</div>
+<p class="pl">D. 活动报名自查清单</p>
+<p class="ps">每次报活动之前，照着这个清单过一遍，确认都OK了再报：</p>
+<div class="tw"><table class="ts tbl-small"><tr><th>序号</th><th>检查项</th><th>OK的标准</th></tr><tr><td>1</td><td>商品状态</td><td>在售正常，没有违规处罚、没有下架</td></tr><tr><td>2</td><td>库存</td><td>库存充足，能撑过整个活动周期</td></tr><tr><td>3</td><td>供货价</td><td>有竞争力，能支撑活动价</td></tr><tr><td>4</td><td>商品图片</td><td>主图清晰、有上身图、无水印无牛皮癣</td></tr><tr><td>5</td><td>商品信息</td><td>标题、属性、尺码表都填完整了</td></tr><tr><td>6</td><td>评价情况</td><td>最好有3条以上评价（新品活动除外）</td></tr><tr><td>7</td><td>活动时间</td><td>确认活动时间不会和其他活动冲突</td></tr><tr><td>8</td><td>报名截止</td><td>在报名截止时间之前提交</td></tr></tr></table></div>
+</div></div>
+</div></div>
+<div class="sec" id="s9"><div class="sh" onclick="tgSec(this)"><div class="sn">9</div><div class="st">步骤8：查质量与售后</div><div class="sa">▼</div></div><div class="sb">
+<div class="pc"><div class="pct">质量&售后</div><div class="pcd">要查什么：看看评价好不好、退货多不多。全托管模式下，客服和退换货主要是平台在搞，但你要盯着退货原因和评价内容，东西不好就赶紧改。差评多、退货多的货，平台会把排名往后排，越来越没人看到，最后就卖不动了。</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 查什么与标准</div><div class="dsc">
+<div class="tw"><table><tr><th>检查项</th><th>正常标准</th><th>异常影响</th><th>处理方案</th></tr><tr><td>好评率</td><td>≥ 94%（不同品类差距比较大）</td><td>好评率过低会显著影响搜索排名和买的人比例</td><td>分析差评原因 → 改进商品质量 → 完善尺码表减少尺码退货</td></tr><tr><td>售后率</td><td>&lt; 6%</td><td>退货率过高会被平台排名往后排，严重时下架</td><td>分析退货原因（尺码/质量/描述不符）→ 针对性改进商品</td></tr><tr><td>差评内容</td><td>无集中差评点</td><td>集中差评（如多人反馈尺码偏小）会持续影响转化</td><td>针对集中差评问题进行修改 → 更新商品信息/尺码表</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 男装品类常见退货原因及改进建议</div><div class="dsc">
+<div class="tw"><table class="ts tbl-small"><tr><th>退货原因</th><th>具体表现</th><th>改进建议</th></tr><tr><td>尺码不合</td><td>尺码偏大/偏小，与买家预期不符</td><td>完善尺码表 → 增加身高体重参考 → 标注版型偏大/偏小 改款优化</td></tr><tr><td>色差</td><td>实物颜色与图片差异较大</td><td>优化图片色彩还原 → 在描述中注明色差可能 → 提供多角度实物图</td></tr><tr><td>面料问题</td><td>面料手感/厚度/透气性与预期不符</td><td>增加面料细节图和描述 → 如实标注面料参数 → 增加面料特写图</td></tr><tr><td>版型不符</td><td>实物版型与图片展示差异大</td><td>确保上身图与实物版型一致 → 增加多角度上身图</td></tr></tr></table></div>
+</div></div>
+</div></div>
+<div class="sec" id="s10"><div class="sh" onclick="tgSec(this)"><div class="sn">10</div><div class="st">步骤9：查品牌化做得好不好</div><div class="sa">▼</div></div><div class="sb">
+<div class="pc"><div class="pct">品牌化</div><div class="pcd">在TEMU男装品类，平台对有品牌资质、品牌辨识度高的商品会给予更多曝光支持。<br>品牌没有那么难！！其实入门很轻松，买一个商标+temu站内销量打标就可以！国内品牌大部分都可以用<br><b>优势：</b></div></div>
+<ol class="ol"><li>品牌流量加成</li><li>高价限流不和白牌比</li></ol>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 1 商标上传</div><div class="dsc">
+<p class="p">品牌资质是品牌化的基础。没有齐全的品牌资质，商品在平台上会被当作白牌处理，无法享受品牌相关的流量扶持和活动资源。<br>在temu后台-商标管理-上传自己的商标</p>
+<div class="tw"><table class="ts tbl-small"><tr><th>步骤</th><th>具体内容</th></tr><tr><td>#01 卖家申请商标授权</td><td>位置：卖家中心-GLOBAL-店铺管理-商标管理 链接：https://agentseller.temu.com/govern-platform/trademark-manage 内容：卖家按主体维度申请商标授权</td></tr><tr><td>#02 治理审核商标授权</td><td>治理审批通过后，将作为该商家主体下所有店铺发品时可选的品牌名；注意在品牌名下拉选项中展示的格式是 商标名称 商标序列号（站点）</td></tr><tr><td>#03 前端展示</td><td>1.买手确认品牌/商标已登记 2. 用temu：给买手发5张图片（实物包装袋+吊牌+洗水唛 有自己的商标logo 实拍）+店铺id+商标名称+店铺前段连接 找不到给我店铺名~ 用其他平台流水申请：1.视频形式拍摄 流水{提现页面}、品质分页面、退货率页面 要是有google trade 可以提供截图~ 3. 理论上最迟第三天会在C端展示黑标或蓝标</td></tr><tr><td>#04 申请品牌调性分比价规则 高分品牌（5~6）：只比自己（品牌名称一致） 中档品牌（3~4）：混比中档及高分品牌 低分品牌（1~2）：全网混比</td><td>1.买手确认品牌/商标已登记 2. 用temu流水申请：品牌分入围必须提供商品实物带品牌logo的凭证+带logo发货满3个月 给买手发5张图片（实物包装袋+吊牌+洗水唛 有自己的商标logo 实拍）+店铺id+商标名称+店铺前段连接 找不到给我店铺名~ 用其他平台流水申请：1.视频形式拍摄 流水{提现页面}、品质分页面、退货率页面 要是有google trade 可以提供截图~ 3. 理论上最迟第三天会有调性分 不展示商家页面，可以私聊我询问</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 2 品牌建设</div><div class="dsc">
+<p class="pb">站内品牌加权 要求</p>
+<ol class="ol"><li>有美国/ 欧洲申请商标版权 亚马逊商标可以</li><li>temu绑定商标版权</li><li>temu月流水稳定月gmv大于五万 或者亚马逊大于30w 或者其他平台大于15w</li><li>做货时候 实物包装袋+吊牌+洗水唛 有自己的商标logo</li></ol>
+<p class="p">品牌露出是指品牌元素在商品图片、标题、详情页等位置的可视化呈现。品牌辨识度高的商品，买家一眼就能记住，复购率也更高。</p>
+<div class="tw"><table><tr><th>检查项</th><th>合格标准</th><th>不合格的影响</th><th>处理方案</th></tr><tr><td>品牌授权链路</td><td>品牌授权书完整，授权链路清晰（品牌方→商家），授权范围覆盖销售站点</td><td>无法通过品牌资质审核，商品被当作白牌</td><td>补全品牌授权链路，确保授权书在有效期内，覆盖所有目标站点</td></tr><tr><td>资质文件有效期</td><td>商标注册证/授权书在有效期内，未过期</td><td>资质过期后品牌标识会被清除</td><td>定期检查资质到期时间，提前30天更新续期</td></tr><tr><td>商标类目覆盖</td><td>商标注册类别覆盖男装品类（第25类）</td><td>商标类目不匹配无法通过品牌审核</td><td>确认商标注册类别覆盖目标品类，必要时补充注册</td></tr><tr><td>平台品牌备案</td><td>已在TEMU平台完成品牌备案，品牌信息与资质一致</td><td>未备案的品牌标识不被平台认可</td><td>在商家后台提交品牌备案，上传资质文件，等待审核通过</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 3 白牌商品 vs 品牌化商品对比</div><div class="dsc">
+<div class="tw"><table><tr><th>对比项</th><th>白牌商品</th><th>品牌化商品</th></tr><tr><td>流量支持</td><td>自然流量为主，无品牌流量倾斜</td><td>品牌搜索流量 + 自然流量 + 品牌活动资源</td></tr><tr><td>限流</td><td>站内混比</td><td>有调性分 高分品牌（5~6）：只比自己 中档品牌（3~4）：混比中档及高分品牌</td></tr><tr><td>买家信任度</td><td>低</td><td>高，前段会带品牌标识增加信任感</td></tr><tr><td>隐形好处</td><td>白牌无</td><td>1.有独立生产能力的可以衣服上带自己的品牌logo，防抄款，防限流 2.可以关联其他平台，有对应资源 3.有利于合规化发展，是服装行业做大的一步很重要的基础</td></tr><tr><td>活动资源</td><td>只能报通用活动</td><td>有品牌专属活动资源位</td></tr><tr><td>核价</td><td>常规核价</td><td>品牌可申请品牌溢价</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 4 品牌资产积累</div><div class="dsc">
+<p class="p">要是之前就有做品牌，除了在temu平台做，品牌还可以怎么发展？<br>主要可考虑建立独立站，刷一下google trade浏览，在站内外以及多平台打造自己的品牌。<br>品牌资产是品牌化长期价值的体现。品牌搜索词流量、评价中的品牌提及、复购率等都是品牌资产积累的指标。品牌资产越多，商品在平台上的竞争壁垒越高。</p>
+<div class="tw"><table class="ts tbl-small"><tr><th>检查项</th><th>怎么查</th><th>建议</th></tr><tr><td>品牌搜索词流量</td><td>在买家端搜索品牌名称，看是否有搜索结果和流量</td><td>通过站外引流（社媒、KOL）引导买家搜索品牌名，积累品牌搜索热度</td></tr><tr><td>评价中品牌提及</td><td>查看商品评价，统计买家是否在评价中提到品牌名</td><td>通过评价有礼引导买家写详细评价，在包装中放品牌卡片引导提及品牌</td></tr><tr><td>粉丝关注</td><td>查看品牌粉丝数和关注增长趋势</td><td>通过品质和口碑积累粉丝，参与平台品牌活动增加曝光</td></tr></tr></table></div>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 5 品牌巧用</div><div class="dsc">
+<ol class="ol"><li>做的款可以加品牌的皮标/烫画，可以防止抄款</li><li>多店铺运营可以做品牌绑定，同款不会比价</li><li>品牌展示的流量更好</li></ol>
+</div></div>
+<div class="ds"><div class="dsh" onclick="tgDeep(this)"><span class="dsi">▶</span> 6 品牌化排查要点</div><div class="dsc">
+<ol class="ol"><li>品牌化是一个长期过程，短期内可能看不到明显效果，但长期来看是提升竞争壁垒的关键。</li><li>如果商家暂时没有品牌，品牌授权也可以考虑</li><li>品牌化不等于高价化，品牌溢价的建立需要商品品质、视觉、服务全方位支撑。</li><li>男装品类的品牌差异化建议从面料和版型入手，这是买家最容易感知的差异点。</li></ol>
+</div></div>
+</div></div>
+<div class="sec" id="s11"><div class="sh" onclick="tgSec(this)"><div class="sn">11</div><div class="st">排查记录表</div><div class="sa">▼</div></div><div class="sb">
+<p class="p">上面8步都查完后，请填写以下记录表，梳理排查结果并制定修改计划：</p>
+<a class="lc" href="https://quege686.github.io/bingran/checkit.html" target="_blank">📋 记录表可以点击版本：每日三省吾身</a>
+<div class="tw"><table class="ts tbl-small"><tr><th>序号</th><th>查什么</th><th>是否正常</th><th>问题描述</th><th>修改计划与目标完成时间</th></tr><tr><td>1</td><td>商品状态</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr><tr><td>2</td><td>SKU在架与加站</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr><tr><td>3</td><td>查有没有被处罚</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr><tr><td>4</td><td>查有没有库存</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr><tr><td>5</td><td>商品图片与信息</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr><tr><td>6</td><td>供货价贵不贵、价格有没有竞争力</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr><tr><td>7</td><td>活动与流量</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr><tr><td>8</td><td>评价与售后</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr><tr><td>9</td><td>品牌化做得好不好</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr></tr></table></div>
+</div></div>
+<div class="sec" id="s12"><div class="sh" onclick="tgSec(this)"><div class="sn">12</div><div class="st">排查先后顺序（优先级）</div><div class="sa">▼</div></div><div class="sb">
+<p class="p">根据排查结果，按以下优先级进行修改。硬伤问题（东西卖不了）必须优先解决，否则后续优化无法产生效果：</p>
+<div class="tw"><table><tr><th>优先级</th><th>时间要求</th><th>修改事项</th><th>说明</th></tr><tr><td>&lt;span class="bd bp0"&gt;P0&lt;/span&gt;</td><td>立即处理</td><td>商品状态异常 违规处罚 商品未收录</td><td>商品不在售 / 被冻结 / 有未处理违规处罚 / 未被平台收录 → 直接导致商品无法售卖或无法被搜到，必须立即处理</td></tr><tr><td>&lt;span class="bd bp1"&gt;P1&lt;/span&gt;</td><td>24小时内</td><td>SKU未加站 库存断货</td><td>SKU未加站或库存为0 → 商品即使状态正常也无法产生订单，需在24小时内处理</td></tr><tr><td>&lt;span class="bd bp2"&gt;P2&lt;/span&gt;</td><td>3天内</td><td>图片优化 信息补全 标题优化</td><td>图片质量差 / 信息不完整 / 标题关键词缺失 → 影响点击率和买的人比例，需尽快优化</td></tr><tr><td>&lt;span class="bd bp3"&gt;P3&lt;/span&gt;</td><td>1周内</td><td>供货价调整 多参加平台活动 评价积累 品牌备案与资质补全</td><td>供货价偏高 / 未被选入活动 / 评价少 → 影响销量增长但东西还能卖，可以慢慢改 品牌资质不全会影响品牌流量扶持和活动资源 → 尽快完成品牌备案和资质补全</td></tr><tr><td>&lt;span class="bd bp4"&gt;P4&lt;/span&gt;</td><td>持续进行</td><td>质量改进 差评处理 退货率降低 品牌化建设与差异化</td><td>商品质量/差评/退货率等 → 长期影响店铺权重和商品转化，需持续优化 品牌化是长期竞争力 → 持续推进品牌露出、差异化和资产积累</td></tr></tr></table></div>
+</div></div>
+<div class="sec" id="s13"><div class="sh" onclick="tgSec(this)"><div class="sn">13</div><div class="st">常见Q&A</div><div class="sa">▼</div></div><div class="sb">
+<div class="qa"><div class="qq" onclick="tgQA(this)"><span class="qqi">Q</span><span>Q1：商品状态显示「在售」，SKU也在架，为什么还是没有销量？</span></div><div class="qaa">A：状态正常说明商品可以售卖，但无销量通常是因为：1) 商品图片质量差导致点击率低；2) 价格偏高缺乏竞争力；3) 未参与平台活动导致曝光不足；4) 商品未被搜索收录或排名靠后。请重点排查步骤5-7。</div></div>
+<div class="qa"><div class="qq" onclick="tgQA(this)"><span class="qqi">Q</span><span>Q2：商品之前有动销，突然就没有了，是什么原因？</span></div><div class="qaa">A：突然无动销常见原因：1) 库存断货（最常见）；2) 新增违规处罚导致排名往后排或下架；3) SKU被移出站点；4) 竞品大量低价涌入导致失去竞争力；建议优先排查步骤2-4。</div></div>
+<div class="qa"><div class="qq" onclick="tgQA(this)"><span class="qqi">Q</span><span>Q3：男装新品上架后多少天有动销算正常？</span></div><div class="qaa">A：通常新品上架后短时间内产生首单属于正常范围。若超过14天仍无动销，建议按这份指南查。若较长时间仍无动销，需重点排查图片质量和供货价竞争力。</div></div>
+<div class="qa"><div class="qq" onclick="tgQA(this)"><span class="qqi">Q</span><span>Q4：商品图片已经很好了，还需要优化什么？</span></div><div class="qaa">A：图片好但仍无动销，需排查：1) 标题关键词是否覆盖热搜词；2) 供货价是否有优化空间（全托管售价由平台定，降低供货价可间接影响前台售价）；3)站内是否同款较多
+图片自己觉得好不一定消费者认可，可以再用商品诊断去ai辅助看看有没有可以优化的空间。多个ai工具一起鉴别：https://quege686.github.io/bingran/Modification.html</div></div>
+<div class="qa"><div class="qq" onclick="tgQA(this)"><span class="qqi">Q</span><span>Q5：参与活动后还是没动销怎么办？</span></div><div class="qaa">A：活动期间无动销需排查：1) 活动价是否仍然偏高，可考虑降低供货价；2) 秒杀流量比较大，可以考虑换秒杀+广告双开 前期容易起量3) 主图是不是表现一般4) 活动期间是否有竞品以更低价竞争。</div></div>
+<div class="qa"><div class="qq" onclick="tgQA(this)"><span class="qqi">Q</span><span>Q6：多个SKU中只有部分有动销，怎么办？</span></div><div class="qaa">1) 看看好卖的SKU是什么颜色什么尺码，把不好卖的SKU信息也弄好；2) 看看是不是正常展示 有没有部分sku下架情况
+本身站内的爆款搭配是黑白灰销量高，亮色图在欧美点击好，前期可以做黑白灰+一个亮色 。如果拿不准啥颜色好卖 参考外套7月趋势+复色上款注意事项：https://quege686.github.io/bingran/style.html</div></div>
+<div class="qa"><div class="qq" onclick="tgQA(this)"><span class="qqi">Q</span><span>Q7：修改后多久能看到效果？</span></div><div class="qaa">A：不同修改类型的效果周期不同：库存补货 → 到货后恢复售卖；违规处理 → 申诉通过后恢复（一般找买手48h之内解罚 没解开继续dd对接人）；图片优化 → 数天到一周见效；供货价调整 → 平台调整前台售价后见效；活动参与 → 活动开始即见效；标题优化 → 一到两周见效。建议多盯几天看有没有效果。</div></div>
+<div class="qa"><div class="qq" onclick="tgQA(this)"><span class="qqi">Q</span><span>Q8：如果排查完所有步骤还是找不到原因怎么办？</span></div><div class="qaa">A：若所有维度排查均正常但仍无动销，建议：1)找对接人看店铺问题；2) 对比同类目动销商品的特征差异；3) 考虑商品是否存在市场需求不足的问题；4) 找对接人看店铺问题；5) 找对接人看店铺问题</div></div>
+<div class="qa"><div class="qq" onclick="tgQA(this)"><span class="qqi">Q</span><span>Q9：白牌商品要不要做品牌化？品牌化对销量有什么实际帮助？</span></div><div class="qaa">A：白牌商品在TEMU平台上的竞争压力越来越大，品牌化是长期趋势。品牌化对销量的实际帮助主要体现在：1) 品牌商品可以获得品牌搜索流量，这是白牌没有的额外流量来源；2) 品牌商品参与平台品牌专属活动，有更多曝光资源位；3) 品牌溢价空间让商品不一定非要拼最低价，利润更健康；4) 品牌复购率高于白牌，长期销量更稳定。如果暂时没有自有品牌，可以先从品牌授权合作开始，用较低成本积累品牌运营经验。建议先完成品牌资质备案，再逐步推进品牌露出和差异化，这是一个循序渐进的过程。</div></div>
+</div></div>
+<div class="sec" id="s14"><div class="sh" onclick="tgSec(this)"><div class="sn">14</div><div class="st">注意事项</div><div class="sa">▼</div></div><div class="sb">
+<ul class="ul">
+<li>这份指南适用于男装品类，其他品类也可以参考，但要根据自己卖的东西调整。</li>
+<li>查的时候建议一次多查几个多个商品ID，按店铺维度批量排查可大幅提升效率。</li>
+<li>若商品状态正常、SKU在架、无违规、有库存，但货还是卖不动，重点查第5-7步（图片、供货价、活动）。</li>
+<li>修改后建议持续观察一段时间，使用第六章的跟踪表记录数据变化，评估修改效果。</li>
+<li>若修改后仍无改善，建议从头再查一遍，或联系对接人寻求支持。</li>
+<li>对于平台政策变动或规则调整，请以平台最新通知为准，这份指南只是参考，具体以平台最新规则为准。</li>
+<li>男装品类有明显的季节性特征，换季时需提前30-45天完成备货和上架，避免错过销售窗口。</li>
+<li>建议每个月至少查一次店铺里哪些货卖不动，及时发现并处理无动销商品。</li>
+</ul>
+<p class="ps" style="margin-top:10px">- 品牌化是男装品类长期竞争力的关键，建议尽早完成品牌资质备案，逐步推进品牌露出和差异化。</p>
+<p class="ps">— 这份指南是给商家自己查问题用的，有不清楚的找对接人 —</p>
+</div></div>
+<hr class="ftd">
+<div class="ft">Temu男装商品无动销自查SOP · 商家端操作指南<br>全托管 · 仅供参考，具体以平台最新规则为准</div>
 </div>
-
-<!-- 右侧内容 -->
-<div class="content">
-
-<!-- ===== 总览 ===== -->
-<div class="step-detail active" id="overview">
-  <div class="overview">
-    <h2>TEMU男装商品无动销自查SOP</h2>
-    <h2>外套对接冰燃：13511744912</h2>
-    <p>帮助男装商家按标准化流程逐项排查无动销原因，快速定位问题并采取纠正措施。<br>前4步为「硬伤问题（东西卖不了）」，后5步为「改进问题（能卖但卖不好）」。</p>
-    <div class="overview-cards">
-      <div class="overview-card">
-        <div class="icon">🚫</div>
-        <h3>硬伤问题（步骤1-4）</h3>
-        <p>商品状态异常、SKU未加站、违规处罚、库存断货——直接导致商品无法售卖</p>
-      </div>
-      <div class="overview-card">
-        <div class="icon">📈</div>
-        <h3>改进问题（步骤5-9）</h3>
-        <p>图片信息、供货价、活动流量、评价退货、品牌化——影响销量但商品仍可售卖</p>
-      </div>
-      <div class="overview-card">
-        <div class="icon">⚡</div>
-        <h3>排查原则</h3>
-        <p>先查硬伤再查改进 · 全SKU覆盖 · 全站点覆盖 · 记录每项结果</p>
-      </div>
-      <div class="overview-card">
-        <div class="icon">🕐</div>
-        <h3>何时使用</h3>
-        <p>上架超7天无销量 · 日均销量明显偏低 · 突然连续7天无销量 · 活动期间仍无销量</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== 步骤1 ===== -->
-<div class="step-detail" id="step1">
-  <div class="step-header">
-    <div class="step-num">1</div>
-    <h2>查商品状态对不对</h2>
-    <span class="step-tag step-tag-hard">硬伤问题</span>
-  </div>
-  <div class="step-desc">
-    <strong>要查什么：</strong>看看商品是否处于正常「在售」状态。状态不对，买家根本看不到你的东西。
-  </div>
-  <div class="tip-box info">
-    <strong>操作路径：</strong>登录商家后台 → 「商品管理」→「商品生命周期」→ 输入商品ID搜索 → 查看生命周期状态与待办信息
-  </div>
-  <div class="checklist">
-    <div class="checklist-title">状态判断标准与处理方案</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>生命周期状态</th><th>能不能卖</th><th>可能原因</th><th>处理方案</th></tr>
-        <tr><td>在售</td><td>✅ 正常</td><td>状态正常，继续下一步排查</td><td>进入步骤2排查SKU状态</td></tr>
-        <tr><td>违规待整改</td><td>❌ 违规站点卖不了</td><td>存在违规需整改</td><td>能申诉自行提交，不确定联系冰燃处理</td></tr>
-        <tr><td>流量待提升</td><td>⚠️ 部分站点屏蔽</td><td>站内有同款且低价</td><td>跟价（降供/报活动）或申诉同款识别有误</td></tr>
-        <tr><td>已下架</td><td>❌ 卖不了</td><td>商家主动下架 / 平台强制下架</td><td>确认下架原因 → 修正问题 → 重新申请上架</td></tr>
-        <tr><td>草稿/未提交</td><td>❌ 卖不了</td><td>商品信息未填写完整或未提交审核</td><td>完善商品信息 → 提交审版</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">男装商品常见治理驳回原因</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>驳回类型</th><th>具体表现</th><th>修改方案</th></tr>
-        <tr><td>图片问题</td><td>主图有牛皮癣/水印/文字遮挡；图片模糊；比例不符</td><td>重新拍摄/修图，确保白底或场景图清晰无遮挡</td></tr>
-        <tr><td>属性缺失</td><td>材质/版型/领型/袖长/适用季节等关键属性未填写</td><td>该填的都填上，填得越全越好</td></tr>
-        <tr><td>资质问题</td><td>缺少品牌授权/质检报告/成分检测报告</td><td>准备并上传相关资质文件，确保授权链路完整</td></tr>
-        <tr><td>尺码问题</td><td>未提供尺码表/尺码表不完整/尺码数据有误</td><td>提供完整尺码表（含肩宽/胸围/衣长/袖长），建议增加身高体重参考</td></tr>
-        <tr><td>描述不符</td><td>商品描述与图片/属性不一致外套对接冰燃：13511744912（如描述纯棉但属性写聚酯纤维）</td><td>标题、图片、属性里写的内容要对得上</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="tip-box">
-    <strong>排查要点：</strong>① 即使处罚已解除，之前的记录可能仍影响搜索排名，建议多看几天。② 申诉有时效限制，收到通知后请尽快处理。③ 男装重点关注：面料成分真实性、品牌侵权、尺码描述准确性。
-  </div>
-</div>
-
-<!-- ===== 步骤2 ===== -->
-<div class="step-detail" id="step2">
-  <div class="step-header">
-    <div class="step-num">2</div>
-    <h2>查SKU有没有上架、有没有加到站点</h2>
-    <span class="step-tag step-tag-hard">硬伤问题</span>
-  </div>
-  <div class="step-desc">
-    <strong>要查什么：</strong>看看每个SKU（不同颜色/尺码）是不是都加到了要卖的站点、是不是都在架能卖。有时商品整体在售，但某个颜色或尺码没加站或下架了，那个SKU就卖不了。
-  </div>
-  <div class="tip-box info">
-    <strong>操作路径：</strong>「商品生命周期」→ 点击目标商品进入详情页 → 找到「SKU信息」栏目 → 查看每个SKU的在架状态与已加入站点
-  </div>
-  <div class="checklist">
-    <div class="checklist-title">SKU状态判断标准与处理方案</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>SKU状态</th><th>能不能卖</th><th>可能原因</th><th>处理方案</th></tr>
-        <tr><td>已加站 + 在架</td><td>✅ 正常</td><td>SKU状态正常</td><td>进入步骤3排查违规处罚</td></tr>
-        <tr><td>未加站</td><td>❌ 卖不了</td><td>未提交加站 / 审核未通过 / 被移除</td><td>提交加站申请，选择正确站点；审核未通过则查看原因修正后重新提交</td></tr>
-        <tr><td>已加站但不在架</td><td>❌ 卖不了</td><td>SKU被下架 / 库存为0 / 价格异常 / 违规</td><td>依次排查库存→价格→违规→修正后重新上架</td></tr>
-        <tr><td>部分站点未加站</td><td>⚠️ 部分卖不了</td><td>SKU只加入了部分站点</td><td>对未加站站点提交加站申请</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="tip-box">
-    <strong>男装加站要点：</strong>① 男装商品通常需加入多个站点（美国站、欧洲站等），确认每个目标站点都已加站。② 新品上架后尽快完成所有目标站点加站。③ 加站后需确认SKU在该站点的在架状态，加站和在架是两个独立环节。
-  </div>
-</div>
-
-<!-- ===== 步骤3 ===== -->
-<div class="step-detail" id="step3">
-  <div class="step-header">
-    <div class="step-num">3</div>
-    <h2>查有没有被处罚</h2>
-    <span class="step-tag step-tag-hard">硬伤问题</span>
-  </div>
-  <div class="step-desc">
-    <strong>要查什么：</strong>确认商品是否存在违规处罚，导致商品被限制售卖、搜索排名往后排或强制下架。即使显示「在售」，违规处罚也可能大幅减少曝光。
-  </div>
-  <div class="tip-box info">
-    <strong>操作路径：</strong>商家后台 →「违规管理」或「处罚记录」→ 输入商品ID查询 → 查看违规类型、原因、处罚措施与状态
-  </div>
-  <div class="checklist">
-    <div class="checklist-title">常见违规类型与处理方案</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>违规类型</th><th>处罚措施</th><th>常见原因（男装）</th><th>处理方案</th></tr>
-        <tr><td>侵权违规</td><td>下架+限制上架</td><td>使用知名品牌LOGO/图案；商标侵权；图片盗用</td><td>删除侵权素材 → 更换原创设计 → 重新提交治理</td></tr>
-        <tr><td>质量违规</td><td>下架</td><td>面料成分不符/做工缺陷/色牢度不达标/缩水变形</td><td>提升质量 → 提供质检报告 → 申请复检或申诉</td></tr>
-        <tr><td>描述不符</td><td>下架15天</td><td>实物与图片/描述不一致（色差大/版型不符/面料不符）</td><td>修正描述/图片/属性 → 确保与实物一致 → 提交修改审核</td></tr>
-        <tr><td>虚假宣传</td><td>下架15天/直接下架</td><td>夸大面料功能（普通棉宣称为免烫/抗菌）；虚标成分</td><td>修改宣传内容 → 提交修改审核</td></tr>
-        <tr><td>图片违规</td><td>驳回修改/下架</td><td>图片含牛皮癣/水印/不适当内容</td><td>更换合规图片 → 符合平台规范 → 重新提交治理</td></tr>
-        <tr><td>GCC资质</td><td>美国站禁售</td><td>皮衣/绒面非纯涤品需做GCC资质才能上美国站</td><td>确认面料填写准确 → 做GCC资质</td></tr>
-        <tr><td>重复铺货</td><td>下架</td><td>同店铺上同款/不同店铺被系统判定同经营者上同款</td><td>改款/下架同款</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="tip-box success">
-    <strong>避坑指南：</strong><br>
-    ✅ 实拍图保姆级教程：<a href="https://mp.weixin.qq.com/s/sS_2U1bhSOJ1xx4HuPspXw" target="_blank">点击查看</a><br>
-    ✅ 资质文件合规秘诀：<a href="https://mp.weixin.qq.com/s/Gm551T03h2ouq0ilfpSygg" target="_blank">点击查看</a><br>
-    ✅ 低价引流避坑指南：<a href="https://mp.weixin.qq.com/s/wMiO3rju13mhDDhlrmhTDA" target="_blank">点击查看</a><br>
-    ✅ 内容信息发布避坑指南：<a href="https://mp.weixin.qq.com/s/UQ-sK0Uk-PKROr9_n16mSA" target="_blank">点击查看</a><br>
-    ✅ 商品图片发布避坑指南：<a href="https://mp.weixin.qq.com/s/kzo7HBSYHSvmBXfxT8yiIg" target="_blank">点击查看</a><br>
-    ✅ 描述不符避坑指南：<a href="https://mp.weixin.qq.com/s/wko6ZBcpme9sMbdEzLC3wg" target="_blank">点击查看</a><br>
-    ✅ 重复铺货避坑指南：<a href="https://mp.weixin.qq.com/s/Tqm31aD1d7hz04ZPdYB_Jw" target="_blank">点击查看</a>
-  </div>
-</div>
-
-<!-- ===== 步骤4 ===== -->
-<div class="step-detail" id="step4">
-  <div class="step-header">
-    <div class="step-num">4</div>
-    <h2>查有没有库存</h2>
-    <span class="step-tag step-tag-hard">硬伤问题</span>
-  </div>
-  <div class="step-desc">
-    <strong>要查什么：</strong>看看货仓里还有没有货。没货了买家下不了单，东西自然卖不动。货不够或者货不在卖的那个仓，都卖不了。
-  </div>
-  <div class="tip-box info">
-    <strong>操作路径：</strong>「库存管理」或「库存中心」→ 输入商品ID/SKC ID/SKU ID查询 → 查看可用库存、在途库存、仓组分配
-  </div>
-  <div class="checklist">
-    <div class="checklist-title">库存状态判断标准</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>库存状态</th><th>能不能卖</th><th>判断标准</th><th>处理方案</th></tr>
-        <tr><td>库存为0</td><td>❌ 完全卖不了</td><td>可用库存=0，无在途库存</td><td>紧急补货→安排发货入仓→到货后恢复；预计超7天建议暂时下架SKU</td></tr>
-        <tr><td>库存极少</td><td>⚠️ 部分卖不了</td><td>可用库存偏低</td><td>增加备货量，确保满足较长一段时间预计销量</td></tr>
-        <tr><td>有在途库存</td><td>⚠️ 暂时卖不了</td><td>可用库存=0但有在途</td><td>确认预计到货时间→7天内可等待→超过7天建议暂时下架</td></tr>
-        <tr><td>库存不在目标仓</td><td>⚠️ 部分卖不了</td><td>库存存在但不在目标站点仓组</td><td>联系平台协调调拨或重新发货到目标仓</td></tr>
-        <tr><td>库存充足</td><td>✅ 正常</td><td>可用库存充足</td><td>进入步骤5排查商品图片与信息</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="tip-box">
-    <strong>男装备货建议：</strong>① 换季提前30-45天完成备货入仓。② 爆款SKU保持充足库存确保不断货。③ 多SKU商品需逐个检查，不同颜色/尺码库存差异可能很大。④ 断货超7天的SKU建议暂时下架，避免拉低商品整体权重。
-  </div>
-</div>
-
-<!-- ===== 步骤5 ===== -->
-<div class="step-detail" id="step5">
-  <div class="step-header">
-    <div class="step-num">5</div>
-    <h2>查商品图片和信息好不好</h2>
-    <span class="step-tag step-tag-soft">改进问题</span>
-  </div>
-  <div class="step-desc">
-    <strong>要查什么：</strong>确认商品主图、详情图、标题、属性、尺码表等信息质量是否达标。图片和信息质量直接影响点击率和转化率，是男装品类无动销最常见的改进问题。<br>
-    <strong>衡量指标：</strong>优秀主图glo点击率3.62%，优秀4%<br>
-    <strong>功能入口：</strong>卖家中心：<a href="https://agentseller-us.temu.com/main/flux-analysis" target="_blank">点击进入</a>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">5.1 图片质量检查</div>
-    <div class="tip-box success">
-      <strong>参考资源：</strong><br>
-      外套对接冰燃：13511744912男装图片要求：<a href="https://bdl.cdnfe.com/upload_bdl/nzyh/238f2f03-79cc-43ed-a64c-b942a2d75ae2.pdf" target="_blank">点击查看</a><br>
-      图片+标题美化：<a href="https://quege686.github.io/bingran/picturetitle.html" target="_blank">点击查看</a><br>
-      拉美高转化图指南：<a href="https://quege686.github.io/bingran/Latinmodel.html" target="_blank">点击查看</a><br>
-      视觉优化指南：<a href="https://quege686.github.io/bingran/vision.html" target="_blank">点击查看</a><br>
-      外套7月趋势+复色上款注意事项：<a href="https://quege686.github.io/bingran/style.html" target="_blank">点击查看</a>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">5.2 商品信息检查</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>检查项</th><th>合格标准</th><th>不合格的影响</th><th>修改建议</th></tr>
-        <tr><td>标题</td><td>包含核心关键词：品类词+风格词+材质词+场景词；长度30-60字符；无堆砌</td><td>搜索曝光低，自然流量少</td><td>参考热搜词优化：<a href="https://quege686.github.io/bingran/2.html" target="_blank">标题优化</a></td></tr>
-        <tr><td>属性完整度</td><td>必填属性100%填写；选填属性填写率>80%</td><td>商品信息评分低，影响搜索排名</td><td>逐一补全所有属性，特别是材质/版型/领型/袖长/季节</td></tr>
-        <tr><td>尺码表</td><td>包含肩宽/胸围/衣长/袖长；提供身高体重参考；多尺码可选</td><td>退换货率高，买家不敢下单</td><td>完善尺码表数据，增加身高体重推荐尺码</td></tr>
-        <tr><td>商品描述</td><td>详细描述面料/工艺/版型特点/穿搭建议/洗护说明</td><td>卖点传达不充分，影响转化</td><td>把最大卖点和别人没有的好处写出来</td></tr>
-        <tr><td>信息一致性</td><td>标题/属性/描述/图片中信息一致</td><td>信息矛盾可能导致违规处罚</td><td>挨个检查确保说的都一样</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">5.3 男装品类标题关键词参考</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>关键词类型</th><th>男装品类参考词</th></tr>
-        <tr><td>品类词</td><td>T恤、衬衫、POLO衫、卫衣、夹克、外套、裤装、西装、马甲、针织衫等</td></tr>
-        <tr><td>风格词</td><td>休闲、商务、运动、复古、街头、极简、韩版、日系、美式等</td></tr>
-        <tr><td>材质词</td><td>纯棉、涤纶、亚麻、牛仔、羊毛、法兰绒、灯芯绒、速干面料等</td></tr>
-        <tr><td>场景词</td><td>日常休闲、办公通勤、约会、运动健身、旅行、度假、居家等</td></tr>
-        <tr><td>卖点词</td><td>透气、免烫、弹力、修身、宽松、抗皱、速干、保暖、轻薄等</td></tr>
-      </table>
-    </div>
-    <div class="tip-box info">
-      <strong>优质标题公式：</strong>品类词 + 风格词 + 材质词 + 场景词 + 卖点词
-    </div>
-  </div>
-</div>
-
-<!-- ===== 步骤6 ===== -->
-<div class="step-detail" id="step6">
-  <div class="step-header">
-    <div class="step-num">6</div>
-    <h2>查供货价贵不贵、价格有没有竞争力</h2>
-    <span class="step-tag step-tag-soft">改进问题</span>
-  </div>
-  <div class="step-desc">
-    <strong>要查什么：</strong>全托管模式下，商品售价由平台根据市场情况定价，商家主要通过供货价影响定价空间。排查重点是确认供货价是否有优化空间，以及前台售价在同类目中是否具有竞争力。若售价偏高，可通过降低供货价来间接影响前台定价。<br>
-    <strong>AI辅助参考：</strong>商品诊断-买手分析Prompt：<a href="https://quege686.github.io/bingran/Modification.html" target="_blank">点击查看</a>
-  </div>
-  <div class="tip-box info">
-    <strong>操作路径：</strong><br>
-    Step 1：在Temu买家端搜索商品核心关键词，找到前台售价，筛选同品类竞品记录前20名售价<br>
-    Step 2：计算竞品售价平均值与中位数，确定主流价格区间，对比自身是否在区间内<br>
-    Step 3：在商家后台查看供货价，评估成本能否再降，对比同类面料/工艺市场成本<br>
-    Step 4：确认商品是否被平台选入促销活动，活动价是否更有竞争力外套对接冰燃：13511744912
-  </div>
-  <div class="tip-box">
-    <strong>全托管模式下价格怎么定：</strong>① 前台售价由平台自动定价，商家不直接设置。② 降低供货价可为平台留出更多降价余地。③ 积极参加平台活动（秒杀、折扣等），活动时平台会把价格调低，更好卖。
-  </div>
-</div>
-
-<!-- ===== 步骤7 ===== -->
-<div class="step-detail" id="step7">
-  <div class="step-header">
-    <div class="step-num">7</div>
-    <h2>查有没有参加活动、有没有人看到</h2>
-    <span class="step-tag step-tag-soft">改进问题</span>
-  </div>
-  <div class="step-desc">
-    <strong>要查什么：</strong>确认商品是否有足够的曝光和流量。男装品类竞争激烈，若未参与任何活动且自然搜索排名靠后，很可能是流量不足导致无动销。<br>
-    <strong>广告课程：</strong><a href="https://seller.kuajingmaihuo.com/main/course/detail?courseId=2503090000022" target="_blank">Temu广告账号快速搭建</a> | <a href="https://seller.kuajingmaihuo.com/main/course/detail?courseId=2503130000024" target="_blank">广告投放起量方法</a> | <a href="https://seller.kuajingmaihuo.com/main/course/detail?courseId=2503130000838" target="_blank">投放广告流程SOP</a>
-  </div>
-  <div class="tip-box info">
-    <strong>操作路径：</strong>① 检查活动参与（后台「活动管理」→「我的活动」）② 检查搜索排名（买家端搜索关键词翻页查找）③ 检查商品收录（搜完整标题确认能搜到）④ 检查评价情况 ⑤ 分析流量数据（曝光量、点击量、转化率）
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">7.2 流量问题判断与处理方案</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>流量问题</th><th>判断标准</th><th>原因分析</th><th>处理方案</th></tr>
-        <tr><td>未参与活动</td><td>当前无任何活动在进行中</td><td>未被选入/不符合门槛/未报名</td><td>多看可报活动→把商品做好→找冰燃推荐</td></tr>
-        <tr><td>搜索排名靠后</td><td>核心关键词排在第5页以后</td><td>销量低/评价少/信息评分低/有违规</td><td>优化标题→提升图片→积累销量评价→参与活动</td></tr>
-        <tr><td>商品未被收录</td><td>搜完整标题找不到商品</td><td>信息不完整/评分过低/违规处罚</td><td>补全商品信息→提升信息质量</td></tr>
-        <tr><td>无评价</td><td>商品评价数=0</td><td>无销量基础/上架时间短</td><td>靠活动破零→攒好评→或评价有礼功能</td></tr>
-        <tr><td>有差评</td><td>好评率<90%</td><td>商品质量/尺码/描述存在问题</td><td>分析差评原因→整改</td></tr>
-        <tr><td>曝光量极低</td><td>日均曝光量极低</td><td>未被收录/权重极低/未参与活动</td><td>确认收录→参加活动→优化信息提升排名</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">7.3 商家能自己报名的活动、广告和增长工具</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>活动类型</th><th>是什么</th><th>怎么报+要求</th><th>对卖货有什么用</th></tr>
-        <tr><td>秒杀活动</td><td>限时限量打折，价格很低</td><td>活动报名入口→选商品→填活动价；要求供货价有优势、库存充足</td><td>最快搞出第一单，秒杀期间流量暴增，攒评价后自然搜索也涨</td></tr>
-        <tr><td>折扣活动</td><td>打折促销，力度没秒杀大</td><td>活动管理→折扣活动→选商品报名；商品状态正常在售即可</td><td>比秒杀温和，适合想冲量但不想亏太多的货</td></tr>
-        <tr><td>节日大促</td><td>平台大型促销（黑五、圣诞等）</td><td>大促前1-2周开放报名；要求状态正常、库存充足、供货价有竞争力</td><td>大促期间全平台流量最高，清库存和冲销量最好时机</td></tr>
-        <tr><td>日常促销</td><td>平时的常规促销位</td><td>营销中心→日常促销→报名参加；门槛低容易通过</td><td>虽没大促流量大，但总比什么都不报强</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">增长工具（商家自己能设置的）</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>工具类型</th><th>是什么</th><th>怎么设</th><th>对卖货有什么用</th></tr>
-        <tr><td>多件优惠</td><td>买多件更便宜（如买2件9折）</td><td>营销中心→多件优惠→设置规则</td><td>提高客单价，男装特别适合（同款不同色各买一件）</td></tr>
-        <tr><td>满减活动</td><td>买满多少减多少</td><td>营销中心→满减活动→设置</td><td>刺激买家凑单，多买东西</td></tr>
-        <tr><td>评价有礼</td><td>买家写评价可拿奖励</td><td>营销中心→评价有礼→开启</td><td>解决"没有评价"问题，评价多了搜索排名也会提升</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="tip-box danger">
-    <strong>广告投放要注意：</strong>① 开广告之前先把图片和信息弄好！广告只把人引来，图片丑信息差不买就是白花钱。② 先从小预算开始试，每天几十块钱看几天效果。③ 关注广告数据，花了钱没出单马上停掉找原因。
-  </div>
-</div>
-
-<!-- ===== 步骤8 ===== -->
-<div class="step-detail" id="step8">
-  <div class="step-header">
-    <div class="step-num">8</div>
-    <h2>查评价好不好、退货多不多</h2>
-    <span class="step-tag step-tag-soft">改进问题</span>
-  </div>
-  <div class="step-desc">
-    <strong>要查什么：</strong>看看评价好不好、退货多不多。全托管模式下客服和退换货主要是平台在搞，但你要盯着退货原因和评价内容。差评多、退货多的货，平台会把排名往后排，越来越没人看到，最后就卖不动了。
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">8.1 查什么与标准</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>检查项</th><th>正常标准</th><th>异常影响</th><th>处理方案</th></tr>
-        <tr><td>好评率</td><td>≥94%（不同品类差距较大）</td><td>过低会显著影响搜索排名和转化率</td><td>分析差评原因→改进质量→完善尺码表</td></tr>
-        <tr><td>售后率</td><td><6%</td><td>退货率过高会被排名往后排，严重时下架</td><td>分析退货原因（尺码/质量/描述不符）→针对性改进</td></tr>
-        <tr><td>差评内容</td><td>无集中差评点</td><td>集中差评（如多人反馈尺码偏小）会持续影响转化</td><td>针对集中差评问题修改→更新信息/尺码表</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">8.2 男装品类常见退货原因及改进建议</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>退货原因</th><th>具体表现</th><th>改进建议</th></tr>
-        <tr><td>尺码不合</td><td>尺码偏大/偏小，与买家预期不符</td><td>完善尺码表→增加身高体重参考→标注版型偏大/偏小→改款优化</td></tr>
-        <tr><td>色差</td><td>实物颜色与图片差异较大</td><td>优化图片色彩还原→在描述中注明色差可能→提供多角度实物图</td></tr>
-        <tr><td>面料问题</td><td>面料手感/厚度/透气性与预期不符</td><td>增加面料细节图和描述→如实标注面料参数→增加面料特写图</td></tr>
-        <tr><td>版型不符</td><td>实物版型与图片展示差异大</td><td>确保上身图与实物版型一致→增加多角度上身图</td></tr>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ===== 步骤9 ===== -->
-<div class="step-detail" id="step9">
-  <div class="step-header">
-    <div class="step-num">9</div>
-    <h2>查品牌化做得好不好</h2>
-    <span class="step-tag step-tag-soft">改进问题</span>
-  </div>
-  <div class="step-desc">
-    <strong>要查什么：</strong>看看商品有没有品牌化、品牌露出够不够、品牌差异化明不明显。在TEMU男装品类，白牌商品越来越难获得流量倾斜，平台对有品牌资质、品牌辨识度高的商品会给予更多曝光支持。品牌化不是简单加个LOGO，而是从资质、露出、差异化、资产积累到品牌保护的全链路建设。
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">9.1 品牌资质检查</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>检查项</th><th>合格标准</th><th>不合格的影响</th><th>处理方案</th></tr>
-        <tr><td>品牌授权链路</td><td>授权书完整，授权链路清晰（品牌方→商家），覆盖销售站点</td><td>无法通过品牌资质审核，被当作白牌</td><td>补全授权链路，确保在有效期内</td></tr>
-        <tr><td>资质文件有效期</td><td>商标注册证/授权书在有效期内</td><td>资质过期后品牌标识会被清除</td><td>提前30天更新续期</td></tr>
-        <tr><td>商标类目覆盖</td><td>商标注册类别覆盖男装品类（第25类）</td><td>商标类目不匹配无法通过审核</td><td>确认覆盖目标品类，必要时补充注册</td></tr>
-        <tr><td>平台品牌备案</td><td>已在TEMU完成品牌备案，信息与资质一致</td><td>未备案的品牌标识不被认可</td><td>在后台提交品牌备案，上传资质文件</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">9.2 品牌露出与辨识度</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>检查项</th><th>合格标准</th><th>不合格的影响</th><th>修改建议</th></tr>
-        <tr><td>主图品牌LOGO</td><td>主图有清晰LOGO，不遮挡商品，大小适中</td><td>看起来像白牌，缺乏品牌信任感</td><td>在主图左上角或右下角添加品牌LOGO</td></tr>
-        <tr><td>标题品牌词</td><td>标题包含品牌名称，品牌词在标题前半部分</td><td>品牌搜索流量丢失，买家搜品牌找不到</td><td>在标题前半部分加入品牌名称</td></tr>
-        <tr><td>详情页品牌故事</td><td>有品牌介绍模块，展示品牌故事、设计理念、品质承诺</td><td>品牌认知度低，买家对品牌没有印象</td><td>增加品牌故事模块，展示品牌理念</td></tr>
-        <tr><td>视觉一致性</td><td>所有商品主图风格、LOGO位置、品牌色调保持一致</td><td>品牌形象混乱，无法形成品牌记忆</td><td>制定品牌视觉规范，统一所有商品图片风格</td></tr>
-        <tr><td>包装与吊牌</td><td>商品有品牌包装袋/吊牌/洗水标，体现品牌感</td><td>收货后品牌体验差，影响复购和口碑</td><td>定制品牌包装袋、吊牌、洗水标</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">9.3 品牌差异化分析</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>差异化维度</th><th>怎么查</th><th>差异化不够的表现</th><th>改进建议</th></tr>
-        <tr><td>设计差异化</td><td>对比TOP20竞品的款式、版型、细节设计</td><td>款式高度雷同，买家分不清谁是谁</td><td>从版型、口袋、拉链、领型等细节做差异化</td></tr>
-        <tr><td>面料差异化</td><td>对比竞品面料成分，确认是否有独特面料卖点</td><td>面料和竞品一样，没有面料层面的卖点</td><td>选择差异化面料（有机棉、再生面料、功能性面料）</td></tr>
-        <tr><td>工艺差异化</td><td>对比竞品做工细节（走线、包边、辅料等）</td><td>做工普通，没有能体现品质感的工艺细节</td><td>增加品质工艺细节（双线缝合、定制纽扣、刺绣LOGO）</td></tr>
-        <tr><td>人群差异化</td><td>分析竞品目标人群，确认是否切入差异化人群</td><td>和竞品抢同一批人，只能靠价格竞争</td><td>切入差异化人群（大码男装、潮流青年、商务休闲）</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">白牌商品 vs 品牌化商品对比</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>对比项</th><th>白牌商品</th><th>品牌化商品</th></tr>
-        <tr><td>流量支持</td><td>自然流量为主，无品牌流量倾斜</td><td>品牌搜索流量 + 自然流量 + 品牌活动资源</td></tr>
-        <tr><td>价格竞争力</td><td>只能拼低价，利润薄</td><td>品牌溢价空间，利润更高</td></tr>
-        <tr><td>买家信任度</td><td>低，买家不敢轻易下单</td><td>高，品牌标识增加信任感</td></tr>
-        <tr><td>复购率</td><td>低，买家记不住品牌</td><td>高，买家认品牌会回来买</td></tr>
-        <tr><td>活动资源</td><td>只能报通用活动</td><td>有品牌专属活动资源位</td></tr>
-        <tr><td>长期价值</td><td>随时被更低价竞品替代</td><td>品牌资产持续积累，竞争壁垒高</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">9.4 品牌资产积累</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>检查项</th><th>怎么查</th><th>薄弱的表现</th><th>改进建议</th></tr>
-        <tr><td>品牌搜索词流量</td><td>在买家端搜索品牌名称，看是否有搜索结果</td><td>搜品牌名搜不到商品</td><td>通过站外引流（社媒、KOL）引导买家搜索品牌名</td></tr>
-        <tr><td>评价中品牌提及</td><td>查看商品评价，统计买家是否提到品牌名</td><td>评价中无人提及品牌</td><td>通过评价有礼引导写详细评价，包装中放品牌卡片</td></tr>
-        <tr><td>复购率</td><td>查看同一买家是否多次购买同品牌商品</td><td>复购率低，买完不认品牌</td><td>提升品质和开箱体验，通过品牌包装让买家记住</td></tr>
-        <tr><td>粉丝关注</td><td>查看品牌粉丝数和关注增长趋势</td><td>粉丝数少，增长缓慢</td><td>通过品质和口碑积累粉丝，参与品牌活动增加曝光</td></tr>
-        <tr><td>品牌词收录</td><td>搜索品牌名+品类词，确认是否被收录</td><td>品牌词未被收录，买家搜不到</td><td>确保品牌名在标题、属性中填写，提交品牌词收录申请</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">9.5 品牌保护与风险</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>风险类型</th><th>怎么查</th><th>风险表现</th><th>处理方案</th></tr>
-        <tr><td>侵权风险</td><td>检查图片、标题、描述中是否使用他人品牌LOGO/图案</td><td>使用了未授权品牌元素</td><td>立即删除未授权元素，更换原创设计</td></tr>
-        <tr><td>商标抢注风险</td><td>查询目标销售站点的商标注册情况</td><td>品牌名在目标站点被他人注册</td><td>提前在目标站点注册商标，或通过法律途径解决</td></tr>
-        <tr><td>仿冒风险</td><td>在平台搜索品牌名，查看是否有仿冒商品</td><td>有仿冒商品分流品牌流量</td><td>向平台投诉仿冒商品，提供品牌资质证明</td></tr>
-        <tr><td>品牌授权到期</td><td>定期检查品牌授权书有效期</td><td>授权即将到期或已过期</td><td>提前30天联系品牌方续签授权</td></tr>
-        <tr><td>图片版权风险</td><td>检查商品图片是否使用未授权模特照片/素材/字体</td><td>图片中有未授权素材</td><td>使用自有拍摄图片或已购买版权的素材</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="tip-box">
-    <strong>品牌化排查要点：</strong>① 品牌化是长期过程，短期可能看不到明显效果，但长期是提升竞争壁垒的关键。② 如果暂时没有品牌，建议先从品牌授权合作开始。③ 品牌化不等于高价化，品牌溢价需要品质、视觉、服务全方位支撑。④ 定期检查品牌资质有效期和品牌词收录情况。⑤ 男装品类的品牌差异化建议从面料和版型入手，这是买家最容易感知的差异点。
-  </div>
-</div>
-
-<!-- ===== 汇总与优先级 ===== -->
-<div class="step-detail" id="summary">
-  <div class="step-header">
-    <div class="step-num">✓</div>
-    <h2>汇总与修改优先级</h2>
-  </div>
-  <div class="step-desc">
-    根据排查结果，按以下优先级进行修改。<strong>硬伤问题（东西卖不了）必须优先解决</strong>，否则后续优化无法产生效果。
-  </div>
-  <div class="checklist">
-    <div class="checklist-title">修改优先级表</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>优先级</th><th>时间要求</th><th>修改事项</th><th>说明</th></tr>
-        <tr><td class="priority-P0">P0</td><td>立即处理</td><td>商品状态异常 / 违规处罚 / 商品未收录</td><td>商品不在售/被冻结/有未处理违规/未被收录→直接导致无法售卖或被搜到，必须立即处理</td></tr>
-        <tr><td class="priority-P1">P1</td><td>24小时内</td><td>SKU未加站 / 库存断货</td><td>SKU未加站或库存为0→商品即使状态正常也无法产生订单</td></tr>
-        <tr><td class="priority-P2">P2</td><td>3天内</td><td>图片优化 / 信息补全 / 标题优化</td><td>图片质量差/信息不完整/标题关键词缺失→影响点击率和转化率</td></tr>
-        <tr><td class="priority-P3">P3</td><td>1周内</td><td>供货价调整 / 参加活动 / 评价积累 / 品牌备案与资质补全</td><td>供货价偏高/未选入活动/评价少/品牌资质不全→影响销量增长但还能卖</td></tr>
-        <tr><td class="priority-P4">P4</td><td>持续进行</td><td>质量改进 / 差评处理 / 退货率降低 / 品牌化建设与差异化</td><td>质量/差评/退货率→长期影响店铺权重和转化，品牌化是长期竞争力</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="checklist">
-    <div class="checklist-title">排查记录表</div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>序号</th><th>查什么</th><th>是否正常</th><th>问题描述</th><th>修改计划与目标完成时间</th></tr>
-        <tr><td>1</td><td>商品状态</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr>
-        <tr><td>2</td><td>SKU在架与加站</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr>
-        <tr><td>3</td><td>有没有被处罚</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr>
-        <tr><td>4</td><td>有没有库存</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr>
-        <tr><td>5</td><td>商品图片与信息</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr>
-        <tr><td>6</td><td>供货价与价格竞争力</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr>
-        <tr><td>7</td><td>活动与流量</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr>
-        <tr><td>8</td><td>评价与售后</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr>
-        <tr><td>9</td><td>品牌化做得好不好</td><td>☐ 正常 ☐ 异常</td><td></td><td></td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="sub-section">
-    <div class="sub-title">常见问题</div>
-    <div class="tip-box info">
-      <strong>Q1：</strong>商品状态显示「在售」，SKU也在架，为什么还是没有销量？<br>
-      <strong>A：</strong>状态正常说明能卖，但无销量通常因为：① 图片质量差导致点击率低 ② 价格偏高缺乏竞争力 ③ 未参与活动导致曝光不足 ④ 商品未被搜索收录或排名靠后。重点排查步骤5-7。
-    </div>
-    <div class="tip-box info">
-      <strong>Q2：</strong>商品之前有动销，突然就没有了，是什么原因？<br>
-      <strong>A：</strong>突然无动销常见原因：① 库存断货（最常见）② 新增违规处罚 ③ SKU被移出站点 ④ 竞品大量低价涌入。优先排查步骤2-4。
-    </div>
-    <div class="tip-box info">
-      <strong>Q3：</strong>男装新品上架后多少天有动销算正常？<br>
-      <strong>A：</strong>通常新品上架后短时间内产生首单属于正常范围。若超过14天仍无动销，建议按这份指南查。重点排查图片质量和供货价竞争力。
-    </div>
-    <div class="tip-box info">
-      <strong>Q4：</strong>商品图片已经很好了，还需要优化什么？<br>
-      <strong>A：</strong>图片好但仍无动销，需排查：① 标题关键词是否覆盖热搜词 ② 供货价是否有优化空间 ③ 站内是否同款较多。图片自己觉得好不一定消费者认可，可以再用AI辅助看看有没有优化空间：<a href="https://quege686.github.io/bingran/Modification.html" target="_blank">AI商品诊断</a>
-    </div>
-    <div class="tip-box info">
-      <strong>Q5：</strong>参与活动后还是没动销怎么办？<br>
-      <strong>A：</strong>活动期间无动销需排查：① 活动价是否仍然偏高，可考虑降低供货价 ② 秒杀流量较大，可考虑换秒杀+广告双开前期容易起量 ③ 主图是不是表现一般 ④ 活动期间是否有竞品以更低价竞争。
-    </div>
-    <div class="tip-box info">
-      <strong>Q6：</strong>多个SKU中只有部分有动销，怎么办？<br>
-      <strong>A：</strong>① 看看好卖的SKU是什么颜色什么尺码，把不好卖的SKU信息也弄好 ② 看看是不是正常展示，有没有部分SKU下架情况。本身站内的爆款搭配是黑白灰销量高，亮色图在欧美点击好，前期可以做黑白灰+一个亮色。参考：<a href="https://quege686.github.io/bingran/style.html" target="_blank">外套7月趋势+复色上款注意事项</a>
-    </div>
-    <div class="tip-box info">
-      <strong>Q7：</strong>修改后多久能看到效果？<br>
-      <strong>A：</strong>不同修改类型效果周期不同：库存补货→到货后恢复；违规处理→申诉通过后恢复（一般48h内解罚，没解开继续联系冰燃）；图片优化→数天到一周；供货价调整→平台调整前台售价后；活动参与→活动开始即见效；标题优化→一到两周。建议多盯几天看效果。
-    </div>
-    <div class="tip-box info">
-      <strong>Q8：</strong>如果排查完所有步骤还是找不到原因怎么办？<br>
-      <strong>A：</strong>若所有维度排查均正常但仍无动销，建议：① 找冰燃看店铺问题 ② 对比同类目动销商品的特征差异 ③ 考虑商品是否存在市场需求不足的问题 ④ 继续联系冰燃寻求支持。
-    </div>
-    <div class="tip-box info">
-      <strong>Q9：</strong>白牌商品要不要做品牌化？品牌化对销量有什么实际帮助？<br>
-      <strong>A：</strong>白牌商品竞争压力越来越大，品牌化是长期趋势。实际帮助：① 品牌商品可获得品牌搜索流量 ② 有品牌专属活动资源位 ③ 品牌溢价空间让商品不必只拼最低价 ④ 品牌复购率高于白牌。如果暂时没有自有品牌，可以先从品牌授权合作开始。
-    </div>
-  </div>
-  <div class="tip-box danger">
-    <strong>注意事项：</strong>① 本指南适用于男装品类，其他品类可参考但需调整。② 查的时候建议一次多查几个商品ID，按店铺维度批量排查。③ 若状态正常、SKU在架、无违规、有库存但卖不动，重点查第5-7步。④ 修改后建议持续观察，使用记录表跟踪数据变化。⑤ 平台政策变动请以最新通知为准。⑥ 男装有季节性特征，换季时需提前30-45天完成备货和上架。
-  </div>
-</div>
-
-</div><!-- end content -->
-</div><!-- end container -->
-
 <script>
-function showPage(pageId, ev) {
-  // 隐藏所有
-  document.querySelectorAll('.step-detail').forEach(function(el) {
-    el.classList.remove('active');
-  });
-  // 显示目标
-  var target = document.getElementById(pageId);
-  if (target) {
-    target.classList.add('active');
-  }
-  // 更新导航高亮
-  document.querySelectorAll('.sidebar-item').forEach(function(el) {
-    el.classList.remove('active');
-  });
-  // 兼容事件来源
-  var src = ev && ev.currentTarget ? ev.currentTarget : (ev && ev.target ? ev.target : null);
-  if (src && src.classList) {
-    src.classList.add('active');
-    // 手机端：横向滚动让当前项可见
-    if (window.innerWidth <= 768 && src.scrollIntoView) {
-      src.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-    }
-  }
-  // 滚动到顶部
-  var content = document.querySelector('.content');
-  if (content) content.scrollTop = 0;
-  window.scrollTo(0, 0);
-  // 手机端：内容区滚到视图顶部
-  if (window.innerWidth <= 768) {
-    var contentTop = document.querySelector('.content');
-    if (contentTop && contentTop.getBoundingClientRect) {
-      var rect = contentTop.getBoundingClientRect();
-      if (rect.top < 0) {
-        window.scrollTo(0, rect.top + window.scrollY - 5);
-      }
-    }
-  }
-}
+function tgSec(e){var b=e.nextElementSibling;if(b.classList.contains("open")){b.classList.remove("open");e.classList.remove("exp")}else{b.classList.add("open");e.classList.add("exp")}}
+function tgSub(e){var c=e.nextElementSibling;if(c.classList.contains("open")){c.classList.remove("open");c.classList.remove("open")}else{c.classList.add("open");c.classList.add("open")}}
+function tgDeep(e){var c=e.nextElementSibling;if(c.classList.contains("open")){c.classList.remove("open");c.classList.remove("open")}else{c.classList.add("open");c.classList.add("open")}}
+function tgQA(e){var a=e.nextElementSibling;if(a.classList.contains("open")){a.classList.remove("open")}else{a.classList.add("open")}}
+function scrollToSec(id){var el=document.getElementById(id);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});var h=el.querySelector(".sh");if(h&&!h.classList.contains("exp")){h.click()}}}
 </script>
-
-</body>
-</html>
+</body></html>
