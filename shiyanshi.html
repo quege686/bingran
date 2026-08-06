@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧪 开款思路实验室 v2.0</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh;overflow-x:hidden}
+.header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:40px 20px;text-align:center;border-bottom:2px solid #e94560;position:relative;overflow:hidden}
+.header h1{font-size:2.5em;color:#e94560;text-shadow:0 0 20px rgba(233,69,96,0.5);position:relative;z-index:1}
+.header .ver{color:#e94560;font-size:0.6em;background:#1a1a2e;padding:2px 10px;border-radius:10px;margin-left:8px}
+.header p{color:#a0a0c0;margin-top:10px;font-size:1.1em;position:relative;z-index:1}
+.nav{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;padding:12px 15px;background:#111118;border-bottom:1px solid #222;position:sticky;top:0;z-index:100}
+.nav-btn{padding:7px 14px;background:#1a1a28;border:1px solid #333;color:#888;border-radius:20px;cursor:pointer;font-size:0.85em;transition:all 0.3s;white-space:nowrap}
+.nav-btn:hover{background:#1a1a3e;border-color:#e94560;color:#e94560}
+.nav-btn.active{background:#e94560;color:#fff;border-color:#e94560}
+.container{max-width:1400px;margin:0 auto;padding:20px}
+.dimension-section{display:none}.dimension-section.active{display:block}
+.section-title{font-size:1.8em;color:#e94560;margin-bottom:5px;padding-bottom:10px;border-bottom:2px solid #333}
+.section-desc{color:#888;margin-bottom:20px;font-size:0.95em}
+/* Filter Bar */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;align-items:center}
+.filter-label{color:#666;font-size:0.85em;margin-right:5px}
+.filter-btn{padding:5px 14px;background:#141420;border:1px solid #333;color:#888;border-radius:15px;cursor:pointer;font-size:0.82em;transition:all 0.3s}
+.filter-btn:hover{border-color:#555;color:#ccc}
+.filter-btn.active{background:#e94560;color:#fff;border-color:#e94560}
+/* Difficulty Badges */
+.diff-1{color:#4caf50}.diff-2{color:#8bc34a}.diff-3{color:#ffc107}.diff-4{color:#ff9800}.diff-5{color:#f44336}
+.diff-badge{display:inline-block;padding:1px 6px;border-radius:3px;font-size:0.7em;font-weight:bold;margin-left:5px}
+.diff-badge.简单{background:rgba(76,175,80,0.15);color:#4caf50;border:1px solid rgba(76,175,80,0.3)}
+.diff-badge.中等{background:rgba(255,193,7,0.15);color:#ffc107;border:1px solid rgba(255,193,7,0.3)}
+.diff-badge.困难{background:rgba(244,67,54,0.15);color:#f44336;border:1px solid rgba(244,67,54,0.3)}
+/* Cards */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.card{background:#141420;border:1px solid #222;border-radius:10px;padding:14px;transition:all 0.3s;cursor:pointer}
+.card:hover{border-color:#e94560;background:#1a1a2e;transform:translateY(-2px);box-shadow:0 5px 20px rgba(233,69,96,0.15)}
+.card-id{color:#e94560;font-size:0.78em;font-weight:bold;margin-bottom:4px}
+.card-name{color:#fff;font-size:1.02em;font-weight:600;margin-bottom:4px;display:flex;align-items:center;flex-wrap:wrap}
+.card-desc{color:#999;font-size:0.83em;line-height:1.5}
+.card-tag{display:inline-block;padding:2px 8px;background:#1a1a3e;border-radius:4px;color:#8b8bd0;font-size:0.73em;margin-top:5px}
+.card-cat{display:inline-block;padding:1px 6px;border-radius:3px;font-size:0.7em;margin-top:4px;margin-left:4px}
+.cat-高饱和{background:rgba(255,100,0,0.15);color:#ff8a00;border:1px solid rgba(255,100,0,0.3)}
+.cat-金属色{background:rgba(255,215,0,0.15);color:#ffd700;border:1px solid rgba(255,215,0,0.3)}
+.cat-渐变色{background:rgba(138,43,226,0.15);color:#bb86fc;border:1px solid rgba(138,43,226,0.3)}
+.cat-做旧色{background:rgba(139,90,43,0.15);color:#cd853f;border:1px solid rgba(139,90,43,0.3)}
+.cat-中性色{background:rgba(128,128,128,0.15);color:#bbb;border:1px solid rgba(128,128,128,0.3)}
+.color-card{display:flex;align-items:center;gap:10px}
+.color-swatch{width:45px;height:45px;border-radius:8px;border:2px solid #333;flex-shrink:0}
+/* Worldview Art Style */
+.wv-art-box{margin-top:10px;padding:10px;background:#0a0a14;border-radius:8px;border-left:3px solid #0f3460}
+.wv-art-label{color:#0f3460;font-size:0.75em;font-weight:bold;margin-bottom:4px;filter:brightness(1.5)}
+.wv-art-style{color:#8bb0ff;font-size:0.85em;margin-bottom:4px}
+.wv-art-palette{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.wv-art-palette-label{color:#666;font-size:0.72em}
+.wv-art-palette-val{color:#aaa;font-size:0.78em}
+.wv-art-mood{color:#c9a0dc;font-size:0.78em;margin-bottom:4px}
+.wv-art-ref{color:#555;font-size:0.72em;font-style:italic}
+.wv-combo{margin-top:8px;padding:8px;background:#0a0a14;border-radius:6px;font-size:0.78em;color:#aaa;line-height:1.6}
+.wv-keywords{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.wv-keyword{padding:2px 6px;background:#1a1a3e;border-radius:3px;color:#8b8bd0;font-size:0.72em}
+/* Lab */
+.lab-section{background:#0f0f1a;border:1px solid #222;border-radius:16px;padding:30px;margin-bottom:20px}
+.lab-section h2{color:#e94560;margin-bottom:15px}
+.lab-section p{color:#888;margin-bottom:20px;line-height:1.6}
+.generate-btn{padding:12px 40px;background:linear-gradient(135deg,#e94560,#0f3460);color:#fff;border:none;border-radius:30px;font-size:1.1em;cursor:pointer;transition:all 0.3s}
+.generate-btn:hover{transform:scale(1.05);box-shadow:0 5px 25px rgba(233,69,96,0.4)}
+.result-box{margin-top:25px;display:none}.result-box.show{display:block}
+.result-dimension{margin-bottom:10px;padding:10px 14px;background:#141420;border-left:3px solid #e94560;border-radius:6px}
+.result-label{color:#e94560;font-size:0.82em;font-weight:bold;margin-bottom:3px}
+.result-value{color:#ddd;font-size:0.95em}
+.result-diff{display:inline-block;margin-left:6px;font-size:0.75em}
+.result-concept{margin-top:20px;padding:20px;background:linear-gradient(135deg,#1a1a2e,#0f3460);border-radius:12px;text-align:center}
+.result-concept-label{color:#e94560;font-size:0.82em;margin-bottom:8px}
+.result-concept-text{color:#fff;font-size:1.15em;font-style:italic;line-height:1.6}
+.result-diff-summary{margin-top:15px;padding:12px;background:#0a0a14;border-radius:8px;text-align:center}
+.result-diff-label{color:#888;font-size:0.82em;margin-bottom:6px}
+.result-diff-bar{display:flex;align-items:center;justify-content:center;gap:4px}
+.result-diff-dot{width:12px;height:12px;border-radius:50%;background:#333}
+.result-diff-dot.on{background:#e94560}
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:30px}
+.stat-card{background:linear-gradient(135deg,#141420,#1a1a2e);border:1px solid #222;border-radius:12px;padding:18px;text-align:center;transition:all 0.3s}
+.stat-card:hover{border-color:#e94560;transform:translateY(-3px)}
+.stat-number{font-size:2.3em;color:#e94560;font-weight:bold}
+.stat-label{color:#888;margin-top:5px;font-size:0.85em}
+/* Method */
+.method-box{background:#141420;border:1px solid #222;border-radius:12px;padding:25px;margin-bottom:20px}
+.method-box h3{color:#e94560;margin-bottom:12px}
+.method-box table{width:100%;border-collapse:collapse;margin-top:10px}
+.method-box th,.method-box td{padding:8px 10px;border:1px solid #222;text-align:left;color:#ccc;font-size:0.85em}
+.method-box th{background:#1a1a2e;color:#e94560}
+/* Search */
+.search-box{width:100%;padding:10px 15px;background:#141420;border:1px solid #333;border-radius:8px;color:#fff;font-size:0.92em;margin-bottom:12px}
+.search-box::placeholder{color:#555}
+.search-box:focus{outline:none;border-color:#e94560}
+.footer{text-align:center;padding:30px 20px;color:#555;font-size:0.82em;border-top:1px solid #222}
+@media(max-width:768px){.header h1{font-size:1.6em}.cards-grid{grid-template-columns:1fr}.nav-btn{padding:5px 10px;font-size:0.75em}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🧪 开款思路实验室<span class="ver">v2.0</span></h1>
+  <p>7大维度 × 难度分档 × 世界观主图风格 × 色彩分类 × 交叉组合 × 无限灵感</p>
+</div>
+<div class="nav">
+  <button class="nav-btn active" onclick="showSection('overview',this)">📊 总览</button>
+  <button class="nav-btn" onclick="showSection('lab',this)">🎲 灵感生成器</button>
+  <button class="nav-btn" onclick="showSection('material',this)">🧵 材质(100)</button>
+  <button class="nav-btn" onclick="showSection('structure',this)">📐 结构(80)</button>
+  <button class="nav-btn" onclick="showSection('hardware',this)">⚙️ 五金(200)</button>
+  <button class="nav-btn" onclick="showSection('surface',this)">🔥 表面(150)</button>
+  <button class="nav-btn" onclick="showSection('silhouette',this)">✂️ 廓形(50)</button>
+  <button class="nav-btn" onclick="showSection('color',this)">🎨 色彩</button>
+  <button class="nav-btn" onclick="showSection('worldview',this)">🌍 世界观(15)</button>
+  <button class="nav-btn" onclick="showSection('method',this)">📋 方法论</button>
+</div>
+<div class="container">
+
+<div id="overview" class="dimension-section active">
+  <div class="section-title">📊 维度总览（v2.0 升级版）</div>
+  <div class="section-desc">新增：材质/结构/表面/廓形 难度分档系统、世界观主图作图风格解构、色彩5大分类体系</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-number">100</div><div class="stat-label">材质（1-5级难度）</div></div>
+    <div class="stat-card"><div class="stat-number">80</div><div class="stat-label">结构（1-5级难度）</div></div>
+    <div class="stat-card"><div class="stat-number">200</div><div class="stat-label">五金</div></div>
+    <div class="stat-card"><div class="stat-number">150</div><div class="stat-label">表面工艺（1-5级难度）</div></div>
+    <div class="stat-card"><div class="stat-number">50</div><div class="stat-label">廓形（1-5级难度）</div></div>
+    <div class="stat-card"><div class="stat-number">50+</div><div class="stat-label">色彩（5大分类）</div></div>
+    <div class="stat-card"><div class="stat-number">15</div><div class="stat-label">世界观（含主图风格）</div></div>
+    <div class="stat-card"><div class="stat-number">∞</div><div class="stat-label">组合可能</div></div>
+  </div>
+  <div class="method-box">
+    <h3>🆕 v2.0 新增功能</h3>
+    <table>
+      <tr><th>新增</th><th>说明</th></tr>
+      <tr><td>难度分档</td><td>材质/结构/表面/廓形 均标注1-5级难度，分为 简单/中等/困难 三档，可按难度筛选</td></tr>
+      <tr><td>世界观主图风格</td><td>每个世界观解构出：主图作图风格、色彩方案、情绪基调、参考视觉方向，直接指导主图拍摄/设计</td></tr>
+      <tr><td>色彩分类体系</td><td>色彩分为：高饱和/金属色/渐变色/做旧色/中性色 五大类，可按分类筛选</td></tr>
+      <tr><td>灵感生成器升级</td><td>生成开款方向时同时显示各维度难度，并计算综合难度评分</td></tr>
+    </table>
+  </div>
+</div>
+
+<div id="lab" class="dimension-section">
+  <div class="section-title">🎲 灵感生成器（v2.0）</div>
+  <div class="section-desc">随机生成开款方向，自动显示各维度难度和综合难度评分</div>
+  <div class="lab-section">
+    <h2>实验室骰子 🎲</h2>
+    <p>每次点击随机抽取：材质×2、结构×2、表面×2、廓形×1、色彩×1、世界观×1，并显示综合难度评分（1-5星）。</p>
+    <button class="generate-btn" onclick="generateConcept()">🎲 投掷骰子</button>
+    <div id="result-box" class="result-box"><div id="result-content"></div></div>
+  </div>
+  <div class="lab-section">
+    <h2>🎲 按难度生成</h2>
+    <p>选择目标难度档位，系统将只在该难度范围内随机抽取元素。</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+      <button class="generate-btn" style="background:linear-gradient(135deg,#4caf50,#1a1a2e);font-size:0.95em;padding:10px 25px" onclick="generateConceptByDiff('简单')">🟢 简单款</button>
+      <button class="generate-btn" style="background:linear-gradient(135deg,#ffc107,#1a1a2e);font-size:0.95em;padding:10px 25px" onclick="generateConceptByDiff('中等')">🟡 中等款</button>
+      <button class="generate-btn" style="background:linear-gradient(135deg,#f44336,#1a1a2e);font-size:0.95em;padding:10px 25px" onclick="generateConceptByDiff('困难')">🔴 困难款</button>
+      <button class="generate-btn" style="background:linear-gradient(135deg,#e94560,#0f3460);font-size:0.95em;padding:10px 25px" onclick="generateConcept()">🎲 全随机</button>
+    </div>
+  </div>
+</div>
+
+<div id="material" class="dimension-section">
+  <div class="section-title">🧵 材质维度（100种 · 难度分档）</div>
+  <div class="section-desc">按难度分档：简单(1级) / 中等(2-3级) / 困难(4-5级)</div>
+  <div class="filter-bar"><span class="filter-label">难度筛选：</span><button class="filter-btn active" onclick="setFilter('material','all',this)">全部</button><button class="filter-btn" onclick="setFilter('material','简单',this)">🟢 简单</button><button class="filter-btn" onclick="setFilter('material','中等',this)">🟡 中等</button><button class="filter-btn" onclick="setFilter('material','困难',this)">🔴 困难</button></div>
+  <input type="text" class="search-box" placeholder="搜索材质..." oninput="filterCards('material-grid',this.value)">
+  <div id="material-grid" class="cards-grid"></div>
+</div>
+
+<div id="structure" class="dimension-section">
+  <div class="section-title">📐 结构维度（80种 · 难度分档）</div>
+  <div class="section-desc">领口25种 + 袖子25种 + 门襟15种 + 下摆15种，按难度分档</div>
+  <div class="filter-bar"><span class="filter-label">难度筛选：</span><button class="filter-btn active" onclick="setFilter('structure','all',this)">全部</button><button class="filter-btn" onclick="setFilter('structure','简单',this)">🟢 简单</button><button class="filter-btn" onclick="setFilter('structure','中等',this)">🟡 中等</button><button class="filter-btn" onclick="setFilter('structure','困难',this)">🔴 困难</button></div>
+  <input type="text" class="search-box" placeholder="搜索结构..." oninput="filterCards('structure-grid',this.value)">
+  <div id="structure-grid" class="cards-grid"></div>
+</div>
+
+<div id="hardware" class="dimension-section">
+  <div class="section-title">⚙️ 五金维度（200种）</div>
+  <div class="section-desc">拉链50 + 扣具60 + 织带绳索50 + 挂件40</div>
+  <p style="color:#666;padding:40px;text-align:center;">五金维度沿用v1.0完整数据，请在v1.0文件中查看完整清单。</p>
+</div>
+
+<div id="surface" class="dimension-section">
+  <div class="section-title">🔥 表面工艺维度（150种 · 难度分档）</div>
+  <div class="section-desc">洗水40 + 压纹40 + 镀膜涂层35 + 烧花特殊35，按难度分档</div>
+  <div class="filter-bar"><span class="filter-label">难度筛选：</span><button class="filter-btn active" onclick="setFilter('surface','all',this)">全部</button><button class="filter-btn" onclick="setFilter('surface','简单',this)">🟢 简单</button><button class="filter-btn" onclick="setFilter('surface','中等',this)">🟡 中等</button><button class="filter-btn" onclick="setFilter('surface','困难',this)">🔴 困难</button></div>
+  <input type="text" class="search-box" placeholder="搜索工艺..." oninput="filterCards('surface-grid',this.value)">
+  <div id="surface-grid" class="cards-grid"></div>
+</div>
+
+<div id="silhouette" class="dimension-section">
+  <div class="section-title">✂️ 廓形维度（50种 · 难度分档）</div>
+  <div class="section-desc">从短宽Box到破碎重组型，按难度分档</div>
+  <div class="filter-bar"><span class="filter-label">难度筛选：</span><button class="filter-btn active" onclick="setFilter('silhouette','all',this)">全部</button><button class="filter-btn" onclick="setFilter('silhouette','简单',this)">🟢 简单</button><button class="filter-btn" onclick="setFilter('silhouette','中等',this)">🟡 中等</button><button class="filter-btn" onclick="setFilter('silhouette','困难',this)">🔴 困难</button></div>
+  <input type="text" class="search-box" placeholder="搜索廓形..." oninput="filterCards('silhouette-grid',this.value)">
+  <div id="silhouette-grid" class="cards-grid"></div>
+</div>
+
+<div id="color" class="dimension-section">
+  <div class="section-title">🎨 色彩体系维度（5大分类）</div>
+  <div class="section-desc">高饱和 / 金属色 / 渐变色 / 做旧色 / 中性色</div>
+  <div class="filter-bar"><span class="filter-label">分类筛选：</span><button class="filter-btn active" onclick="setColorFilter('all',this)">全部</button><button class="filter-btn" onclick="setColorFilter('高饱和',this)">🔥 高饱和</button><button class="filter-btn" onclick="setColorFilter('金属色',this)">✨ 金属色</button><button class="filter-btn" onclick="setColorFilter('渐变色',this)">🌈 渐变色</button><button class="filter-btn" onclick="setColorFilter('做旧色',this)"> vintage 做旧色</button><button class="filter-btn" onclick="setColorFilter('中性色',this)">🤍 中性色</button></div>
+  <input type="text" class="search-box" placeholder="搜索色彩..." oninput="filterCards('color-grid',this.value)">
+  <div id="color-grid" class="cards-grid"></div>
+</div>
+
+<div id="worldview" class="dimension-section">
+  <div class="section-title">🌍 世界观维度（15种 · 含主图作图风格解构）</div>
+  <div class="section-desc">每个世界观解构出：主图作图风格 / 色彩方案 / 情绪基调 / 参考视觉方向</div>
+  <input type="text" class="search-box" placeholder="搜索世界观..." oninput="filterCards('worldview-grid',this.value)">
+  <div id="worldview-grid" class="cards-grid"></div>
+</div>
+
+<div id="method" class="dimension-section">
+  <div class="section-title">📋 开款组合方法论（v2.0）</div>
+  <div class="section-desc">组合公式、难度策略、世界观主图指导、组合禁忌</div>
+  <div class="method-box">
+    <h3>🔢 组合公式</h3>
+    <p style="color:#aaa;font-size:1.05em;margin:10px 0;">开款方案 = 材质(1-3) × 结构(1-2) × 五金(2-5) × 表面(1-3) × 廓形(1) × 色彩(1-2) × 世界观(1)</p>
+  </div>
+  <div class="method-box">
+    <h3>⭐ 难度策略</h3>
+    <table>
+      <tr><th>难度档</th><th>材质</th><th>结构</th><th>表面</th><th>廓形</th><th>适合场景</th></tr>
+      <tr><td>🟢 简单款</td><td>1级面料</td><td>基础结构</td><td>基础工艺</td><td>常规廓形</td><td>快速翻单/基础款/跑量款</td></tr>
+      <tr><td>🟡 中等款</td><td>2-3级面料</td><td>中等结构</td><td>中等工艺</td><td>有设计廓形</td><td>季度主推/差异化基础款</td></tr>
+      <tr><td>🔴 困难款</td><td>4-5级面料</td><td>复杂结构</td><td>高难工艺</td><td>实验廓形</td><td>形象款/秀场款/概念款</td></tr>
+      <tr><td>⚖️ 混搭策略</td><td>1困难+其余简单</td><td>1中等+其余简单</td><td>1困难+其余基础</td><td>1困难+基础填充</td><td>成本可控的差异化</td></tr>
+    </table>
+  </div>
+  <div class="method-box">
+    <h3>🎨 世界观主图作图风格指导</h3>
+    <p style="color:#aaa;line-height:1.8;margin-bottom:10px;">每个世界观已解构出4个主图维度，直接指导拍摄/设计方向：</p>
+    <table>
+      <tr><th>维度</th><th>说明</th><th>使用方式</th></tr>
+      <tr><td>主图作图风格</td><td>该世界观的视觉风格定义</td><td>指导拍摄构图/渲染风格/排版方向</td></tr>
+      <tr><td>色彩方案</td><td>主图核心配色</td><td>指导背景色/道具色/光线色温</td></tr>
+      <tr><td>情绪基调</td><td>主图应传达的情绪</td><td>指导模特表情/姿势/场景氛围</td></tr>
+      <tr><td>参考视觉方向</td><td>具体的视觉参考</td><td>搜集团队/竞品/电影/艺术参考图</td></tr>
+    </table>
+  </div>
+  <div class="method-box">
+    <h3>🎨 色彩分类使用指南</h3>
+    <table>
+      <tr><th>分类</th><th>特点</th><th>适合场景</th><th>搭配建议</th></tr>
+      <tr><td>🔥 高饱和</td><td>荧光/电光/烈色</td><td>街头/派对/运动</td><td>搭配中性色做底色，高饱和做点缀</td></tr>
+      <tr><td>✨ 金属色</td><td>金/银/铜/全息</td><td>高端/未来/派对</td><td>金属色做主色+深色做背景</td></tr>
+      <tr><td>🌈 渐变色</td><td>多色过渡</td><td>度假/设计/赛博</td><td>渐变色做主视觉+纯色做辅</td></tr>
+      <tr><td>vintage 做旧色</td><td>退色/锈/烟熏</td><td>废土/复古/工装</td><td>做旧色全身统一+小面积亮色</td></tr>
+      <tr><td>🤍 中性色</td><td>大地/灰/驼/白</td><td>通勤/极简/基础</td><td>中性色互搭+1个跳色点缀</td></tr>
+    </table>
+  </div>
+  <div class="method-box">
+    <h3>⚠️ 组合禁忌</h3>
+    <table>
+      <tr><th>禁忌</th><th>原因</th><th>替代方案</th></tr>
+      <tr><td>全维度都选困难</td><td>成本爆炸+供应链难以匹配</td><td>1-2维度困难+其余简单</td></tr>
+      <tr><td>全维度都夸张</td><td>视觉过载，失去焦点</td><td>1-2维度夸张+其余极简</td></tr>
+      <tr><td>材质与工艺冲突</td><td>如精致真丝+粗犷石洗</td><td>匹配面料与工艺兼容性</td></tr>
+      <tr><td>色彩超过3个主色</td><td>花哨无重点</td><td>1主色+1辅色+1点缀色</td></tr>
+      <tr><td>难度不匹配市场</td><td>困难款定价高跑不了量</td><td>明确款型定位再选难度</td></tr>
+    </table>
+  </div>
+</div>
+
+</div>
+<div class="footer">🧪 开款思路实验室 v2.0 | 难度分档 × 世界观主图风格 × 色彩分类 × 交叉组合 × 无限灵感</div>
+
+<script>
+var D = {"material": [["M001", "精梳长绒棉", "纤维长度>35mm，表面光洁，起球率低", "衬衫/T恤", 1, "简单"], ["M002", "比马棉", "丝般光泽，柔糯触感，色牢度高", "高端T恤", 1, "简单"], ["M003", "海岛棉", "全球最稀有棉种，蚕丝般光泽", "奢华基础款", 2, "中等"], ["M004", "亚麻石洗水", "火山石水洗，表面微毛茸", "夏季外套", 2, "中等"], ["M005", "大麻混纺棉", "抗菌防臭，透气性优于纯棉", "户外工装", 2, "中等"], ["M006", "苎麻空气层", "轻质骨架感，不易贴身", "夏季西装", 2, "中等"], ["M007", "桑蚕丝双绉", "双面绉纹，哑光，垂感极佳", "连衣裙", 2, "中等"], ["M008", "桑蚕丝电力纺", "轻薄透亮，丝鸣感强", "内搭/丝巾", 2, "中等"], ["M009", "柞蚕丝粗纺", "野蚕丝，天然米色，粗犷", "文艺外套", 3, "中等"], ["M010", "羊毛精纺薄花呢", "薄而有骨，结构感单品", "西装", 2, "中等"], ["M011", "羊驼绒混纺", "中空纤维，轻暖，无刺扎", "大衣/针织", 3, "中等"], ["M012", "美利奴超细羊毛", "细度<18.5μm，可贴身穿", "高领毛衣", 2, "中等"], ["M013", "马海毛圈圈纱", "长毛绒圈，毛茸朦胧感", "毛衣/围巾", 3, "中等"], ["M014", "羊绒丝混纺", "羊绒的暖+丝的光泽", "奢华针织", 3, "中等"], ["M015", "牦牛绒原色", "高原牦牛绒，天然深棕", "民族外套", 3, "中等"], ["M016", "驼绒驼丝锦", "紧密织造，绒面短密", "大衣面料", 3, "中等"], ["M017", "兔绒混纺", "极软糯，需混纺防掉毛", "针织衫", 3, "中等"], ["M018", "棉麻交捻纱", "棉的柔软+麻的骨架", "文艺衬衫", 1, "简单"], ["M019", "丝麻交织", "经丝纬麻，光泽与肌理并存", "高端夏季", 3, "中等"], ["M020", "有机棉竹节纱", "竹节纹理不规则，手工感", "复古基础款", 2, "中等"], ["M021", "再生PET涤纶", "矿泉水瓶回收，功能等同涤纶", "运动外套", 1, "简单"], ["M022", "莱赛尔天丝", "木浆提取，垂坠如丝", "连衣裙", 1, "简单"], ["M023", "莫代尔空气层", "柔软吸湿，不贴身", "家居服", 1, "简单"], ["M024", "醋酸纤维", "真丝替代品，光泽典雅", "礼服", 2, "中等"], ["M025", "铜氨纤维", "极致柔滑，静电小", "衬衫/里布", 2, "中等"], ["M026", "大豆蛋白纤维", "柔软如羊绒，抗菌", "内衣", 3, "中等"], ["M027", "竹纤维混纺", "天然抗菌，吸湿排汗", "T恤", 1, "简单"], ["M028", "香蕉纤维混纺", "粗犷肌理，可持续叙事", "文艺包袋", 4, "困难"], ["M029", "咖啡碳纤维", "咖啡渣回收，除臭+远红外", "运动内搭", 3, "中等"], ["M030", "蟹壳纤维", "甲壳素提取，天然抗菌", "医美内衣", 4, "困难"], ["M031", "再生尼龙", "渔网回收，强度高", "冲锋衣", 2, "中等"], ["M032", "玉米纤维PLA", "可堆肥降解，硬挺可调", "概念款", 4, "困难"], ["M033", "橙皮纤维", "柑橘皮提取，丝般光泽", "环保高定", 5, "困难"], ["M034", "菠萝叶纤维", "粗犷挺括，类皮革替代", "纯素皮革", 4, "困难"], ["M035", "苹果皮革", "果渣+PU，质感近似真皮", "纯素配饰", 3, "中等"], ["M036", "蘑菇菌丝皮革", "菌丝体培养，可定制纹理", "概念包袋", 5, "困难"], ["M037", "再生羊毛", "旧衣回收再纺，环保标签", "环保大衣", 3, "中等"], ["M038", "茧棉再生混纺", "回收棉+再生纤维，降低水耗", "基础T恤", 2, "中等"], ["M039", "海藻纤维", "海藻提取，富含矿物质", "功能内衣", 4, "困难"], ["M040", "蓖麻油生物尼龙", "植物基尼龙，碳足迹低", "功能外套", 4, "困难"], ["M041", "Gore-Tex薄膜", "防水透气，户外标配", "冲锋衣", 3, "中等"], ["M042", "eVent直排透气", "比Gore-Tex透气性高30%", "高性能户外", 4, "困难"], ["M043", "Schoeller软壳", "四面弹+防风+耐磨", "软壳外套", 4, "困难"], ["M044", "Polartec抓绒", "轻量保暖，压缩性好", "抓绒衣", 2, "中等"], ["M045", "PrimaLoft金标", "仿羽绒结构，湿态保暖", "羽绒替代", 4, "困难"], ["M046", "Outlast相变调温", "微胶囊储热，温度调节", "智能温控", 5, "困难"], ["M047", "石墨烯涂层", "导热+抑菌+抗静电", "概念科技", 5, "困难"], ["M048", "气凝胶夹层", "世界上最轻固体，极致隔热", "极端环境", 5, "困难"], ["M049", "钛金属镀膜", "红外反射，体感降温", "夏季运动", 5, "困难"], ["M050", "远红外陶瓷纤维", "吸收体热发射远红外", "保暖内衣", 4, "困难"], ["M051", "形状记忆合金交织", "热敏变形，自动调节", "概念结构", 5, "困难"], ["M052", "压感导电织物", "织入导电纱，监测心率", "智能服装", 5, "困难"], ["M053", "温致变色纱", "温度变化触发变色", "互动概念", 5, "困难"], ["M054", "光致变色纱", "紫外线照射变色", "户外概念", 4, "困难"], ["M055", "防刺切割纤维", "超高分子量聚乙烯，防割", "工装", 4, "困难"], ["M056", "阻燃芳纶", "永不熔融，自熄", "工业概念", 4, "困难"], ["M057", "超泼水DWR涂层", "水珠滚落，不渗透", "户外基础", 2, "中等"], ["M058", "防蚊虫处理面料", "微胶囊驱虫剂缓释", "户外露营", 4, "困难"], ["M059", "抗菌银离子处理", "银离子杀菌，减少异味", "运动内搭", 3, "中等"], ["M060", "自修复尼龙", "纳米胶囊受损释放修复剂", "概念户外", 5, "困难"], ["M061", "PU涂层尼龙", "漆皮光泽，防水", "机车外套", 2, "中等"], ["M062", "亚光PU革", "哑光皮质替代", "纯素皮革", 2, "中等"], ["M063", "微孔透气涂层", "防水但透气", "通勤外套", 3, "中等"], ["M064", "金属箔贴合", "金/银箔烫贴，华丽", "派对/舞台", 3, "中等"], ["M065", "全息镭射涂层", "彩虹渐变反光", "未来感", 4, "困难"], ["M066", "蜡感涂层棉", "蜡质表面，做旧肌理", "复古工装", 2, "中等"], ["M067", "纸感涂层", "纸质触感，实际涤纶", "极简外套", 3, "中等"], ["M068", "碳涂层防透视", "深色内层防走光", "浅色裤装", 2, "中等"], ["M069", "反光珠光涂层", "微珠反光，夜间可见", "夜跑/机能", 3, "中等"], ["M070", "磨毛涂层", "涂层后磨毛，鹿皮感", "休闲外套", 3, "中等"], ["M071", "双面复合面料", "正反两面不同材质", "可双穿", 3, "中等"], ["M072", "薄膜复合针织", "针织+薄膜，弹力防水", "运动外套", 4, "困难"], ["M073", "贴合泡沫夹层", "泡沫层增加体积感", "Aventure风", 3, "中等"], ["M074", "点胶复合", "点状胶复合，透气", "轻量防风", 3, "中等"], ["M075", "仿皮草复合", "毛绒+底布复合", "冬季外套", 3, "中等"], ["M076", "牛津布PU背胶", "防水耐磨", "包袋/工装", 1, "简单"], ["M077", "蕾丝复合网眼", "立体层次", "女装上衣", 3, "中等"], ["M078", "牛仔布复合罗纹", "外牛仔+内罗纹", "无内衬牛仔", 4, "困难"], ["M079", "网纱复合亮片", "亮片固定于网纱", "派对礼服", 4, "困难"], ["M080", "钛涂层尼龙", "金属光泽，轻薄", "未来主义", 5, "困难"], ["M081", "3D间隔织物", "双层中间纱线连接", "运动保护", 4, "困难"], ["M082", "经编网眼", "规则孔洞，透气", "运动衣", 2, "中等"], ["M083", "提花浮雕面料", "立体花纹，不需额外加工", "高端外套", 4, "困难"], ["M084", "烂花绒", "部分绒面腐蚀形成图案", "晚装礼服", 5, "困难"], ["M085", "剪花织物", "局部剪断纱线形成肌理", "艺术外套", 5, "困难"], ["M086", "缩绒羊毛毡", "羊毛毡化处理，无纺织", "无缝外套", 4, "困难"], ["M087", "水溶蕾丝", "水溶底布留下立体花纹", "高定上衣", 5, "困难"], ["M088", "发泡印花面料", "立体发泡图案", "街头印花", 3, "中等"], ["M089", "烂棉绣花纱", "棉绣于网纱后烂去底棉", "透视层次", 5, "困难"], ["M090", "镭射切割网布", "激光切割精确孔型", "机能透气", 3, "中等"], ["M091", "镶嵌金属丝织物", "金属丝织入，可塑形", "结构配饰", 4, "困难"], ["M092", "羊毛颗粒呢", "表面颗粒状肌理", "复古西装", 3, "中等"], ["M093", "丝绒割绒", "割绒形成天鹅绒面", "复古连衣裙", 4, "困难"], ["M094", "灯芯条绒", "粗条绒，复古质感", "工装/裤装", 2, "中等"], ["M095", "缎纹塔夫绸", "紧密平滑，沙沙声", "礼服/风衣", 3, "中等"], ["M096", "双面异色呢", "正反不同颜色，可双穿", "大衣", 4, "困难"], ["M097", "植绒面料", "静电植绒，丝绒感", "派对外套", 3, "中等"], ["M098", "压花皮革", "模具压花，鳄鱼/鸵鸟纹", "皮质单品", 4, "困难"], ["M099", "编织草席布", "拉菲草编织+底布", "度假风", 3, "中等"], ["M100", "生物蕾丝", "菌丝体生长形成的蕾丝", "概念艺术", 5, "困难"]], "structure": [["S001", "经典衬衫领", "尖领+领座，可系扣", "商务/学院", 1, "简单"], ["S002", "古巴领", "敞口无领座，V形开口", "复古/度假", 1, "简单"], ["S003", "立领", "无翻折，贴合颈部", "极简/东方", 1, "简单"], ["S004", "连身立领", "领与身一体裁剪", "建筑/前卫", 4, "困难"], ["S005", "西装平驳领", "平实稳重，通用西装领", "商务", 3, "中等"], ["S006", "西装戗驳领", "尖角上翘，强势", "正式/权力", 3, "中等"], ["S007", "青果领", "无缺口缎面领", "礼服/优雅", 3, "中等"], ["S008", "大翻领", "宽大翻折领面", "复古/70s", 2, "中等"], ["S009", "蝙蝠领", "宽松下垂领口", "慵懒/波西", 2, "中等"], ["S010", "一字领", "水平横切领口", "优雅/女性", 2, "中等"], ["S011", "方领", "方形开口", "复古/田园", 2, "中等"], ["S012", "心形领", "心形弧线", "浪漫/礼服", 4, "困难"], ["S013", "船型领", "横向宽领口", "法式优雅", 2, "中等"], ["S014", "堆堆领", "宽松高领堆叠", "休闲/北欧", 2, "中等"], ["S015", "半开高领", "前中半开拉链/扣", "户外/机能", 3, "中等"], ["S016", "拉链立领", "立领内置拉链", "运动/机能", 2, "中等"], ["S017", "连帽领", "帽子连接领口", "运动/街头", 2, "中等"], ["S018", "可脱卸帽", "拉链/扣子可拆帽", "户外", 3, "中等"], ["S019", "超大夸张领", "造型感领面超常规", "前卫/舞台", 5, "困难"], ["S020", "不对称领", "左右不对称设计", "解构/前卫", 5, "困难"], ["S021", "无领+镶边", "无领座，包边处理", "极简", 2, "中等"], ["S022", "围巾领", "领部连体围巾", "温暖/造型", 4, "困难"], ["S023", "荡领", "前胸领片自然下垂", "浪漫/女装", 3, "中等"], ["S024", "飘带领", "系带可飘动", "复古浪漫", 3, "中等"], ["S025", "海军领", "方形后背+V形前胸", "学院/童趣", 4, "困难"], ["S026", "装袖标准", "肩线合体，最常见", "通用", 1, "简单"], ["S027", "落肩袖", "肩线下移，宽松", "休闲/oversize", 1, "简单"], ["S028", "插肩袖", "袖连领窝，无肩线", "运动/休闲", 2, "中等"], ["S029", "蝙蝠袖", "腋下宽大，袖口收", "慵懒/波西", 2, "中等"], ["S030", "灯笼袖", "袖身蓬松，袖口收紧", "浪漫/复古", 4, "困难"], ["S031", "羊腿袖", "上宽下窄，肩部蓬", "维多利亚", 5, "困难"], ["S032", "喇叭袖", "袖口外扩", "浪漫/70s", 3, "中等"], ["S033", "泡泡袖", "袖山抽褶蓬起", "甜美/复古", 4, "困难"], ["S034", "飞鼠袖", "腋下无裁断，自然垂", "日系/禅", 3, "中等"], ["S035", "削肩袖", "肩部削切露出肩", "性感/运动", 2, "中等"], ["S036", "7分宽袖", "长度7分，袖口宽大", "东方/禅", 2, "中等"], ["S037", "卷边袖", "可翻卷固定长度", "工装/实用", 1, "简单"], ["S038", "袖袢束口袖", "袖口袢扣调节", "军旅/工装", 2, "中等"], ["S039", "拉链开袖", "袖内侧拉链可敞开", "机能/运动", 3, "中等"], ["S040", "拼接插色袖", "不同颜色/材质拼接", "街头/运动", 3, "中等"], ["S041", "超长盖手袖", "袖长超手腕盖手", "慵懒/暗黑", 2, "中等"], ["S042", "短款截断袖", "故意截短的短袖", "解构/前卫", 4, "困难"], ["S043", "假两件袖", "视觉层叠实际单层", "街头/设计", 4, "困难"], ["S044", "开衩袖", "袖外侧开衩露臂", "性感/前卫", 3, "中等"], ["S045", "绑带袖", "袖上绑带可调节", "废土/机能", 3, "中等"], ["S046", "羽绒充棉袖", "袖部充棉身部不充", "混搭功能", 4, "困难"], ["S047", "网眼拼接袖", "透气网纱拼接", "运动/机能", 3, "中等"], ["S048", "解构拼接袖", "多段不同面料拼接", "解构/前卫", 5, "困难"], ["S049", "可脱卸袖", "拉链拆卸变马甲", "户外", 4, "困难"], ["S050", "无袖/马甲式", "去除袖部结构", "层搭/造型", 1, "简单"], ["S051", "全开明扣门襟", "纽扣全可见", "经典/学院", 1, "简单"], ["S052", "暗扣门襟", "扣子隐藏", "极简/优雅", 3, "中等"], ["S053", "拉链门襟", "拉链开合", "运动/机能", 1, "简单"], ["S054", "磁吸门襟", "磁扣自动吸合", "科技/极简", 4, "困难"], ["S055", "半门襟", "上半部分开合", "套头+灵活", 2, "中等"], ["S056", "双排扣门襟", "两排扣子", "复古/军旅", 3, "中等"], ["S057", "系带门襟", "绳带系结", "民族/度假", 2, "中等"], ["S058", "暗拉链门襟", "拉链隐藏于门襟下", "极简", 3, "中等"], ["S059", "不对称门襟", "偏扣或斜扣", "解构/前卫", 5, "困难"], ["S060", "无门襟套头", "无开合，直接套穿", "极简/基础", 1, "简单"], ["S061", "粘扣门襟", "魔术贴开合", "户外/童趣", 1, "简单"], ["S062", "包边门襟", "门襟边缘包边处理", "精致做工", 3, "中等"], ["S063", "褶裥门襟", "门襟处打褶", "复古细节", 4, "困难"], ["S064", "叠门双层门襟", "双层重叠", "防风/户外", 3, "中等"], ["S065", "隐形按扣门襟", "按扣隐藏于内侧", "极简/科技", 4, "困难"], ["S066", "平直下摆", "水平裁切", "经典/通用", 1, "简单"], ["S067", "弧形下摆", "前圆后方或全弧", "休闲/运动", 2, "中等"], ["S068", "不规则下摆", "长短不一", "解构/前卫", 5, "困难"], ["S069", "前短后长", "后长盖臀", "时尚/修身", 3, "中等"], ["S070", "鱼尾下摆", "后摆延长如鱼尾", "优雅/女性", 4, "困难"], ["S071", "抽绳下摆", "可调节收紧", "户外/运动", 2, "中等"], ["S072", "罗纹下摆", "罗纹收口", "运动/休闲", 1, "简单"], ["S073", "毛边下摆", "不锁边，自然散", "废土/复古", 2, "中等"], ["S074", "拉链扩展下摆", "拉链打开扩展活动量", "机能/骑行", 3, "中等"], ["S075", "开衩下摆", "侧衩或中衩", "便于活动", 2, "中等"], ["S076", "叠层下摆", "多层布料叠搭", "层次/设计", 4, "困难"], ["S077", "不对称斜切下摆", "斜角裁切", "解构/前卫", 5, "困难"], ["S078", "松紧收口下摆", "松紧带收紧", "运动/休闲", 1, "简单"], ["S079", "荷叶边下摆", "波浪扩张", "浪漫/女性", 4, "困难"], ["S080", "可拆卸下摆", "拉链拆卸变短款", "多功能", 4, "困难"]], "hardware": [], "surface": [["P001", "普洗", "基础水洗去浆", "棉/麻", 1, "简单"], ["P002", "石洗", "火山石摩擦做旧", "牛仔/棉", 2, "中等"], ["P003", "酵素洗", "生物酶软化", "牛仔/T恤", 2, "中等"], ["P004", "漂洗", "漂白褪色", "牛仔/棉", 2, "中等"], ["P005", "砂洗", "砂粉摩擦起绒", "真丝/棉", 2, "中等"], ["P006", "免打石洗", "无打石痕石洗", "牛仔", 3, "中等"], ["P007", "普洗+柔软剂", "柔软增触", "通用", 1, "简单"], ["P008", "酸洗", "强酸烧灼纹", "牛仔/复古", 4, "困难"], ["P009", "冰洗", "冰块纹理", "牛仔", 3, "中等"], ["P010", "墨洗", "墨水浸染效果", "牛仔/棉", 3, "中等"], ["P011", "喷砂洗", "局部砂喷", "牛仔", 3, "中等"], ["P012", "猫须洗", "须状褶皱", "牛仔", 2, "中等"], ["P013", "3D猫须", "立体猫须", "牛仔", 4, "困难"], ["P014", "毛边洗", "边缘自然散开", "牛仔/棉", 2, "中等"], ["P015", "破洞+修补洗", "破洞手工修补", "牛仔/废土", 4, "困难"], ["P016", "扎染洗", "捆扎浸染", "通用", 2, "中等"], ["P017", "渐变洗", "颜色渐变退", "牛仔/棉", 3, "中等"], ["P018", "油污洗", "做旧油渍效果", "废土/工装", 3, "中等"], ["P019", "手擦做旧", "手工摩擦", "牛仔", 2, "中等"], ["P020", "刮白做旧", "刀刮白痕", "牛仔", 3, "中等"], ["P021", "树脂褶皱定型", "永久褶皱", "棉/麻", 3, "中等"], ["P022", "猫须+破坏组合", "组合做旧", "牛仔", 4, "困难"], ["P023", "纯碱洗", "去色泛白", "棉", 1, "简单"], ["P024", "高锰酸钾漂", "强漂白", "牛仔", 3, "中等"], ["P025", "次氯酸钠漂", "化学漂白", "牛仔", 3, "中等"], ["P026", "生物抛光", "去毛球", "棉/粘胶", 2, "中等"], ["P027", "树脂涂层洗", "涂层后水洗", "涂层面料", 3, "中等"], ["P028", "蜡洗", "蜡质涂层做旧", "复古工装", 3, "中等"], ["P029", "粉洗", "白粉附着做旧", "废土", 3, "中等"], ["P030", "烟熏洗", "烟熏色调", "暗黑/废土", 4, "困难"], ["P031", "锈蚀洗", "铁锈效果", "废土/工业", 4, "困难"], ["P032", "泼墨洗", "墨点泼洒", "街头/艺术", 3, "中等"], ["P033", "扎漂", "扎+漂组合", "牛仔", 3, "中等"], ["P034", "石漂组合", "石洗+漂白", "牛仔", 3, "中等"], ["P035", "二次染色洗", "先洗后染", "复古", 3, "中等"], ["P036", "芥末黄做旧", "黄色调做旧", "复古/军旅", 3, "中等"], ["P037", "灰度做旧", "灰色调退色", "极简/废土", 3, "中等"], ["P038", "咖啡渍做旧", "咖啡色斑点", "废土/复古", 3, "中等"], ["P039", "手绘做旧", "手工绘制痕迹", "艺术款", 4, "困难"], ["P040", "超声波洗", "超声波清洁", "精细面料", 4, "困难"], ["P041", "压花-鳄鱼纹", "鳄鱼皮纹理", "皮革/PU", 3, "中等"], ["P042", "压花-鸵鸟纹", "鸵鸟皮纹理", "皮革/PU", 3, "中等"], ["P043", "压花-蜥蜴纹", "蜥蜴皮纹理", "皮革/PU", 3, "中等"], ["P044", "压花-蛇纹", "蛇皮纹理", "皮革/PU", 3, "中等"], ["P045", "压花-鱼鳞纹", "鱼鳞排列", "皮革/金属", 3, "中等"], ["P046", "压花-几何纹", "几何图案", "皮革/面料", 3, "中等"], ["P047", "压花-花卉纹", "花卉浮雕", "面料/皮革", 4, "困难"], ["P048", "压花-字母纹", "品牌字母", "皮革/面料", 3, "中等"], ["P049", "压花-碳纹", "碳纤维纹理", "机能面料", 4, "困难"], ["P050", "压花-涟漪纹", "水波纹理", "面料", 3, "中等"], ["P051", "压花-裂纹", "龟裂效果", "皮革/涂层", 4, "困难"], ["P052", "压花-碎石纹", "碎石质感", "面料/皮革", 4, "困难"], ["P053", "压花-树皮纹", "树皮肌理", "面料", 3, "中等"], ["P054", "压花-蜂巢纹", "六边形蜂巢", "功能面料", 4, "困难"], ["P055", "绗缝菱格", "菱形绗缝", "羽绒/棉服", 2, "中等"], ["P056", "绗缝平行", "平行线绗缝", "羽绒/棉服", 1, "简单"], ["P057", "绗缝波浪", "波浪形绗缝", "羽绒/棉服", 3, "中等"], ["P058", "绗缝格纹", "方格绗缝", "羽绒/棉服", 2, "中等"], ["P059", "3D立体压花", "立体浮雕", "特殊面料", 5, "困难"], ["P060", "局部压暗", "局部压光", "丝绒/天鹅绒", 4, "困难"], ["P061", "自然褶", "自然褶皱", "麻/棉", 1, "简单"], ["P062", "规则褶", "规则排列褶", "雪纺/涤纶", 3, "中等"], ["P063", "碎褶", "不规则碎褶", "通用", 2, "中等"], ["P064", "纸褶", "纸质褶皱", "涤纶纸感", 4, "困难"], ["P065", "树皮皱", "树皮皱纹", "涤纶/棉", 3, "中等"], ["P066", "段染褶", "段染+褶皱", "设计面料", 4, "困难"], ["P067", "阳极氧化", "金属阳极氧化", "铝合金", 4, "困难"], ["P068", "金属拉丝", "金属拉丝", "金属五金", 3, "中等"], ["P069", "金属喷砂", "金属喷砂哑光", "金属五金", 3, "中等"], ["P070", "锤纹", "锤击纹理", "金属/铜", 4, "困难"], ["P071", "布纹压纹", "布面压纹", "金属面", 3, "中等"], ["P072", "激光雕刻", "激光精准雕刻", "通用", 3, "中等"], ["P073", "热熔凹凸", "热熔胶定型", "化纤", 4, "困难"], ["P074", "植线压花", "植绒+压花组合", "丝绒/面料", 5, "困难"], ["P075", "烫金压花", "金箔烫压", "皮革/面料", 4, "困难"], ["P076", "烫银压花", "银箔烫压", "皮革/面料", 4, "困难"], ["P077", "全息烫", "全息箔烫压", "派对/未来", 4, "困难"], ["P078", "哑光覆膜", "哑光膜压", "皮革/纸感", 2, "中等"], ["P079", "高光覆膜", "高光膜压", "皮革/漆皮", 2, "中等"], ["P080", "微浮雕", "微小浮雕图案", "面料", 5, "困难"], ["P081", "PU涂层-亮面", "漆皮亮光", "尼龙/棉", 2, "中等"], ["P082", "PU涂层-哑光", "哑光皮感", "尼龙/棉", 2, "中等"], ["P083", "PU涂层-皱纹", "皱纹皮感", "尼龙", 3, "中等"], ["P084", "PU涂层-变色", "温度变色PU", "概念款", 5, "困难"], ["P085", "硅胶涂层", "透明硅胶膜", "防水/概念", 4, "困难"], ["P086", "特氟龙涂层", "防水防油污", "户外面料", 3, "中等"], ["P087", "纳米自洁涂层", "荷叶效应自洁", "户外/概念", 5, "困难"], ["P088", "金属镀膜-金色", "真空镀金", "面料/皮革", 4, "困难"], ["P089", "金属镀膜-银色", "真空镀银", "面料/皮革", 4, "困难"], ["P090", "金属镀膜-铜色", "真空镀铜", "面料/皮革", 4, "困难"], ["P091", "金属镀膜-枪黑", "枪黑色镀膜", "面料/皮革", 4, "困难"], ["P092", "金属镀膜-钛色", "钛色镀膜", "机能面料", 5, "困难"], ["P093", "金属镀膜-彩虹", "多层干涉彩虹", "未来/派对", 5, "困难"], ["P094", "金属镀膜-镭射", "全息镭射", "派对/赛博", 5, "困难"], ["P095", "金属镀膜-液态", "液态金属效果", "未来/前卫", 5, "困难"], ["P096", "防紫外涂层", "UPF50+", "户外面料", 3, "中等"], ["P097", "阻燃涂层", "阻燃处理", "工装/概念", 4, "困难"], ["P098", "抗菌涂层", "银离子涂层", "运动面料", 3, "中等"], ["P099", "远红外涂层", "陶瓷粉涂层", "保暖面料", 4, "困难"], ["P100", "石墨烯涂层", "导电+抗菌", "科技面料", 5, "困难"], ["P101", "温感变色涂层", "温度变色", "互动概念", 5, "困难"], ["P102", "光感变色涂层", "紫外变色", "户外概念", 5, "困难"], ["P103", "压感变色涂层", "压力变色", "互动概念", 5, "困难"], ["P104", "导电涂层", "导电银浆", "智能面料", 5, "困难"], ["P105", "磁性涂层", "磁性微粒", "概念面料", 5, "困难"], ["P106", "荧光涂层", "荧光色膜", "安全/派对", 2, "中等"], ["P107", "夜光涂层", "蓄光发光", "趣味/安全", 3, "中等"], ["P108", "反光涂层", "玻璃微珠反光", "安全/运动", 3, "中等"], ["P109", "蜡感涂层", "蜡质触感", "复古工装", 2, "中等"], ["P110", "纸感涂层", "纸质触感", "极简面料", 3, "中等"], ["P111", "丝绒涂层", "绒毛静电植绒", "派对面料", 4, "困难"], ["P112", "珠光涂层", "珍珠光泽", "女性时装", 3, "中等"], ["P113", "金葱涂层", "金粉闪烁", "派对/华丽", 3, "中等"], ["P114", "银葱涂层", "银粉闪烁", "派对/未来", 3, "中等"], ["P115", "全息涂层", "全息薄膜", "未来/赛博", 5, "困难"], ["P116", "激光烧花-几何", "激光切割几何", "涤纶/尼龙", 3, "中等"], ["P117", "激光烧花-花卉", "激光切割花卉", "涤纶/蕾丝", 4, "困难"], ["P118", "激光烧花-文字", "激光刻字", "通用", 2, "中等"], ["P119", "激光烧蚀-渐变", "激光渐变烧蚀", "牛仔/棉", 4, "困难"], ["P120", "激光蚀刻-微纹", "微细纹理蚀刻", "皮革/金属", 5, "困难"], ["P121", "热切割-封边", "热熔封边不散", "化纤面料", 2, "中等"], ["P122", "超声波焊接", "无缝拼接", "化纤/防水", 5, "困难"], ["P123", "超声波切割", "无散边切割", "化纤面料", 4, "困难"], ["P124", "超声波压花", "超声波压纹", "化纤面料", 4, "困难"], ["P125", "烫画-白墨", "白墨烫画", "通用", 1, "简单"], ["P126", "烫画-金银", "金属箔烫画", "通用", 2, "中等"], ["P127", "烫画-全息", "全息箔烫画", "街头/派对", 3, "中等"], ["P128", "烫画-夜光", "夜光烫画", "趣味/安全", 3, "中等"], ["P129", "烫画-温变", "温度变色烫画", "互动概念", 4, "困难"], ["P130", "数码直喷DTG", "直接数码印花", "棉/混纺", 2, "中等"], ["P131", "热升华转印", "分散染料升华", "涤纶", 2, "中等"], ["P132", "丝网印花", "丝网漏印", "通用", 1, "简单"], ["P133", "植绒印花", "静电植绒图案", "通用", 3, "中等"], ["P134", "发泡印花", "立体发泡图案", "街头", 3, "中等"], ["P135", "烂花印花", "腐蚀性印花", "天鹅绒/棉", 5, "困难"], ["P136", "拔染印花", "拔色印花", "牛仔/棉", 4, "困难"], ["P137", "涂料印花", "颜料直接印花", "通用", 1, "简单"], ["P138", "活性印花", "活性染料印花", "棉/麻/丝", 2, "中等"], ["P139", "酸性印花", "酸性染料印花", "尼龙/丝", 3, "中等"], ["P140", "分散印花", "分散染料印花", "涤纶", 2, "中等"], ["P141", "数码热转印", "热转印纸转印", "通用", 2, "中等"], ["P142", "冷转印", "冷转移印花", "棉/麻", 4, "困难"], ["P143", "手绘", "手工绘制", "艺术款", 4, "困难"], ["P144", "扎染", "捆扎染色", "通用", 2, "中等"], ["P145", "蜡染", "蜡封防染", "棉/民族", 4, "困难"], ["P146", "夹染", "板夹染色", "通用", 3, "中等"], ["P147", "喷枪上色", "气喷渐变", "通用", 3, "中等"], ["P148", "手工刷染", "刷子手工染色", "复古", 3, "中等"], ["P149", "渐变浸染", "渐变颜色浸染", "通用", 3, "中等"], ["P150", "生物染色", "天然植物/菌染色", "环保/概念", 5, "困难"]], "silhouette": [["F001", "短宽Box", "衣长短+衣宽宽，箱型", "街头/Y2K", 1, "简单"], ["F002", "长窄Slim", "衣身长+宽度窄，修长", "暗黑/极简", 2, "中等"], ["F003", "气球Balloon", "上宽下收，球形膨胀", "前卫/实验", 4, "困难"], ["F004", "茧型Cocoon", "全身圆润包裹", "优雅/复古", 3, "中等"], ["F005", "A字型", "上窄下宽，三角", "优雅/女性", 2, "中等"], ["F006", "H直筒", "上下同宽，矩形", "极简/利落", 1, "简单"], ["F007", "X收腰", "肩宽+腰细+下摆宽", "经典/女性", 3, "中等"], ["F008", "T倒三角", "肩宽+下收", "权力/80s", 3, "中等"], ["F009", "O圆型", "全身圆润无腰", "慵懒/北欧", 2, "中等"], ["F010", "沙漏型", "强调腰线曲线", "性感/经典", 4, "困难"], ["F011", "超大Oversize", "全维度放大3-4码", "街头/慵懒", 2, "中等"], ["F012", "紧身Slim-fit", "全身贴合曲线", "运动/性感", 3, "中等"], ["F013", "不对称裁剪", "左右不对称", "解构/前卫", 5, "困难"], ["F014", "高低差", "前短后长或侧不等", "前卫/设计", 4, "困难"], ["F015", "超长及踝", "衣长到脚踝", "仪式/前卫", 4, "困难"], ["F016", "超短露腰", "衣长到肋骨", "Y2K/运动", 2, "中等"], ["F017", "斗篷型", "无袖或连袖宽身", "戏剧/复古", 4, "困难"], ["F018", "降落伞型", "蓬松+下摆收口", "机能/运动", 4, "困难"], ["F019", "鱼尾型", "上身合体+下摆扩散", "优雅/女性", 4, "困难"], ["F020", "层叠蛋糕型", "多层水平扩张", "浪漫/礼服", 5, "困难"], ["F021", "裹身Wrap", "交叠系带", "优雅/度假", 3, "中等"], ["F022", "马甲背心型", "无袖+合体", "层搭/学院", 2, "中等"], ["F023", "修身西服型", "肩线明确+收腰", "商务/正装", 3, "中等"], ["F024", "宽肩阔身", "垫肩+直身", "权力/80s", 3, "中等"], ["F025", "落肩宽松", "肩线下移+宽松", "休闲/街头", 1, "简单"], ["F026", "连身A字", "从颈部直扩到下摆", "极简/建筑", 3, "中等"], ["F027", "超短蓬松", "短身+膨胀", "甜美/Y2K", 3, "中等"], ["F028", "长裙式", "极长+垂感", "浪漫/仪式", 3, "中等"], ["F029", "工装宽松", "多袋+宽松", "工装/机能", 2, "中等"], ["F030", "旗袍合体", "立领+收腰+开衩", "东方/优雅", 5, "困难"], ["F031", "斜裁流线", "45度斜裁流动", "优雅/30s", 5, "困难"], ["F032", "解构拼接", "多件视觉合一", "解构/前卫", 5, "困难"], ["F033", "超宽蝙蝠", "腋下极度展开", "慵懒/前卫", 3, "中等"], ["F034", "紧身束腰", "内束腰带+紧身", "军旅/性感", 4, "困难"], ["F035", "硬挺建筑感", "材质硬+结构锐利", "建筑/前卫", 4, "困难"], ["F036", "软垂褶皱", "细软面料自然垂", "浪漫/东方", 4, "困难"], ["F037", "短款截断", "故意截短", "街头/Y2K", 2, "中等"], ["F038", "加长盖手", "袖长超手", "暗黑/慵懒", 2, "中等"], ["F039", "前开V下扩", "V领+下摆扩展", "优雅/女性", 3, "中等"], ["F040", "高领包裹型", "高领+合体包裹", "极简/保暖", 2, "中等"], ["F041", "多层叠穿型", "故意多层露出", "街头/设计", 4, "困难"], ["F042", "单肩不对称", "一肩露一肩盖", "性感/前卫", 5, "困难"], ["F043", "抹胸直筒", "无肩+直身", "性感/极简", 3, "中等"], ["F044", "高腰修长", "高腰线+长身", "复古/优雅", 3, "中等"], ["F045", "低腰宽松", "低腰+宽松", "街头/00s", 2, "中等"], ["F046", "梯形上窄下宽", "渐变扩张", "建筑/设计", 4, "困难"], ["F047", "倒梯形上宽下窄", "肩宽下收", "权力/运动", 3, "中等"], ["F048", "球形短款", "短+球型膨胀", "前卫/实验", 5, "困难"], ["F049", "流线型运动", "符合人体工学线条", "运动/机能", 4, "困难"], ["F050", "破碎重组型", "多碎片重新组合", "解构/艺术", 5, "困难"]], "color": [["C001", "荧光绿", "#39FF14", "前卫/能量", "街头/运动/赛博", "高饱和"], ["C002", "荧光橙", "#FF5F00", "活力/警示", "户外/街头", "高饱和"], ["C003", "荧光粉", "#FF6EC7", "Y2K/甜酷", "派对/街头", "高饱和"], ["C004", "电光蓝", "#0080FF", "科技/未来", "机能/运动", "高饱和"], ["C005", "电光紫", "#8B00FF", "神秘/未来", "暗黑/赛博", "高饱和"], ["C006", "明黄", "#FFD700", "活力/醒目", "运动/街头", "高饱和"], ["C007", "烈焰红", "#FF2400", "激情/力量", "派对/运动", "高饱和"], ["C008", "翠绿", "#00C957", "生命力/鲜锐", "度假/设计", "高饱和"], ["C009", "宝蓝", "#0047AB", "深邃/高端", "商务/设计", "高饱和"], ["C010", "玫红", "#E0115F", "女性力量", "女装/派对", "高饱和"], ["C011", "香槟金", "#F7E7CE", "奢华/优雅", "高端/派对", "金属色"], ["C012", "玫瑰金", "#B76E79", "女性/精致", "女装高端", "金属色"], ["C013", "枪黑", "#2B2B2B", "暗黑/机能", "暗黑/科技", "金属色"], ["C014", "钛银", "#C0C0C0", "科技/冷感", "机能/未来", "金属色"], ["C015", "古铜", "#B87333", "复古/工装", "复古/民族", "金属色"], ["C016", "铂金", "#E5E4E2", "奢华/纯净", "高定/极简", "金属色"], ["C017", "液态银", "#D3D3D3", "未来/赛博", "赛博/前卫", "金属色"], ["C018", "哑光金", "#D4AF37", "质感/低调", "高端/设计", "金属色"], ["C019", "做旧铜", "#7B5A3F", "废土/工业", "废土/复古", "金属色"], ["C020", "全息彩", "rainbow", "派对/未来", "派对/赛博", "金属色"], ["C021", "日落渐变", "linear", "浪漫/温暖", "度假/设计", "渐变色"], ["C022", "海洋渐变", "linear", "清新/自由", "度假/运动", "渐变色"], ["C023", "火焰渐变", "linear", "热情/能量", "运动/街头", "渐变色"], ["C024", "极光渐变", "linear", "神秘/未来", "赛博/前卫", "渐变色"], ["C025", "森林渐变", "linear", "自然/治愈", "户外/自然", "渐变色"], ["C026", "沙漠渐变", "linear", "大地/温暖", "度假/工装", "渐变色"], ["C027", "星空渐变", "linear", "神秘/深邃", "派对/暗黑", "渐变色"], ["C028", "薰衣草渐变", "linear", "梦幻/女性", "女装/浪漫", "渐变色"], ["C029", "金属渐变", "linear", "奢华/流动", "高端/派对", "渐变色"], ["C030", "烟雾渐变", "linear", "朦胧/极简", "极简/设计", "渐变色"], ["C031", "退色蓝", "#6B8E9F", "复古/怀旧", "牛仔/复古", "做旧色"], ["C032", "水洗灰", "#B0B0B0", "朦胧/慵懒", "极简/休闲", "做旧色"], ["C033", "锈红", "#8B3A3A", "废土/工业", "废土/工装", "做旧色"], ["C034", "烟熏黑", "#2F2F2F", "暗黑/深沉", "暗黑/废土", "做旧色"], ["C035", "旧报纸黄", "#F0E6D2", "复古/怀旧", "复古/文艺", "做旧色"], ["C036", "苔藓绿", "#8A9A5B", "自然/旧化", "户外/复古", "做旧色"], ["C037", "旧军绿", "#4B5320", "军旅/复古", "军旅/工装", "做旧色"], ["C038", "退色粉", "#D4A5A5", "柔和/怀旧", "女装/复古", "做旧色"], ["C039", "咖啡渍", "#6F4E37", "废土/叙事", "废土/工装", "做旧色"], ["C040", "泛黄白", "#F5F5DC", "时间感/复古", "复古/基础", "做旧色"], ["C041", "燕麦色", "#D4C5A0", "温暖/自然", "基础/北欧", "中性色"], ["C042", "驼色", "#C19A6B", "经典/大地", "大衣/通勤", "中性色"], ["C043", "灰褐色", "#80806F", "中性/沉稳", "通勤/极简", "中性色"], ["C044", "沙色", "#C2B280", "沙漠/户外", "户外/度假", "中性色"], ["C045", "石板灰", "#708090", "冷静/建筑", "极简/设计", "中性色"], ["C046", "奶油白", "#FFFDD0", "温柔/纯净", "基础/女性", "中性色"], ["C047", "深咖", "#3E2723", "沉稳/秋冬", "秋冬外套", "中性色"], ["C048", "橄榄绿", "#556B2F", "军旅/户外", "工装/户外", "中性色"], ["C049", "赤陶", "#B7410E", "暖土/手工", "民族/度假", "中性色"], ["C050", "墨蓝", "#003366", "深沉/经典", "商务/正装", "中性色"]], "worldview": [["W001", "废土 Wasteland", "文明崩塌后的生存美学", "锈蚀|破损|修补|尘土|油污", "材质M054/M073+结构S045+五金H019+表面P029/P031+廓形F029/F041", "废土纪实", "灰土黄/锈红/油黑", "荒芜|粗粝|生存", "Mad Max概念图/末日废墟摄影"], ["W002", "夜店 Nightclub", "暗夜中的光与欲望", "金属|亮面|全息|荧光|透视", "材质M065/M080+结构S019+五金H010/H094+表面P093/P094+廓形F011/F020", "赛博夜场视觉", "电光紫/荧光粉/全息彩虹", "迷幻|张力|光污染", " Blade Runner2049剧照/电子音乐节视觉"], ["W003", "未来 Future", "科技高度发达的冷感乌托邦", "银色|金属|几何|无缝|液态", "材质M047/M048+结构S004+五金H020/H041+表面P092/P095+廓形F006/F035", "极简未来主义", "钛银/纯白/冷灰", "秩序|冰冷|永恒", "Syd Mead概念图/Apple产品设计语言"], ["W004", "露营 Camping", "回归自然的户外生活", "大地色|功能|拼贴|质感", "材质M041/M044+结构S018+五金H111/H119+表面P087+廓形F029/F025", "户外生活方式", "橄榄绿/沙色/焦橙", "自然|功能|松弛", "Patagonia目录/Snow Peak视觉手册"], ["W005", "实验室 Lab", "科学研究的精密美学", "白色|透明|刻度|功能", "材质M052/M053+结构S004/S053+五金H034/H074+表面P085/P110+廓形F006/F023", "实验器械美学", "纯白/透明/不锈钢蓝", "精密|冷静|理性", "Muji实验室系列/航天器材手册"], ["W006", "赛博朋克 Cyberpunk", "高科技低生活", "霓虹|全息|破败|金属", "材质M065/M080+结构S045+五金H199+表面P094/P115+廓形F001/F029", "赛博废墟美学", "霓虹粉/电光蓝/全息", "混乱|霓虹|底层", " Ghost in the Shell/ Cyberpunk 2077概念图"], ["W007", "东方禅意 Zen", "东方哲学的内敛宁静", "麻|棉|自然色|宽松", "材质M006/M020+结构S003/S034+五金H054+表面P061/P062+廓形F006/F036", "水墨留白", "墨色/宣纸白/竹青", "留白|呼吸|静默", "山本耀司Lookbook/侘寂美学摄影"], ["W008", "维多利亚 Victorian", "19世纪英伦的华丽与克制", "蕾丝|天鹅绒|束腰|高领", "材质M007/M093+结构S006/S031+五金H056/H060+表面P060/P111+廓形F010/F022", "暗黑浪漫主义", "酒红/墨绿/暗金", "华丽|压抑|仪式", "Tim Burton电影美术/Alexander McQueen秀场"], ["W009", "工装 Workwear", "劳动者的功能与坚韧", "帆布|铜扣|多袋|耐磨", "材质M005/M061+结构S038+五金H001/H067+表面P027/P029+廓形F029/F045", "工业功能主义", "卡其/铜色/靛蓝", "坚固|实用|朴素", "Levis Vintage Clothing/Carhartt WIP目录"], ["W010", "街头 Streetwear", "城市亚文化的能量", "超大|撞色|印花|logo", "材质M021/M088+结构S027/S051+五金H034/H161+表面P088/P134+廓形F001/F011", "街头拼贴艺术", "撞色/荧光/黑白", "叛逆|活力|草根", " Supreme宣传图/ Stussy视觉设计"], ["W011", "极简 Minimalism", "少即是多的纯粹", "纯色|无装饰|直线条", "材质M001/M025+结构S003/S052+五金H025/H064+表面P082/P110+廓形F006/F026", "极简几何美学", "纯白/纯黑/灰阶", "纯粹|克制|永恒", "Jil Sander Lookbook/Muji视觉系统"], ["W012", "浪漫 Romantic", "柔美梦幻的感性表达", "蕾丝|丝带|花卉|粉调", "材质M007/M022+结构S030/S079+五金H093/H137+表面P082/P112+廓形F004/F020", "浪漫水彩画风", "粉调/雾蓝/珍珠白", "柔美|梦幻|飘逸", " Dior高定秀场/水彩花卉插画"], ["W013", "军旅 Military", "军事的纪律与功能", "迷彩|铜扣|肩章|硬挺", "材质M055/M061+结构S038/S056+五金H057/H067+表面P027/P109+廓形F008/F034", "军规功能美学", "军绿/卡其/黑", "纪律|硬朗|功能", " Alpha Industries目录/军事装备图鉴"], ["W014", "蒸汽朋克 Steampunk", "蒸汽时代的机械浪漫", "铜齿轮|皮革|做旧|机械", "材质M015/M061+结构S024+五金H077/H177+表面P019/P109+廓形F024/F034", "维多利亚机械美学", "古铜/深棕/黄铜", "复古|机械|浪漫", "Hugo Cabret电影美术/蒸汽朋克概念图集"], ["W015", "波西米亚 Bohemian", "自由不羁的游牧灵魂", "印花|流苏|层叠|混搭", "材质M004/M008+结构S009/S029+五金H115/H183+表面P145/P146+廓形F021/F041", "游牧拼贴艺术", "赤陶/孔雀蓝/大地色", "自由|层叠|异域", "Free People目录/Coachella音乐节街拍"]]};
+var currentFilter = {};
+
+function showSection(name, btn){
+  document.querySelectorAll('.dimension-section').forEach(function(s){s.classList.remove('active')});
+  document.getElementById(name).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active')});
+  if(btn) btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function setFilter(type, diff, btn){
+  currentFilter[type] = diff;
+  // Update buttons
+  btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  // Re-render
+  var items = D[type];
+  if(diff !== 'all'){
+    items = items.filter(function(item){return item[5] === diff});
+  }
+  renderGrid(type+'-grid', items, type);
+}
+
+function setColorFilter(cat, btn){
+  currentFilter['color'] = cat;
+  btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  var items = D.color;
+  if(cat !== 'all'){
+    items = items.filter(function(item){return item[5] === cat});
+  }
+  renderGrid('color-grid', items, 'color');
+}
+
+function makeCard(item, type){
+  if(type==='color'){
+    var swatchStyle = item[2].indexOf('linear')>=0 || item[2]==='rainbow'
+      ? (item[2]==='rainbow' ? 'background:linear-gradient(135deg,#ff0000,#ff8a00,#ffe600,#00ff00,#00b3ff,#7a00e6)' : 'background:linear-gradient(135deg,#ff6ec7,#e94560)')
+      : 'background:'+item[2];
+    return '<div class="card color-card"><div class="color-swatch" style="'+swatchStyle+'"></div><div><div class="card-id">'+item[0]+'</div><div class="card-name">'+item[1]+'</div><div class="card-desc">'+item[3]+'</div><div class="card-tag">'+item[4]+'</div><span class="card-tag cat-'+item[5]+'">'+item[5]+'</span></div></div>';
+  }
+  if(type==='worldview'){
+    var kws = item[3].split('|').map(function(k){return '<span class="wv-keyword">'+k+'</span>'}).join('');
+    return '<div class="card" style="border-left:4px solid #e94560">'
+      +'<div class="card-id">'+item[0]+'</div>'
+      +'<div class="card-name">'+item[1]+'</div>'
+      +'<div class="card-desc">'+item[2]+'</div>'
+      +'<div class="wv-keywords">'+kws+'</div>'
+      +'<div class="wv-art-box">'
+      +'<div class="wv-art-label">🎨 主图作图风格</div>'
+      +'<div class="wv-art-style">风格：'+item[5]+'</div>'
+      +'<div class="wv-art-palette"><span class="wv-art-palette-label">色彩方案：</span><span class="wv-art-palette-val">'+item[6]+'</span></div>'
+      +'<div class="wv-art-mood">情绪基调：'+item[7]+'</div>'
+      +'<div class="wv-art-ref">参考视觉：'+item[8]+'</div>'
+      +'</div>'
+      +'<div class="wv-combo">推荐组合：'+item[4]+'</div>'
+      +'</div>';
+  }
+  // material, structure, surface, silhouette — have difficulty
+  var diffClass = item[5];
+  return '<div class="card"><div class="card-id">'+item[0]+'</div><div class="card-name">'+item[1]+'<span class="diff-badge '+diffClass+'">'+diffClass+' '+item[4]+'★</span></div><div class="card-desc">'+item[2]+'</div><div class="card-tag">'+item[3]+'</div></div>';
+}
+
+function renderGrid(gridId, items, type){
+  var html = items.map(function(item){return makeCard(item, type)}).join('');
+  document.getElementById(gridId).innerHTML = html;
+}
+
+function filterCards(gridId, query){
+  query = query.toLowerCase();
+  var type = gridId.replace('-grid','');
+  var items = D[type];
+  // Apply difficulty filter if set
+  if(currentFilter[type] && currentFilter[type] !== 'all'){
+    items = items.filter(function(item){return item[5] === currentFilter[type]});
+  }
+  if(query){
+    items = items.filter(function(item){
+      return item.some(function(field){return String(field).toLowerCase().indexOf(query)>=0});
+    });
+  }
+  renderGrid(gridId, items, type);
+}
+
+function pickRandom(arr, n){
+  var result = [];
+  var copy = arr.slice();
+  for(var i=0;i<n && copy.length>0;i++){
+    var idx = Math.floor(Math.random()*copy.length);
+    result.push(copy[idx]);
+    copy.splice(idx,1);
+  }
+  return result;
+}
+
+function pickByDiff(arr, n, diff){
+  var filtered = arr.filter(function(item){return item[5] === diff});
+  if(filtered.length < n) filtered = arr.slice(); // fallback
+  return pickRandom(filtered, n);
+}
+
+function diffStars(level){
+  var html = '';
+  for(var i=1;i<=5;i++){
+    html += '<span class="result-diff-dot'+(i<=level?' on':'')+'"></span>';
+  }
+  return html;
+}
+
+function generateConcept(diffFilter){
+  var mats, strs, sfs, sil;
+  if(diffFilter){
+    mats = pickByDiff(D.material, 2, diffFilter);
+    strs = pickByDiff(D.structure, 2, diffFilter);
+    sfs = pickByDiff(D.surface, 2, diffFilter);
+    sil = pickByDiff(D.silhouette, 1, diffFilter);
+  } else {
+    mats = pickRandom(D.material, 2);
+    strs = pickRandom(D.structure, 2);
+    sfs = pickRandom(D.surface, 2);
+    sil = pickRandom(D.silhouette, 1);
+  }
+  var col = pickRandom(D.color, 1);
+  var wv = pickRandom(D.worldview, 1);
+
+  // Calculate average difficulty
+  var totalDiff = mats[0][4]+mats[1][4]+strs[0][4]+strs[1][4]+sfs[0][4]+sfs[1][4]+sil[0][4];
+  var avgDiff = Math.round(totalDiff / 7 * 10) / 10;
+
+  var html = '';
+  html += '<div class="result-dimension"><div class="result-label">🧵 材质</div><div class="result-value">'+mats[0][1]+'<span class="result-diff diff-'+mats[0][4]+'">'+mats[0][5]+'</span> + '+mats[1][1]+'<span class="result-diff diff-'+mats[1][4]+'">'+mats[1][5]+'</span></div></div>';
+  html += '<div class="result-dimension"><div class="result-label">📐 结构</div><div class="result-value">'+strs[0][1]+'<span class="result-diff diff-'+strs[0][4]+'">'+strs[0][5]+'</span> + '+strs[1][1]+'<span class="result-diff diff-'+strs[1][4]+'">'+strs[1][5]+'</span></div></div>';
+  html += '<div class="result-dimension"><div class="result-label">🔥 表面工艺</div><div class="result-value">'+sfs[0][1]+'<span class="result-diff diff-'+sfs[0][4]+'">'+sfs[0][5]+'</span> + '+sfs[1][1]+'<span class="result-diff diff-'+sfs[1][4]+'">'+sfs[1][5]+'</span></div></div>';
+  html += '<div class="result-dimension"><div class="result-label">✂️ 廓形</div><div class="result-value">'+sil[0][1]+'<span class="result-diff diff-'+sil[0][4]+'">'+sil[0][5]+'</span></div></div>';
+  html += '<div class="result-dimension"><div class="result-label">🎨 色彩</div><div class="result-value">'+col[0][1]+' <span class="card-tag cat-'+col[0][5]+'">'+col[0][5]+'</span></div></div>';
+  html += '<div class="result-dimension"><div class="result-label">🌍 世界观</div><div class="result-value">'+wv[0][1]+'</div><div style="margin-top:6px;color:#888;font-size:0.82em;">🎨 主图风格：'+wv[0][5]+' | 色彩：'+wv[0][6]+' | 情绪：'+wv[0][7]+'</div></div>';
+
+  html += '<div class="result-diff-summary"><div class="result-diff-label">⭐ 综合难度评分：'+avgDiff+' / 5.0</div><div class="result-diff-bar">'+diffStars(Math.round(avgDiff))+'</div></div>';
+
+  html += '<div class="result-concept"><div class="result-concept-label">💡 开款概念方向</div><div class="result-concept-text">以"'+wv[0][2]+'"为灵魂，主图采用"'+wv[0][5]+'"风格，'+wv[0][6]+'色调。用'+mats[0][1]+'与'+mats[1][1]+'碰撞，以'+sil[0][1]+'廓形为骨架，'+strs[0][1]+'搭配'+strs[1][1]+'，'+sfs[0][1]+'工艺质感，'+col[0][1]+'统一视觉。</div></div>';
+
+  document.getElementById('result-content').innerHTML = html;
+  document.getElementById('result-box').classList.add('show');
+}
+
+function generateConceptByDiff(diff){
+  generateConcept(diff);
+}
+
+// Init
+renderGrid('material-grid', D.material, 'material');
+renderGrid('structure-grid', D.structure, 'structure');
+renderGrid('surface-grid', D.surface, 'surface');
+renderGrid('silhouette-grid', D.silhouette, 'silhouette');
+renderGrid('color-grid', D.color, 'color');
+renderGrid('worldview-grid', D.worldview, 'worldview');
+</script>
+</body>
+</html>
