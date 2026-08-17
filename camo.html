@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>迷彩产品 · 男装开款指引</title>
+<style>
+  :root{
+    --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --border:#30363d;
+    --text:#e6edf3; --text2:#8b949e; --text3:#484f58;
+    --green:#238636; --green2:#2ea043; --blue:#388bfd; --orange:#d29922;
+    --red:#f85149; --purple:#a371f7; --teal:#2dd4bf;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;
+    font-size:17px;
+  }
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;padding:80px 24px 60px;text-align:center;overflow:hidden;
+    background:linear-gradient(135deg,#0d1117 0%,#1a1f2e 40%,#0d1f17 100%);
+  }
+  .hero::before{
+    content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+    background-image:
+      repeating-linear-gradient(45deg,transparent 0,transparent 40px,rgba(35,134,54,.03) 40px,rgba(35,134,54,.03) 42px),
+      repeating-linear-gradient(-45deg,transparent 0,transparent 40px,rgba(56,139,253,.03) 40px,rgba(56,139,253,.03) 42px);
+  }
+  .hero-content{position:relative;z-index:1;max-width:900px;margin:0 auto}
+  .hero-tag{
+    display:inline-block;padding:5px 16px;border:1px solid var(--green2);
+    border-radius:20px;font-size:15px;color:var(--green2);margin-bottom:20px;
+  }
+  .hero h1{font-size:48px;font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+  .hero h1 span{
+    background:linear-gradient(90deg,#2ea043,#2dd4bf,#388bfd);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .hero p{font-size:19px;color:var(--text2);max-width:600px;margin:0 auto 28px}
+  .hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+  .hero-stat{text-align:center}
+  .hero-stat .num{font-size:36px;font-weight:800;color:var(--text)}
+  .hero-stat .label{font-size:15px;color:var(--text3);margin-top:4px}
+
+  /* ===== LAYOUT ===== */
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+  
+  /* ===== NAV ===== */
+  .nav{
+    position:sticky;top:0;z-index:100;background:rgba(13,17,23,.92);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
+  }
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:8px;height:56px;overflow-x:auto;scrollbar-width:none}
+  .nav-inner::-webkit-scrollbar{display:none}
+  .nav a{
+    flex-shrink:0;padding:8px 18px;font-size:16px;color:var(--text2);
+    text-decoration:none;border-radius:6px;transition:all .2s;white-space:nowrap;
+  }
+  .nav a:hover{background:var(--bg3);color:var(--text)}
+  .nav a.active{background:var(--green);color:#fff}
+
+  /* ===== SECTION ===== */
+  .section{padding:64px 0;border-top:1px solid var(--border)}
+  .section-header{text-align:center;margin-bottom:48px}
+  .section-num{font-size:15px;color:var(--green2);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+  .section-title{font-size:32px;font-weight:700;margin-bottom:12px}
+  .section-desc{font-size:17px;color:var(--text2);max-width:700px;margin:0 auto}
+
+  /* ===== COLOR SYSTEM CARDS ===== */
+  .color-systems{display:grid;grid-template-columns:repeat(auto-fit,minmax(550px,1fr));gap:24px}
+  .color-card{
+    background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+    transition:all .3s;
+  }
+  .color-card:hover{border-color:var(--green2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+  .color-card-header{padding:24px;position:relative;overflow:hidden}
+  .color-card-header::after{
+    content:'';position:absolute;top:0;right:0;width:120px;height:120px;
+    border-radius:50%;filter:blur(40px);opacity:.15;
+  }
+  .cs-1 .color-card-header{background:linear-gradient(135deg,#1a2e1a,#0d1f0d)}
+  .cs-1 .color-card-header::after{background:#4a7c3a}
+  .cs-2 .color-card-header{background:linear-gradient(135deg,#1a1a2e,#0d0d1f)}
+  .cs-2 .color-card-header::after{background:#5555aa}
+  .cs-3 .color-card-header{background:linear-gradient(135deg,#2e2a1a,#1f1d0d)}
+  .cs-3 .color-card-header::after{background:#8a7c3a}
+  .cs-4 .color-card-header{background:linear-gradient(135deg,#1a2e20,#0d1f12)}
+  .cs-4 .color-card-header::after{background:#3a7c5a}
+
+  .color-badge{
+    display:inline-block;padding:4px 12px;border-radius:4px;font-size:14px;font-weight:600;margin-bottom:12px;
+  }
+  .cs-1 .color-badge{background:rgba(74,124,58,.2);color:#7bc557}
+  .cs-2 .color-badge{background:rgba(85,85,170,.2);color:#9999dd}
+  .cs-3 .color-badge{background:rgba(138,124,58,.2);color:#c4ad57}
+  .cs-4 .color-badge{background:rgba(58,124,90,.2);color:#57c485}
+
+  .color-card-header h3{font-size:24px;font-weight:700;margin-bottom:8px}
+  .color-card-header .subtitle{font-size:15px;color:var(--text2)}
+  
+  /* ===== 参考图条带 ===== */
+  .camo-ref-strip{
+    height:90px;display:flex;position:relative;overflow:hidden;
+    border-top:1px solid rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .camo-ref-tile{
+    flex:1;position:relative;display:flex;align-items:flex-end;justify-content:center;
+    padding-bottom:8px;
+  }
+  .camo-ref-tile .tile-label{
+    font-size:12px;padding:2px 8px;border-radius:3px;
+    background:rgba(0,0,0,.55);backdrop-filter:blur(4px);color:#fff;
+    white-space:nowrap;
+  }
+  /* --- 仿生树枝色系参考图 --- */
+  .ref-realtree{
+    background:
+      radial-gradient(ellipse 30px 40px at 20% 30%,#3a5a2a 0%,transparent 60%),
+      radial-gradient(ellipse 25px 35px at 60% 20%,#4a6a3a 0%,transparent 55%),
+      radial-gradient(ellipse 35px 30px at 80% 60%,#2a4a1a 0%,transparent 60%),
+      radial-gradient(ellipse 20px 25px at 40% 70%,#5a6a3a 0%,transparent 55%),
+      radial-gradient(ellipse 28px 22px at 10% 80%,#3a4a2a 0%,transparent 50%),
+      linear-gradient(135deg,#4a6a3a,#2a4a1a);
+  }
+  .ref-realtree-ap{
+    background:
+      radial-gradient(ellipse 25px 30px at 25% 25%,#3d5a2b 0%,transparent 55%),
+      radial-gradient(ellipse 30px 25px at 70% 35%,#4a6638 0%,transparent 50%),
+      radial-gradient(ellipse 20px 35px at 50% 70%,#2a3e1a 0%,transparent 55%),
+      radial-gradient(ellipse 22px 20px at 85% 75%,#5a7040 0%,transparent 50%),
+      linear-gradient(135deg,#3a5226,#1e3210);
+  }
+  .ref-mossy-oak{
+    background:
+      radial-gradient(ellipse 35px 25px at 30% 40%,#3a5028 0%,transparent 55%),
+      radial-gradient(ellipse 28px 32px at 65% 25%,#445228 0%,transparent 50%),
+      radial-gradient(ellipse 30px 20px at 80% 65%,#2a3e18 0%,transparent 55%),
+      radial-gradient(ellipse 18px 22px at 15% 75%,#556630 0%,transparent 50%),
+      linear-gradient(135deg,#3e5424,#1a2810);
+  }
+  .ref-hunt{
+    background:
+      radial-gradient(ellipse 30px 35px at 25% 30%,#4a5a30 0%,transparent 55%),
+      radial-gradient(ellipse 25px 28px at 60% 50%,#3a4a25 0%,transparent 50%),
+      radial-gradient(ellipse 32px 25px at 85% 30%,#5a6a38 0%,transparent 55%),
+      radial-gradient(ellipse 20px 30px at 40% 75%,#2a3a18 0%,transparent 50%),
+      linear-gradient(135deg,#4a5a30,#2a3a18);
+  }
+  /* --- 都市黑灰色系参考图 --- */
+  .ref-multicam-black{
+    background:
+      radial-gradient(ellipse 30px 25px at 25% 30%,#3a3a3e 0%,transparent 55%),
+      radial-gradient(ellipse 35px 30px at 65% 40%,#2a2a2e 0%,transparent 50%),
+      radial-gradient(ellipse 25px 35px at 45% 70%,#1a1a1e 0%,transparent 55%),
+      radial-gradient(ellipse 28px 20px at 85% 65%,#333335 0%,transparent 50%),
+      linear-gradient(135deg,#252528,#0e0e10);
+  }
+  .ref-shadow{
+    background:
+      radial-gradient(ellipse 40px 30px at 20% 35%,#2e2e32 0%,transparent 55%),
+      radial-gradient(ellipse 35px 25px at 60% 30%,#222226 0%,transparent 50%),
+      radial-gradient(ellipse 30px 35px at 80% 60%,#1a1a1e 0%,transparent 55%),
+      radial-gradient(ellipse 25px 20px at 35% 75%,#2a2a2e 0%,transparent 50%),
+      linear-gradient(135deg,#1e1e22,#0a0a0c);
+  }
+  .ref-glitch-urban{
+    background:
+      repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(50,50,55,.3) 3px,rgba(50,50,55,.3) 5px),
+      repeating-linear-gradient(90deg,transparent 0,transparent 6px,rgba(45,45,50,.25) 6px,rgba(45,45,50,.25) 8px),
+      radial-gradient(ellipse at 50% 50%,#2a2a30 0%,transparent 60%),
+      linear-gradient(135deg,#1a1a20,#0a0a0e);
+  }
+  /* --- 经典工装与大地色系参考图 --- */
+  .ref-ocp{
+    background:
+      radial-gradient(ellipse 30px 25px at 25% 30%,#8a7a4a 0%,transparent 55%),
+      radial-gradient(ellipse 35px 30px at 60% 40%,#6a5a3a 0%,transparent 50%),
+      radial-gradient(ellipse 25px 35px at 45% 70%,#9a8a5a 0%,transparent 55%),
+      radial-gradient(ellipse 28px 22px at 85% 65%,#5a4a2a 0%,transparent 50%),
+      linear-gradient(135deg,#7a6a44,#4a3a24);
+  }
+  .ref-multicam-arid{
+    background:
+      radial-gradient(ellipse 32px 28px at 30% 35%,#9a8a6a 0%,transparent 55%),
+      radial-gradient(ellipse 28px 32px at 65% 30%,#7a6a4a 0%,transparent 50%),
+      radial-gradient(ellipse 30px 25px at 80% 60%,#aa9a7a 0%,transparent 55%),
+      radial-gradient(ellipse 22px 28px at 20% 75%,#6a5a3a 0%,transparent 50%),
+      linear-gradient(135deg,#8a7a5a,#5a4a30);
+  }
+  .ref-desert{
+    background:
+      radial-gradient(ellipse 35px 30px at 25% 30%,#b0a070 0%,transparent 55%),
+      radial-gradient(ellipse 30px 25px at 60% 45%,#8a7a50 0%,transparent 50%),
+      radial-gradient(ellipse 28px 32px at 80% 65%,#c0b080 0%,transparent 55%),
+      radial-gradient(ellipse 20px 25px at 40% 75%,#7a6a40 0%,transparent 50%),
+      linear-gradient(135deg,#a09060,#605030);
+  }
+  /* --- 传统军装与丛林绿系参考图 --- */
+  .ref-m81{
+    background:
+      radial-gradient(ellipse 30px 35px at 25% 30%,#3a5a2a 0%,transparent 55%),
+      radial-gradient(ellipse 35px 25px at 60% 35%,#2a3e1a 0%,transparent 50%),
+      radial-gradient(ellipse 25px 30px at 45% 70%,#4a6a3a 0%,transparent 55%),
+      radial-gradient(ellipse 28px 22px at 85% 60%,#1a2e10 0%,transparent 50%),
+      radial-gradient(ellipse 20px 18px at 15% 80%,#3a4a20 0%,transparent 45%),
+      linear-gradient(135deg,#2a4a1a,#1a2e0a);
+  }
+  .ref-flecktarn{
+    background:
+      radial-gradient(circle 8px at 20% 25%,#3a5028 0%,transparent 100%),
+      radial-gradient(circle 6px at 45% 20%,#445228 0%,transparent 100%),
+      radial-gradient(circle 10px at 70% 35%,#2a3e18 0%,transparent 100%),
+      radial-gradient(circle 7px at 30% 50%,#3a4a20 0%,transparent 100%),
+      radial-gradient(circle 9px at 55% 55%,#445228 0%,transparent 100%),
+      radial-gradient(circle 6px at 80% 60%,#2a3e18 0%,transparent 100%),
+      radial-gradient(circle 8px at 25% 75%,#3a5028 0%,transparent 100%),
+      radial-gradient(circle 7px at 60% 80%,#445228 0%,transparent 100%),
+      radial-gradient(circle 9px at 85% 80%,#2a3e18 0%,transparent 100%),
+      linear-gradient(135deg,#4a6028,#2a3e10);
+  }
+  .ref-og-green{
+    background:
+      radial-gradient(ellipse 30px 25px at 30% 35%,#4a5a2a 0%,transparent 55%),
+      radial-gradient(ellipse 25px 30px at 65% 45%,#3a4a20 0%,transparent 50%),
+      radial-gradient(ellipse 28px 22px at 45% 70%,#5a6a30 0%,transparent 55%),
+      linear-gradient(135deg,#3a4a20,#2a3a14);
+  }
+  
+  .color-card-body{padding:20px 24px}
+  .pattern-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 0;border-bottom:1px solid var(--border);
+  }
+  .pattern-row:last-child{border-bottom:none}
+  .pattern-name{font-size:16px;font-weight:600;color:var(--text)}
+  .pattern-name .tag{font-size:13px;padding:2px 7px;border-radius:3px;margin-left:8px;font-weight:400}
+  .tag-young{background:rgba(46,160,67,.15);color:#2ea043}
+  .tag-outdoor{background:rgba(210,153,34,.15);color:#d29922}
+  .age-group{font-size:15px;color:var(--text2)}
+  .scenes{font-size:14px;color:var(--text3);margin-top:4px;flex-basis:100%}
+  
+  .color-card-footer{padding:16px 24px;background:var(--bg3);display:flex;gap:12px;flex-wrap:wrap}
+  .scene-chip{
+    padding:5px 12px;border-radius:6px;font-size:14px;
+    background:var(--bg2);border:1px solid var(--border);color:var(--text2);
+  }
+
+  /* ===== CAMO LAB CARDS ===== */
+  .camo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+  .camo-card{
+    background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+    transition:all .3s;cursor:pointer;
+  }
+  .camo-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+  .camo-visual{
+    height:140px;position:relative;overflow:hidden;
+    background:var(--bg3);
+  }
+  .camo-visual .label{
+    position:absolute;top:12px;left:12px;font-size:13px;padding:4px 10px;
+    background:rgba(0,0,0,.6);border-radius:4px;backdrop-filter:blur(4px);color:#fff;
+  }
+  .camo-visual .num-badge{
+    position:absolute;top:12px;right:12px;width:32px;height:32px;
+    background:rgba(0,0,0,.6);border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:700;color:#fff;backdrop-filter:blur(4px);
+  }
+  
+  /* 迷彩视觉效果 */
+  .visual-shadow{background:linear-gradient(135deg,#1a1a1a 0%,#333 40%,#222 70%,#1a1a1a 100%);background-image:
+    radial-gradient(ellipse at 20% 30%,rgba(50,50,55,.8) 0%,transparent 50%),
+    radial-gradient(ellipse at 70% 60%,rgba(40,40,45,.7) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 80%,rgba(30,30,35,.6) 0%,transparent 50%)}
+  .visual-glitch{background:#0a0a0a;background-image:
+    repeating-linear-gradient(0deg,transparent 0,transparent 4px,rgba(50,50,55,.4) 4px,rgba(50,50,55,.4) 6px),
+    repeating-linear-gradient(90deg,transparent 0,transparent 8px,rgba(40,40,45,.3) 8px,rgba(40,40,45,.3) 10px),
+    radial-gradient(ellipse at 60% 40%,rgba(30,100,180,.2) 0%,transparent 40%)}
+  .visual-urban{background:linear-gradient(135deg,#3a3a3a,#2a2a2a);background-image:
+    linear-gradient(45deg,rgba(60,60,65,.5) 25%,transparent 25%,transparent 75%,rgba(60,60,65,.5) 75%),
+    linear-gradient(-45deg,rgba(50,50,55,.4) 25%,transparent 25%,transparent 75%,rgba(50,50,55,.4) 75%);
+    background-size:20px 20px}
+  .visual-cyber{background:#0d0d12;background-image:
+    radial-gradient(circle at 30% 50%,rgba(40,60,80,.6) 0%,transparent 40%),
+    repeating-linear-gradient(0deg,transparent 0,transparent 10px,rgba(50,80,60,.15) 10px,rgba(50,80,60,.15) 11px),
+    repeating-linear-gradient(90deg,transparent 0,transparent 10px,rgba(50,80,60,.15) 10px,rgba(50,80,60,.15) 11px)}
+  .visual-acid{background:linear-gradient(135deg,#1a1a0a,#0f0f05);background-image:
+    radial-gradient(ellipse at 30% 40%,rgba(180,200,30,.3) 0%,transparent 45%),
+    radial-gradient(ellipse at 70% 60%,rgba(150,170,20,.2) 0%,transparent 40%)}
+  .visual-bio{background:linear-gradient(135deg,#0f1a0f,#0d130d);background-image:
+    radial-gradient(circle at 40% 50%,rgba(30,60,35,.6) 0%,transparent 35%),
+    radial-gradient(circle at 60% 40%,rgba(25,50,30,.5) 0%,transparent 30%),
+    radial-gradient(circle at 50% 70%,rgba(20,40,25,.4) 0%,transparent 25%)}
+  .visual-woodland{background:linear-gradient(135deg,#1a2a1a,#0d1f0d);background-image:
+    radial-gradient(ellipse at 30% 30%,rgba(50,80,40,.5) 0%,transparent 50%),
+    radial-gradient(ellipse at 70% 60%,rgba(40,70,30,.4) 0%,transparent 45%),
+    radial-gradient(ellipse at 50% 80%,rgba(60,60,30,.3) 0%,transparent 40%)}
+  .visual-chrome{background:linear-gradient(135deg,#2a2a30,#1a1a20);background-image:
+    radial-gradient(ellipse at 40% 40%,rgba(120,130,140,.3) 0%,transparent 40%),
+    radial-gradient(ellipse at 60% 50%,rgba(90,100,110,.2) 0%,transparent 35%)}
+  .visual-rock{background:linear-gradient(135deg,#2a2820,#1a1812);background-image:
+    radial-gradient(ellipse at 30% 40%,rgba(60,55,40,.4) 0%,transparent 40%),
+    radial-gradient(ellipse at 70% 50%,rgba(50,45,35,.3) 0%,transparent 35%)}
+  .visual-alien{background:linear-gradient(135deg,#120a1a,#0d0612);background-image:
+    radial-gradient(ellipse at 40% 50%,rgba(50,30,60,.5) 0%,transparent 40%),
+    radial-gradient(ellipse at 60% 40%,rgba(40,50,30,.3) 0%,transparent 30%)}
+  .visual-digital{background:#0a0a0a;background-image:
+    repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(45,45,50,.4) 3px,rgba(45,45,50,.4) 5px),
+    repeating-linear-gradient(90deg,transparent 0,transparent 3px,rgba(45,45,50,.4) 3px,rgba(45,45,50,.4) 5px)}
+  .visual-rainbow{background:linear-gradient(135deg,#1a0d0d,#0d0a1a);background-image:
+    radial-gradient(ellipse at 25% 40%,rgba(180,50,50,.25) 0%,transparent 35%),
+    radial-gradient(ellipse at 50% 50%,rgba(50,160,60,.2) 0%,transparent 35%),
+    radial-gradient(ellipse at 75% 60%,rgba(50,80,180,.25) 0%,transparent 35%)}
+  
+  .camo-info{padding:20px}
+  .camo-info h3{font-size:22px;font-weight:700;margin-bottom:4px}
+  .camo-info .en-name{font-size:14px;color:var(--text3);margin-bottom:12px}
+  .camo-info .desc{font-size:15px;color:var(--text2);margin-bottom:16px}
+  .camo-palette{display:flex;gap:6px;margin-bottom:16px}
+  .palette-dot{width:24px;height:24px;border-radius:4px;border:1px solid var(--border)}
+  .camo-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .camo-tag{
+    padding:4px 10px;font-size:13px;border-radius:4px;
+    background:var(--bg3);color:var(--text2);
+  }
+  .camo-tag.priority{background:rgba(46,160,67,.15);color:#2ea043;font-weight:600}
+  .camo-tag.material{background:rgba(56,139,253,.15);color:#388bfd}
+  
+  .camo-prompt{
+    padding:0 20px 20px;display:none;
+  }
+  .camo-card.expanded .camo-prompt{display:block}
+  .prompt-box{
+    background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;
+    font-family:'SF Mono',Monaco,Consolas,monospace;font-size:14px;color:var(--text2);
+    white-space:pre-wrap;word-break:break-word;max-height:200px;overflow-y:auto;position:relative;
+  }
+  .copy-btn{
+    margin-top:10px;padding:8px 16px;font-size:14px;border:1px solid var(--blue);
+    background:transparent;color:var(--blue);border-radius:6px;cursor:pointer;transition:all .2s;
+  }
+  .copy-btn:hover{background:var(--blue);color:#fff}
+  .copy-btn.copied{background:var(--green);border-color:var(--green);color:#fff}
+  .expand-hint{
+    text-align:center;padding:10px;font-size:15px;color:var(--text3);
+    border-top:1px solid var(--border);cursor:pointer;transition:all .2s;
+  }
+  .expand-hint:hover{background:var(--bg3);color:var(--text2)}
+
+  /* ===== PRIORITY TABLE ===== */
+  .priority-section{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .priority-header{padding:20px 24px;background:var(--bg3);display:flex;align-items:center;gap:12px}
+  .priority-header h3{font-size:22px;font-weight:700}
+  .priority-table{width:100%;border-collapse:collapse}
+  .priority-table th{
+    padding:14px 16px;text-align:left;font-size:15px;font-weight:600;color:var(--text2);
+    border-bottom:1px solid var(--border);background:var(--bg3);
+  }
+  .priority-table td{padding:14px 16px;font-size:16px;border-bottom:1px solid var(--border)}
+  .priority-table tr:last-child td{border-bottom:none}
+  .priority-table tr:hover td{background:rgba(56,139,253,.05)}
+  .rank{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;font-weight:700;font-size:16px}
+  .rank-1{background:var(--green);color:#fff}
+  .rank-2{background:var(--blue);color:#fff}
+  .rank-3{background:var(--orange);color:#fff}
+  .rank-4{background:var(--purple);color:#fff}
+  .rank-5{background:var(--teal);color:#000}
+  .rank-6{background:var(--red);color:#fff}
+
+  /* ===== COPYRIGHT ===== */
+  .copyright-box{
+    background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:32px;
+  }
+  .copyright-box h3{font-size:22px;font-weight:700;margin-bottom:16px;color:var(--orange)}
+  .copyright-flow{
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:24px 0;
+  }
+  .flow-step{
+    padding:8px 16px;background:var(--bg3);border:1px solid var(--border);
+    border-radius:8px;font-size:15px;color:var(--text);
+  }
+  .flow-arrow{color:var(--text3);font-size:20px}
+  .copyright-prompt-box{
+    background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;
+    font-family:'SF Mono',Monaco,Consolas,monospace;font-size:14px;color:var(--text2);
+    white-space:pre-wrap;margin-top:16px;position:relative;
+  }
+  .warning-box{
+    background:rgba(248,81,73,.08);border:1px solid rgba(248,81,73,.3);border-radius:8px;
+    padding:16px;margin-top:20px;
+  }
+  .warning-box h4{color:var(--red);font-size:16px;margin-bottom:8px}
+  .warning-box p{font-size:15px;color:var(--text2)}
+
+  /* ===== FOOTER ===== */
+  .footer{
+    padding:40px 24px;text-align:center;border-top:1px solid var(--border);
+  }
+  .footer p{font-size:15px;color:var(--text3)}
+
+  /* ===== TOAST ===== */
+  .toast{
+    position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(100px);
+    background:var(--green);color:#fff;padding:12px 28px;border-radius:8px;font-size:16px;
+    opacity:0;transition:all .3s;z-index:999;pointer-events:none;
+  }
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:768px){
+    .hero h1{font-size:32px}
+    .hero-stats{gap:20px}
+    .color-systems{grid-template-columns:1fr}
+    .camo-grid{grid-template-columns:1fr}
+    .section{padding:40px 0}
+    .section-title{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">TEMU 跨境男装 · 商品开发指引</span>
+    <h1>迷彩产品 <span>男装开款指引</span></h1>
+    <p>4 大色系画像 · 12 款原创迷彩 AI Prompt · 版权安全底座 · 从受众分析到落地开款的完整指南</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">4</div><div class="label">核心色系</div></div>
+      <div class="hero-stat"><div class="num">12</div><div class="label">原创迷彩图案</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="label">优先开发款</div></div>
+      <div class="hero-stat"><div class="num">100%</div><div class="label">版权安全</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="active">概览</a>
+    <a href="#color-systems">色系画像</a>
+    <a href="#camo-lab">原创迷彩 Lab</a>
+    <a href="#priority">优先开发</a>
+    <a href="#copyright">版权安全</a>
+  </div>
+</nav>
+
+<!-- ===== SECTION 1: COLOR SYSTEMS ===== -->
+<div class="section" id="color-systems">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">SECTION 01</div>
+      <h2 class="section-title">迷彩产品 · 男装画像</h2>
+      <p class="section-desc">4 大色系覆盖 18–60 岁全年龄层男性受众，从 Y2K 出街到野外打猎，精准匹配场景需求</p>
+    </div>
+
+    <div class="color-systems">
+      <!-- 色系1: 仿生树枝色系 -->
+      <div class="color-card cs-1">
+        <div class="color-card-header">
+          <span class="color-badge">色系 01</span>
+          <h3>仿生树枝色系</h3>
+          <p class="subtitle">户外树枝纹 × Y2K 街头风 · 拟真质感 · 近两年流行方向</p>
+        </div>
+        <div class="camo-ref-strip">
+          <div class="camo-ref-tile ref-realtree"><span class="tile-label">RealTree Edge</span></div>
+          <div class="camo-ref-tile ref-realtree-ap"><span class="tile-label">RealTree AP</span></div>
+          <div class="camo-ref-tile ref-mossy-oak"><span class="tile-label">Mossy Oak</span></div>
+          <div class="camo-ref-tile ref-hunt"><span class="tile-label">打猎风格</span></div>
+        </div>
+        <div class="color-card-body">
+          <div class="pattern-row">
+            <div>
+              <div class="pattern-name">RealTree Edge <span class="tag tag-young">年轻爆款</span></div>
+            </div>
+            <div class="age-group">18–30 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div><div class="pattern-name">RealTree AP</div></div>
+            <div class="age-group">18–30 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div><div class="pattern-name">Mossy Oak Country</div></div>
+            <div class="age-group">18–30 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div>
+              <div class="pattern-name">美式专业户外与乡村打猎风格 <span class="tag tag-outdoor">户外实用</span></div>
+              <div class="scenes" style="margin-top:6px">强调防风防水功能性、实景隐蔽与耐磨防污</div>
+            </div>
+            <div class="age-group">35–55 岁</div>
+          </div>
+        </div>
+        <div class="color-card-footer">
+          <span class="scene-chip">Y2K出街</span>
+          <span class="scene-chip">校园穿搭</span>
+          <span class="scene-chip">日常通勤</span>
+          <span class="scene-chip">夜店聚会</span>
+          <span class="scene-chip">轻度徒步</span>
+          <span class="scene-chip">野外打猎</span>
+          <span class="scene-chip">湖畔钓鱼</span>
+          <span class="scene-chip">深林露营</span>
+          <span class="scene-chip">乡村作业</span>
+        </div>
+      </div>
+
+      <!-- 色系2: 都市黑灰色系 -->
+      <div class="color-card cs-2">
+        <div class="color-card-header">
+          <span class="color-badge">色系 02</span>
+          <h3>都市黑灰色系</h3>
+          <p class="subtitle">城市灰白迷彩 · 休闲高街范 · 最容易卖的黑灰暗影方向</p>
+        </div>
+        <div class="camo-ref-strip">
+          <div class="camo-ref-tile ref-multicam-black"><span class="tile-label">MultiCam Black</span></div>
+          <div class="camo-ref-tile ref-shadow"><span class="tile-label">Shadow Camo</span></div>
+          <div class="camo-ref-tile ref-glitch-urban"><span class="tile-label">Glitch / Cyber</span></div>
+        </div>
+        <div class="color-card-body">
+          <div class="pattern-row">
+            <div>
+              <div class="pattern-name">MultiCam Black <span class="tag tag-young">年轻爆款</span></div>
+              <div class="scenes" style="margin-top:4px">城市灰白迷彩，休闲高街范</div>
+            </div>
+            <div class="age-group">18–35 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div><div class="pattern-name">Shadow Camo（暗影迷彩）</div></div>
+            <div class="age-group">18–35 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div><div class="pattern-name">Glitch Camo（故障迷彩）</div></div>
+            <div class="age-group">18–35 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div><div class="pattern-name">Cyber Camo（科技迷彩）</div></div>
+            <div class="age-group">18–35 岁</div>
+          </div>
+        </div>
+        <div class="color-card-footer">
+          <span class="scene-chip">Y2K出街</span>
+          <span class="scene-chip">校园穿搭</span>
+          <span class="scene-chip">日常通勤</span>
+          <span class="scene-chip">夜店聚会</span>
+        </div>
+      </div>
+
+      <!-- 色系3: 经典工装与大地色系 -->
+      <div class="color-card cs-3">
+        <div class="color-card-header">
+          <span class="color-badge">色系 03</span>
+          <h3>经典工装与大地色系</h3>
+          <p class="subtitle">视觉效果温和自然 · 极度耐脏 · 美式工装与日系复古感浓厚</p>
+        </div>
+        <div class="camo-ref-strip">
+          <div class="camo-ref-tile ref-ocp"><span class="tile-label">OCP Scorpion W2</span></div>
+          <div class="camo-ref-tile ref-multicam-arid"><span class="tile-label">MultiCam Arid</span></div>
+          <div class="camo-ref-tile ref-desert"><span class="tile-label">Desert Camo</span></div>
+        </div>
+        <div class="color-card-body">
+          <div class="pattern-row">
+            <div>
+              <div class="pattern-name">OCP (Scorpion W2)</div>
+              <div class="scenes" style="margin-top:4px">视觉效果温和自然、极度耐脏</div>
+            </div>
+            <div class="age-group">18–35 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div><div class="pattern-name">MultiCam Arid</div></div>
+            <div class="age-group">18–35 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div><div class="pattern-name">Desert Camo（三色/六色沙漠）</div></div>
+            <div class="age-group">18–35 岁</div>
+          </div>
+        </div>
+        <div class="color-card-footer">
+          <span class="scene-chip">街头打卡</span>
+          <span class="scene-chip">校园穿搭</span>
+          <span class="scene-chip">日常通勤</span>
+          <span class="scene-chip">轻度徒步</span>
+        </div>
+      </div>
+
+      <!-- 色系4: 传统军装与丛林绿系 -->
+      <div class="color-card cs-4">
+        <div class="color-card-header">
+          <span class="color-badge">色系 04</span>
+          <h3>传统军装与丛林绿系</h3>
+          <p class="subtitle">经典军装与老牌户外色彩 · 沉稳硬朗 · 复古情怀 · OG 军事复古绿 90s 街头潮流</p>
+        </div>
+        <div class="camo-ref-strip">
+          <div class="camo-ref-tile ref-m81"><span class="tile-label">M81 Woodland</span></div>
+          <div class="camo-ref-tile ref-flecktarn"><span class="tile-label">Flecktarn</span></div>
+          <div class="camo-ref-tile ref-og-green"><span class="tile-label">OG 军绿</span></div>
+        </div>
+        <div class="color-card-body">
+          <div class="pattern-row">
+            <div>
+              <div class="pattern-name">M81 Woodland（美军四色丛林） <span class="tag tag-outdoor">户外实用</span></div>
+              <div class="scenes" style="margin-top:4px">经典军装与老牌户外色彩，沉稳硬朗，复古情怀</div>
+            </div>
+            <div class="age-group">35–60 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div><div class="pattern-name">Flecktarn（德军斑点）</div></div>
+            <div class="age-group">35–60 岁</div>
+          </div>
+          <div class="pattern-row">
+            <div>
+              <div class="pattern-name">OG 军事复古绿</div>
+              <div class="scenes" style="margin-top:4px">90s 街头潮流，百搭色系</div>
+            </div>
+            <div class="age-group">18–35 岁</div>
+          </div>
+        </div>
+        <div class="color-card-footer">
+          <span class="scene-chip">户外钓鱼</span>
+          <span class="scene-chip">农业劳作</span>
+          <span class="scene-chip">森林徒步</span>
+          <span class="scene-chip">野营</span>
+          <span class="scene-chip">街头打卡</span>
+          <span class="scene-chip">校园穿搭</span>
+          <span class="scene-chip">日常通勤</span>
+          <span class="scene-chip">运动</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 2: CAMO LAB ===== -->
+<div class="section" id="camo-lab">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">SECTION 02</div>
+      <h2 class="section-title">原创迷彩 CAMO LAB</h2>
+      <p class="section-desc">12 款完全原创迷彩图案设计，每款均配备 AI 生成 Prompt，可直接用于 Midjourney / Flux / SDXL 等工具，点击卡片展开查看完整 Prompt</p>
+    </div>
+
+    <div class="camo-grid" id="camoGrid"></div>
+  </div>
+</div>
+
+<!-- ===== SECTION 3: PRIORITY ===== -->
+<div class="section" id="priority">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">SECTION 03</div>
+      <h2 class="section-title">优先开发 6 款推荐</h2>
+      <p class="section-desc">基于 TEMU 欧美男装外套选品角度，优先开发以下 6 款，可组成「2027 欧美男装 CAMO LAB」系列</p>
+    </div>
+
+    <div class="priority-section">
+      <div class="priority-header">
+        <h3>🏆 推荐优先级排序</h3>
+      </div>
+      <table class="priority-table">
+        <thead>
+          <tr>
+            <th style="width:60px">排名</th>
+            <th>迷彩名称</th>
+            <th>核心卖点</th>
+            <th>推荐品类</th>
+            <th>受众</th>
+          </tr>
+        </thead>
+        <tbody id="priorityBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 4: COPYRIGHT ===== -->
+<div class="section" id="copyright">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">SECTION 04</div>
+      <h2 class="section-title">版权安全底座</h2>
+      <p class="section-desc">所有原创迷彩均须遵循版权安全流程，确保图案原创性可追溯、可验证</p>
+    </div>
+
+    <div class="copyright-box">
+      <h3>🔄 原创迷彩开发全流程</h3>
+      <p style="color:var(--text2);font-size:14px">从 AI 生成到上架，每一步都需留存记录，确保版权链完整：</p>
+      <div class="copyright-flow">
+        <span class="flow-step">AI 生成</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">人工二次修改</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">保存原始生成记录</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">保存 PSD/AI 源文件</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">记录设计日期</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">IP 筛查</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">上架</span>
+      </div>
+
+      <h3 style="margin-top:28px">📋 万能版权安全 Prompt 底座</h3>
+      <p style="color:var(--text2);font-size:14px">以后团队开发<strong style="color:var(--text)">任何原创迷彩</strong>，都可以把这一段放到 Prompt 最后：</p>
+      <div class="copyright-prompt-box" id="copyrightPrompt">IMPORTANT ORIGINALITY REQUIREMENTS:
+
+Create the camouflage pattern entirely from scratch.
+
+Do not trace, reproduce, recreate, modify, redraw, imitate or closely resemble any existing military camouflage, commercial camouflage pattern, fashion brand pattern or copyrighted textile design.
+
+Do not reference MultiCam, MARPAT, OCP, A-TACS, CADPAT, Flecktarn, DPM or other recognizable camouflage patterns.
+
+Use an independently developed visual language, original shapes, original proportions, original color relationships and original repeat structure.
+
+The final pattern must be visually distinct from existing camouflage designs and intended as an original commercial fashion textile artwork.
+
+No logos, trademarks, military insignia, national emblems or recognizable symbols.</div>
+      <button class="copy-btn" onclick="copyText('copyrightPrompt', this)">复制版权安全 Prompt</button>
+
+      <div class="warning-box">
+        <h4>⚠️ 重要现实问题</h4>
+        <p>AI Prompt 写了 "original" ≠ 法律上自动获得"绝对无版权风险"。真正做 TEMU 商品时，建议不要让商家直接拿 AI 出图就上架，必须经过完整的人工修改与 IP 筛查流程。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <p>迷彩产品 · 男装开款指引 · TEMU 跨境男装商品开发内部参考</p>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast">已复制到剪贴板</div>
+
+<script>
+// ===== CAMO DATA =====
+const camoData = [
+  {
+    id:1, name:"Original Woodland", cnName:"原创森林迷彩", visual:"visual-woodland",
+    enName:"Original Woodland Camo",
+    desc:"抽象森林迷彩，不规则有机形状模拟树叶、树枝、阴影和森林地形。色系沉稳自然，适合经典户外男装。",
+    palette:["#4a5d3a","#2d4a22","#3a3a35","#5a5040","#8a8268"],
+    tags:[{text:"经典户外",cls:""},{text:"自然色系",cls:""}],
+    priority:0,
+    prompt:`Create a completely original camouflage textile pattern for a contemporary European/American men's fashion jacket.
+
+Design language: abstract woodland camouflage, but NOT based on or resembling any existing military camouflage pattern.
+
+Use irregular organic shapes inspired by leaves, branches, shadows and forest terrain. Create 5 original shapes with different scales, asymmetric distribution, overlapping layers and irregular contours. Avoid recognizable military camouflage layouts.
+
+Color palette: muted olive green, deep forest green, charcoal, dusty brown, faded khaki.
+
+Seamless repeating textile pattern, flat 2D surface, no clothing, no model, no logos, no text, no military insignia.
+
+The pattern must look like an independently designed fashion textile print, suitable for commercial apparel production.`
+  },
+  {
+    id:2, name:"Shadow Camo", cnName:"黑灰暗影迷彩", visual:"visual-shadow",
+    enName:"Shadow Camo · 特别推荐",
+    desc:"黑灰暗影迷彩，极度低对比度，精致、极简、战术感。适合欧美男装外套，最容易卖。",
+    palette:["#1a1a1a","#333333","#222222","#2a2a2a","#1a1a1e"],
+    tags:[{text:"⭐ 优先开发 #1",cls:"priority"},{text:"最容易卖",cls:"priority"},{text:"适合外套",cls:"material"}],
+    priority:1,
+    prompt:`Create an entirely original high-fashion camouflage textile pattern for a contemporary men's technical jacket.
+
+Concept: SHADOW CAMO.
+
+Use abstract overlapping silhouettes inspired by smoke, concrete shadows, cracked asphalt and distorted architectural forms.
+
+Monochromatic palette: matte black, charcoal gray, graphite, dark gray and subtle off-black.
+
+Extremely low contrast, sophisticated, minimal and tactical-looking without reproducing any existing military camouflage.
+
+Irregular organic geometry, asymmetric composition, varied scale, subtle depth and layered transparency.
+
+No recognizable military camouflage pattern, no existing camouflage references, no logos, no text, no military insignia.
+
+Seamless repeat pattern, flat textile artwork, commercial fashion print design.`
+  },
+  {
+    id:3, name:"Glitch Camo", cnName:"故障迷彩", visual:"visual-glitch",
+    enName:"Glitch Camo · 特别推荐",
+    desc:"抽象迷彩 + 数字故障 + 损坏像素 + 破碎信号。视觉冲击强，适合年轻人，适合新奇欧美风。",
+    palette:["#0a0a0a","#333338","#222226","#3a3a30","#2a4a8a"],
+    tags:[{text:"⭐ 优先开发 #2",cls:"priority"},{text:"视觉冲击强",cls:"priority"},{text:"年轻人",cls:"material"}],
+    priority:2,
+    prompt:`Create a completely original camouflage textile pattern called "GLITCH CAMO".
+
+Combine abstract camouflage shapes with digital glitches, corrupted pixels, fragmented geometric blocks and broken signal patterns.
+
+Use irregular pixel clusters mixed with large organic shapes. The composition should feel chaotic but intentionally designed.
+
+Color palette: black, graphite, dark gray, muted olive and small accents of electric blue.
+
+Contemporary European/American streetwear aesthetic, experimental fashion, cyberpunk influence.
+
+Do not imitate or reproduce any existing military camouflage pattern.
+
+No military insignia, no logos, no text, no weapons.
+
+Seamless repeating textile pattern, flat 2D artwork, high-end fashion fabric print.`
+  },
+  {
+    id:4, name:"Cyber Camo", cnName:"科技迷彩", visual:"visual-cyber",
+    enName:"Cyber Camo · 特别推荐",
+    desc:"电路板碎片 + 不规则多边形 + 数字噪声 + 微网格。适合机能外套、尼龙、冲锋衣。",
+    palette:["#0d0d12","#3a3a40","#2a2a30","#4a4a50","#3a6a4a"],
+    tags:[{text:"⭐ 优先开发 #4",cls:"priority"},{text:"机能外套",cls:"material"},{text:"冲锋衣",cls:"material"}],
+    priority:4,
+    prompt:`Create an original futuristic camouflage textile pattern for an experimental men's outerwear collection.
+
+Concept: CYBER CAMO.
+
+Develop a completely new camouflage visual language using fragmented circuit-board shapes, irregular polygons, digital noise, micro-grid structures and abstract technological silhouettes.
+
+Avoid conventional military camouflage composition.
+
+Color palette: matte black, gunmetal gray, dark graphite, silver gray and subtle neon green accents.
+
+The design should feel futuristic, technical, urban and European/American rather than military.
+
+No logos, no text, no military symbols, no existing camouflage pattern references.
+
+Seamless repeat textile pattern, perfectly tileable, flat 2D fabric artwork.`
+  },
+  {
+    id:5, name:"Acid Camo", cnName:"酸性迷彩", visual:"visual-acid",
+    enName:"Acid Camo · 特别推荐",
+    desc:"熔化有机形状 + 流体色块 + 迷幻色彩过渡。适合低成本高视觉差异款，低价但视觉差异很强。",
+    palette:["#1a1a0a","#b4c81e","#96aa14","#3a3a20","#262618"],
+    tags:[{text:"⭐ 优先开发 #5",cls:"priority"},{text:"低成本高差异",cls:"priority"},{text:"Oversized",cls:"material"}],
+    priority:5,
+    prompt:`Create a completely original fashion camouflage textile pattern for a contemporary men's oversized jacket.
+
+Concept: ACID CAMO.
+
+Transform traditional camouflage into an experimental abstract composition using melted organic shapes, fluid blobs, distorted contours and psychedelic color transitions.
+
+Color palette: acid lime, toxic yellow, muted black, dark olive and dirty gray.
+
+High visual contrast but sophisticated fashion execution.
+
+Do not copy or resemble any existing military or commercial camouflage pattern.
+
+No logos, no text, no military insignia.
+
+Seamless repeating fabric print, flat 2D textile artwork, suitable for commercial apparel manufacturing.`
+  },
+  {
+    id:6, name:"Chrome Camo", cnName:"金属迷彩", visual:"visual-chrome",
+    enName:"Chrome Camo",
+    desc:"扭曲金属形状 + 液态铬碎片 + 反射表面。适合科技感外套 / PU / 尼龙 / 涂层面料。",
+    palette:["#788490","#2a2a30","#4a4a55","#1a1a20","#3a4a5a"],
+    tags:[{text:"科技感",cls:"material"},{text:"PU/尼龙/涂层面料",cls:"material"}],
+    priority:0,
+    prompt:`Create a completely original luxury futuristic camouflage textile print.
+
+Concept: CHROME CAMO.
+
+Build an abstract camouflage composition from distorted metallic shapes, liquid chrome fragments, reflective surfaces and irregular geometric shadows.
+
+Color palette: chrome silver, gunmetal, graphite, black and subtle steel blue.
+
+The pattern should feel like liquid metal frozen into camouflage.
+
+Contemporary European fashion, futuristic menswear, technical outerwear aesthetic.
+
+Do not imitate any existing military camouflage, commercial camouflage brand or recognizable camouflage pattern.
+
+No logos, no text, no military symbols.
+
+Seamless textile repeat, flat 2D surface artwork, commercially usable fashion pattern.`
+  },
+  {
+    id:7, name:"Urban Camo", cnName:"城市迷彩", visual:"visual-urban",
+    enName:"Urban Camo · 特别推荐",
+    desc:"粗野主义建筑 + 混凝土墙 + 道路标记 + 建筑阴影。很欧美，很推荐。",
+    palette:["#3a3a3a","#2a2a2a","#5a5550","#4a4a4a","#3a4035"],
+    tags:[{text:"⭐ 优先开发 #3",cls:"priority"},{text:"很欧美",cls:"priority"},{text:"极简男性化",cls:"material"}],
+    priority:3,
+    prompt:`Create an entirely original urban camouflage textile pattern for a contemporary European/American men's jacket.
+
+Concept: URBAN CAMO.
+
+Instead of military shapes, use abstract visual elements inspired by brutalist architecture, concrete walls, road markings, construction materials, building shadows, urban cracks and industrial structures.
+
+Transform these elements into overlapping camouflage-like shapes.
+
+Color palette: concrete gray, asphalt black, dusty beige, steel gray and muted olive.
+
+Minimal, masculine, architectural, sophisticated and contemporary.
+
+Do not use or imitate any existing military camouflage pattern.
+
+No logos, no text, no recognizable buildings.
+
+Seamless repeat textile design, flat 2D artwork, fashion fabric print.`
+  },
+  {
+    id:8, name:"Rock Camo", cnName:"岩石迷彩", visual:"visual-rock",
+    enName:"Rock Camo",
+    desc:"裂纹岩石 + 沉积层 + 碎石纹理 + 矿物质感。大不规则形状混合小碎片，自然层次感。",
+    palette:["#3a3528","#2a2520","#5a5040","#3a3530","#4a4535"],
+    tags:[{text:"地质灵感",cls:"material"},{text:"自然层次",cls:"material"}],
+    priority:0,
+    prompt:`Create a completely original camouflage textile pattern inspired by geological formations.
+
+Concept: ROCK CAMO.
+
+Use abstract shapes derived from cracked rocks, sediment layers, stone fragments and mineral textures.
+
+Large irregular shapes mixed with small fragmented forms, layered naturally but with a deliberately designed fashion composition.
+
+Color palette: stone gray, dark brown, sand, charcoal and muted green.
+
+Contemporary European/American menswear aesthetic.
+
+The design must be an original textile pattern and must not reproduce any existing military camouflage.
+
+No logos, no text, no military insignia.
+
+Seamless repeat pattern, flat 2D fabric artwork, commercial apparel design.`
+  },
+  {
+    id:9, name:"Alien Camo", cnName:"外星迷彩", visual:"visual-alien",
+    enName:"Alien Camo · 新奇设计",
+    desc:"外星地形 + 微生物 + 未知地质形态 + 抽象生物结构。新奇设计方向，前卫街头。",
+    palette:["#0d0612","#3a2050","#2a3520","#1a1a1e","#3a5a30"],
+    tags:[{text:"新奇设计",cls:"material"},{text:"前卫",cls:"material"}],
+    priority:0,
+    prompt:`Create a completely original futuristic camouflage textile pattern inspired by alien landscapes.
+
+Concept: ALIEN CAMO.
+
+Use strange organic shapes inspired by extraterrestrial terrain, microscopic organisms, unknown geological formations and abstract biological structures.
+
+The pattern should retain the visual rhythm of camouflage while looking completely unfamiliar and futuristic.
+
+Color palette: deep black, dusty purple, muted olive, dark gray and subtle alien green.
+
+Experimental European/American fashion, avant-garde menswear, futuristic streetwear.
+
+Do not reference or resemble any existing military camouflage pattern.
+
+No logos, no text, no military symbols.
+
+Seamless repeating textile pattern, flat 2D surface design.`
+  },
+  {
+    id:10, name:"Bio Camo", cnName:"生物迷彩", visual:"visual-bio",
+    enName:"Bio Camo · 特别推荐",
+    desc:"细胞结构 + 植物叶脉 + 微生物膜 + 自然生长图案。适合材质实验室 / 新奇设计方向。",
+    palette:["#1a2a1a","#0d130d","#5a5040","#3a3020","#2a3a40"],
+    tags:[{text:"⭐ 优先开发 #6",cls:"priority"},{text:"材质实验室",cls:"priority"},{text:"有机科学",cls:"material"}],
+    priority:6,
+    prompt:`Create a completely original experimental camouflage textile pattern inspired by biological structures.
+
+Concept: BIO CAMO.
+
+Combine abstract cell structures, plant veins, microscopic organisms, organic membranes and natural growth patterns into a camouflage-like composition.
+
+The shapes should overlap unpredictably with multiple scales and irregular boundaries.
+
+Color palette: dark moss green, black, muted beige, deep brown and desaturated blue.
+
+The result should feel organic, strange, scientific and contemporary.
+
+European/American experimental menswear aesthetic.
+
+Do not reproduce any existing camouflage pattern.
+
+No logos, no text, no military insignia.
+
+Seamless repeat textile artwork, flat 2D fashion print.`
+  },
+  {
+    id:11, name:"Digital Pixel Camo", cnName:"数字像素迷彩", visual:"visual-digital",
+    enName:"Digital Pixel Camo",
+    desc:"不规则像素簇 + 碎裂数字块 + 损坏网格。现代街头机能风，避免军事对称布局。",
+    palette:["#0a0a0a","#2d2d32","#222226","#3a4030","#3a3a35"],
+    tags:[{text:"街头机能",cls:"material"},{text:"数字风",cls:"material"}],
+    priority:0,
+    prompt:`Create a completely original digital camouflage textile pattern for contemporary men's streetwear.
+
+Use irregular pixel clusters, fragmented digital blocks, corrupted grids and different pixel sizes.
+
+Avoid symmetrical military camouflage layouts.
+
+Create a sophisticated composition with large pixel masses, medium fragments and tiny digital noise.
+
+Color palette: black, charcoal, dark gray, olive green and muted beige.
+
+Modern European/American streetwear, technical fashion, futuristic utility aesthetic.
+
+Do not copy or resemble MARPAT, CADPAT, OCP, MultiCam or any other existing military camouflage.
+
+No logos, no text, no military symbols.
+
+Seamless tileable textile pattern, flat 2D fabric artwork.`
+  },
+  {
+    id:12, name:"Rainbow Camo", cnName:"彩虹抽象迷彩", visual:"visual-rainbow",
+    enName:"Rainbow Camo · LGBT/Progressive",
+    desc:"彩虹色融入迷彩色块，非旗帜形式。大胆实验、性别流动，适合 LGBT 欧美小众设计。",
+    palette:["#b43232","#3aa040","#3250b4","#1a1a1e","#d29922"],
+    tags:[{text:"LGBT/Progressive",cls:"material"},{text:"小众设计",cls:"material"}],
+    priority:0,
+    prompt:`Create a completely original abstract camouflage textile pattern for contemporary progressive men's fashion.
+
+Concept: RAINBOW CAMO.
+
+Transform camouflage into an abstract color-block composition using irregular organic shapes.
+
+Use sophisticated gradients transitioning between red, orange, yellow, green, blue, purple, charcoal and black.
+
+The rainbow colors should be fragmented and integrated into the camouflage rather than forming a recognizable rainbow flag.
+
+Bold, experimental, gender-fluid, contemporary European/American fashion aesthetic.
+
+Do not reproduce any existing military camouflage or trademarked flag design.
+
+No logos, no text, no recognizable national or organizational symbols.
+
+Seamless repeating textile pattern, flat 2D artwork, commercial fashion fabric design.`
+  }
+];
+
+// ===== RENDER CAMO CARDS =====
+function renderCamoCards(){
+  const grid = document.getElementById('camoGrid');
+  grid.innerHTML = camoData.map(c => `
+    <div class="camo-card" onclick="toggleCard(${c.id})">
+      <div class="camo-visual ${c.visual}">
+        <span class="label">${c.enName}</span>
+        <span class="num-badge">${String(c.id).padStart(2,'0')}</span>
+      </div>
+      <div class="camo-info">
+        <h3>${c.cnName}</h3>
+        <div class="en-name">${c.name}</div>
+        <p class="desc">${c.desc}</p>
+        <div class="camo-palette">
+          ${c.palette.map(color => `<div class="palette-dot" style="background:${color}"></div>`).join('')}
+        </div>
+        <div class="camo-tags">
+          ${c.tags.map(t => `<span class="camo-tag ${t.cls}">${t.text}</span>`).join('')}
+        </div>
+      </div>
+      <div class="camo-prompt" id="prompt-${c.id}">
+        <div class="prompt-box" id="promptbox-${c.id}">${c.prompt}</div>
+        <button class="copy-btn" onclick="event.stopPropagation();copyText('promptbox-${c.id}', this)">复制 Prompt</button>
+      </div>
+      <div class="expand-hint">复制这段话到AI软件可以生成无版权迷彩图 ▼</div>
+    </div>
+  `).join('');
+}
+
+// ===== TOGGLE CARD =====
+function toggleCard(id){
+  const card = document.querySelector(`[onclick="toggleCard(${id})"]`);
+  card.classList.toggle('expanded');
+  const hint = card.querySelector('.expand-hint');
+  if(card.classList.contains('expanded')){
+    hint.textContent = '点击收起 ▲';
+  } else {
+    hint.textContent = '复制这段话到AI软件可以生成无版权迷彩图 ▼';
+  }
+}
+
+// ===== PRIORITY TABLE =====
+const priorityData = [
+  {rank:1, name:"Shadow Camo（黑灰暗影）", selling:"黑灰暗影，最容易卖", category:"技术外套 / 冲锋衣 / 休闲夹克", audience:"18–35 岁"},
+  {rank:2, name:"Glitch Camo（故障迷彩）", selling:"视觉冲击强，适合年轻人", category:"Oversized 夹克 / 街头外套", audience:"18–30 岁"},
+  {rank:3, name:"Urban Camo（城市迷彩）", selling:"城市建筑抽象化，很欧美", category:"休闲夹克 / 工装外套", audience:"18–35 岁"},
+  {rank:4, name:"Cyber Camo（科技迷彩）", selling:"适合机能外套、尼龙、冲锋衣", category:"机能外套 / 尼龙冲锋衣", audience:"18–35 岁"},
+  {rank:5, name:"Acid Camo（酸性迷彩）", selling:"适合低成本高视觉差异款", category:"Oversized 夹克 / 低价引流款", audience:"18–30 岁"},
+  {rank:6, name:"Bio Camo（生物迷彩）", selling:"材质实验室 / 新奇设计方向", category:"实验性外套 / 设计师款", audience:"18–35 岁"},
+];
+
+function renderPriority(){
+  const body = document.getElementById('priorityBody');
+  body.innerHTML = priorityData.map(p => `
+    <tr>
+      <td><span class="rank rank-${p.rank}">${p.rank}</span></td>
+      <td><strong>${p.name}</strong></td>
+      <td style="color:var(--text2)">${p.selling}</td>
+      <td style="color:var(--text2)">${p.category}</td>
+      <td style="color:var(--text2)">${p.audience}</td>
+    </tr>
+  `).join('');
+}
+
+// ===== COPY =====
+function copyText(elementId, btn){
+  const text = document.getElementById(elementId).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = '✓ 已复制';
+    showToast('已复制到剪贴板');
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.textContent = btn.textContent.includes('版权') ? '复制版权安全 Prompt' : '复制 Prompt';
+    }, 2000);
+  });
+}
+
+// ===== TOAST =====
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// ===== NAV SCROLL =====
+const navLinks = document.querySelectorAll('.nav a');
+const sections = document.querySelectorAll('.section, .hero');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    const sectionTop = s.offsetTop - 80;
+    if(window.scrollY >= sectionTop) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if(a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+
+// ===== INIT =====
+renderCamoCards();
+renderPriority();
+</script>
+
+</body>
+</html>
